@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
-  # validates :name, :comments, presence: true
+  validates :name, :comments, :user_id, :book_id, presence: true
 
-  belongs_to :group
   belongs_to :user
+  belongs_to :book
 end

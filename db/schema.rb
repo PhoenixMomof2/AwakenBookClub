@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 2023_02_04_040945) do
     t.integer "stars"
     t.string "category"
     t.string "content"
-    t.bigint "user_id"
-    t.bigint "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,6 +26,8 @@ ActiveRecord::Schema.define(version: 2023_02_04_040945) do
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.string "comments"
+    t.integer "user_id"
+    t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
