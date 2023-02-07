@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Header = () => {
+  console.log("I'm in the Header Component")
   return (
     <div>
       <header className="masthead text-center text-white">
@@ -12,7 +13,7 @@ const Header = () => {
         </div>
         <div className="bg-circle-1 bg-circle"></div>
         <div className="bg-circle-2 bg-circle"></div>
-        <div className="bg-circle-3 bg-circle"></div>
+        <div className="bg-circle-3 bg-circle"></div> 
         <div className="bg-circle-4 bg-circle"></div>
       </header>
     </div>

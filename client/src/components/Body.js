@@ -5,7 +5,7 @@ import HowToBeAntiRacist from '../images/HowToBeAntiRacist.jpeg';
 import WhiteLikeMe from '../images/WhiteLikeMe.jpeg';
 
 const Body = () => {
-    
+    console.log("I'm in the Body Component")
   return ( 
     <div>
         {/* <!-- Content section 1--> */}

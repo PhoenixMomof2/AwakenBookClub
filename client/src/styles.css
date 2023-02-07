@@ -627,6 +627,12 @@ progress {
   color: #6c757d;
 }
 
+.form-horizontal{
+  display:block;
+  width:50%;
+  margin:0 auto;
+}
+
 .container,
 .container-fluid,
 .container-xxl,

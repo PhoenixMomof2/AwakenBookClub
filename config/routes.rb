@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :groups
   resources :users, only: [:index, :show, :create]
+  resources :books
 
   # Users
   get "/me", to: "users#show"

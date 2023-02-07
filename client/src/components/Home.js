@@ -7,6 +7,7 @@ import BooksSign from '../images/BooksSign.jpg'
 import WomanReading from '../images/WomanReading.jpg'
 
 const Home = () => {
+  console.log("I'm in the Home Component")
   return (
     <div className="container">
     <Header />

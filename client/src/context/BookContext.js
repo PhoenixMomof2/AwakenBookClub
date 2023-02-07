@@ -1,31 +1,30 @@
 // src/context/BookContext.js
-// import React, { useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
-// Create context
-// const BookContext = React.createContext();
+// // Create context
+const BookContext = createContext();
 
-// const BookProvider = ({ children }) => {
-//   const [books, setBooks] = useState([]);
-//   const book = {
-//     title: title,
-//     book_img: book_img,
-//     author: author, 
-//     stars: stars, 
-//     category: category,
-//     content: content
-//   }
+const BookProvider = ({ children }) => {
+  // value that will be given to the context
+  const [books, setBooks] = useState([])
+  console.log("I'm in BookProvider")
+
+  // fetch the books
+  useEffect(() => {
+      const fetchBooks = () => {
+        fetch('/books')
+        .then(res => res.json())
+        .then(books => setBooks(books))
+        .catch((error) => console.log("An error occurred."));
+      };
+  fetchBooks();
+  }, []);
   
-//   useEffect(() => {
-//     fetch('/books')
-//       .then(res => res.json())
-//       .then(books => setBooks(books))
-//     }, []);
+  return (
+    <BookContext.Provider value={books}>
+      {children}
+    </BookContext.Provider>
+  );
+}
 
-//   return (
-//     <BookContext.Provider value={{books}}>
-//       {children}
-//     </BookContext.Provider>
-//   );
-// }
-
-// export { BookContext, BookProvider };
+export { BookContext, BookProvider };

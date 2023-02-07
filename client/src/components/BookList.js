@@ -1,29 +1,18 @@
-import React from "react";
-// import { BookContext, BookProvider } from "../context/BookContext";
+import React, { useContext } from "react";
 import BookItem from "../components/BookItem";
+import { BookContext } from "../context/BookContext";
 
-const BookList = ({books}) => {
-  // const [books, setBooks] = useState([]);
-  // const book = {
-  //   title: title,
-  //   book_img: book_img,
-  //   author: author, 
-  //   stars: stars, 
-  //   category: category,
-  //   content: content
-  // }
+const BookList = () => {
+  const books = useContext(BookContext)
+  const myBooks = [{books}]
   
+  console.log("I'm in the BookList Component")
+
   return (
-   // <BookProvider>
-      <div className="container">
-        <ul>
-        {books.map((book) => (
-          <BookItem key={book.id} book={book} />
-        ))}
-        </ul>
-      </div>
-   // </BookProvider>
-  )
-}
+    <div className="container">
+          {myBooks.map((oneBook) => <BookItem key={oneBook.id} oneBook={oneBook}/>)}
+      </div> 
+  );
+};
 
 export default BookList;

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { UserContext, UserProvider } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { redirect, Link } from 'react-router-dom';
 import Welcome from './Welcome';
-import BookList from './BookList';
+
 
 const Navbar = () => {
-  const { login, logout, signup, loggedIn } = useContext(UserContext)
-  const navigate = useNavigate()
-
+  console.log("I'm in the Navbar Component")
+  const { signup, login, logout, loggedIn } = useContext(UserContext)
+  
   const logoutUser = () => {
     fetch('/logout', { 
       method: 'DELETE',
@@ -15,7 +15,7 @@ const Navbar = () => {
     })
     .then(() => {
       logout()
-      navigate('/home')
+      redirect('/home')
     })
   }
   if (loggedIn) {
@@ -24,13 +24,12 @@ const Navbar = () => {
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div className="container px-5">
-              <a className="navbar-brand" href="/groups/:username">My Groups</a>
+              {/* <a className="navbar-brand" href="/groups/:username">My Reading Groups</a> */}
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                   <ul className="navbar-nav ms-auto">
-                  <li className="nav-item"><a className="nav-link" href="/books"><BookList />Books</a></li>
-                  <li className="nav-item"><a className="nav-link" href="/signup"><Welcome /></a></li>
-                  <li className="nav-item"><a className="nav-link" href="/logout" onClick={logoutUser}>Log Out</a></li>
+                  <li><Link to="/signup" onClick={signup}><Welcome /></Link></li>
+                  <li><Link to="/logout" onClick={logoutUser}>Log Out</Link></li>
                   </ul>
                 </div>
             </div>
@@ -44,14 +43,12 @@ const Navbar = () => {
           <div className="container">
             <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
               <div className="container px-5">
-                <a className="navbar-brand" href="/home">Home</a>
+                <li><Link to="/home" className="navbar-brand">Home</Link></li>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>
                   <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ms-auto">
-                    <li className="nav-item"><a className="nav-link" href="/books"><BookList />Books</a></li>
-                    <li className="nav-item"><a className="nav-link" href="/signup"><Welcome /></a></li>
-                    <li className="nav-item"><a className="nav-link" href="/signup" onClick={signup}>Sign Up</a></li>
-                    <li className="nav-item"><a className="nav-link" href="/login" onClick={login}>Log In</a></li>
+                      <li><Link to="/signup" onClick={signup}><Welcome />Please sign up</Link></li>
+                      <li><Link to="/login" onClick={login}>Please login</Link></li>
                     </ul>
                   </div>
               </div>

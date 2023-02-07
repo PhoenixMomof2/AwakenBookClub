@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext';
 import { redirect } from 'react-router-dom';
+import Header from '../components/Header';
+import Body from '../components/Body';
 
 const Login = () => {
-
+  console.log("I'm in the Login Component")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -34,20 +36,25 @@ const Login = () => {
 }
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Username" aria-label="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+    <div className="container-md">
+      <Header />
+      <h2>Please login.</h2>
+      <div className="row d-inline-block">
+        <form className="form-horizontal" onSubmit={handleSubmit}>
+          <div className="col d-grid gap-3">
+            <div className="p-2 bg-light border">
+              <input type="text" className="form-control" placeholder="Username" aria-label="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <input type="text" className="form-control" placeholder="Password" aria-label="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <div className="row d-grid gap-3" >
+            <div className="col p-2 bg-light border">
+              <input type="text" className="form-control" placeholder="Password" aria-label="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            </div>
           </div>
-        </div>
-        <button type="submit" className="btn btn-primary" onClick={redirect('/me')}>Login</button>
-      </form>
+          <button type="submit" className="btn btn-primary" onClick={redirect('/me')}>Login</button>
+        </form>
+      </div>
+      <Body />
     </div>
   )
 }

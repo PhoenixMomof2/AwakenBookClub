@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Footer = () => {
+  console.log("I'm in the Footer Component")
   return (
     <div>
       <footer className="py-5 bg-black">
