@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from "react";
 
 // Create context
-const UserContext = createContext();
+const UserContext = createContext(null);
 
 // Create provider
 function UserProvider ({ children }) {

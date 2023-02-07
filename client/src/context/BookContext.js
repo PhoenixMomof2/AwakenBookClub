@@ -7,6 +7,7 @@ const BookContext = createContext();
 const BookProvider = ({ children }) => {
   // value that will be given to the context
   const [books, setBooks] = useState([])
+
   console.log("I'm in BookProvider")
 
   // fetch the books
@@ -14,7 +15,9 @@ const BookProvider = ({ children }) => {
       const fetchBooks = () => {
         fetch('/books')
         .then(res => res.json())
-        .then(books => setBooks(books))
+        .then(data => 
+          // console.log(data, "In the book fetch")
+          setBooks(data, "Inside setBooks" ))
         .catch((error) => console.log("An error occurred."));
       };
   fetchBooks();
