@@ -1,8 +1,8 @@
 import React from "react";
-import { redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
   
 
-const BookItem = ({book}) => {
+const BookCard = ({book}) => {
   const {id, title, book_img, author, stars, category, content} = book;
   
   return (
@@ -19,12 +19,12 @@ const BookItem = ({book}) => {
         <p className="card-text text-light fw-bold">Preview: {content}</p>
       </div>
       <div className="btn-group border border-warning">
-      <a href="/books/:id" className="btn btn-danger" onClick={redirect('/books/:id')}>Content</a>
-      <a href="books/:id" className="btn btn-dark">Add Book</a>
-      <a href="books/:id" className="btn btn-success">Join Reading Group</a>
+      <Link to={`/books/${id}`} className="btn btn-danger">Expand</Link>
+      <Link to="#" className="btn btn-dark">Leave a Comment</Link>
+      <Link to="#" className="btn btn-success">Join Reading Group</Link>
       </div>
     </div>
   )
 }
 
-export default BookItem;
+export default BookCard;

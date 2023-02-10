@@ -37,7 +37,6 @@ const Login = () => {
   return (
     <div className="container mx-auto mt-3 px-5 bg-warning">
       <Header />
-      {/* <h2>Please login.</h2> */}
       <div className="row d-block">
         <form className="form mx-auto text-center bg-light border-dark p-2 m-5" onSubmit={handleSubmit}>
           <div className="col d-grid gap-3">

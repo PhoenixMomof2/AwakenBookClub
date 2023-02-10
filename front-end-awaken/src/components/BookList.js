@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import BookItem from "../components/BookItem";
+import BookCard from "../components/BookCard";
 import { BookContext } from "../context/BookContext";
 
 const BookList = () => {
   const books  = useContext(BookContext)
-  const bookCards = books.map(book => <BookItem key={book.id} book={book}/>)
+  const bookCards = books.map(book => <BookCard key={book.id} book={book}/>)
   
   console.log("I'm in the BookList Component")
 
   return (
-    <div className="container-lg my-5 bg-dark">
+    <div className="container-lg my-5 bg-dark p-3">
       <div className="row justify-content-center">
         { bookCards }
       </div>

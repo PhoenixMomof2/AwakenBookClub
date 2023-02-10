@@ -4,6 +4,7 @@ import { UserProvider } from '../context/UserContext';
 import { BookProvider } from '../context/BookContext';
 import Navbar from '../components/Navbar'
 import Home from '../components/Home';
+import Footer from './Footer';
 import SignUp from '../components/SignUp';
 import Login from '../components/Login';
 import UserProfile from '../components/UserProfile';
@@ -18,14 +19,14 @@ const App = () => {
         <BookProvider>
         <Navbar />
         <Routes>
-          <Route exact path="/home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/user" element={<UserProfile />} /> 
           <Route path="/books" element={<BookList />} />
           <Route path="/books/:id" element={<BookDetails />} /> 
-          <Route path="/books/user_id/:id" />
         </Routes>
+        <Footer />
         </BookProvider>
       </UserProvider>
     </div>

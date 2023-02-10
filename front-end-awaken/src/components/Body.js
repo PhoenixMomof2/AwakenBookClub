@@ -56,7 +56,6 @@ const Body = () => {
                   </div>
               </div>
           </section>
-        <Footer />
       </div>
   )
 }
