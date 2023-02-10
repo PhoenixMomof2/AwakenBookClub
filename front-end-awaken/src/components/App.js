@@ -4,7 +4,7 @@ import { UserProvider } from '../context/UserContext';
 import { BookProvider } from '../context/BookContext';
 import Navbar from '../components/Navbar'
 import Home from '../components/Home';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import SignUp from '../components/SignUp';
 import Login from '../components/Login';
 import UserProfile from '../components/UserProfile';

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import BookCard from "../components/BookCard";
 import { BookContext } from "../context/BookContext";
+import NewBookForm from "../components/NewBookForm";
 
 const BookList = () => {
   const books  = useContext(BookContext)
@@ -10,6 +11,7 @@ const BookList = () => {
 
   return (
     <div className="container-lg my-5 bg-dark p-3">
+      <NewBookForm />
       <div className="row justify-content-center">
         { bookCards }
       </div>

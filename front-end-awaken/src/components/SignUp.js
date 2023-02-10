@@ -40,6 +40,11 @@ const SignUp = () => {
           setErrors(errorLis);
         }
       });
+      //clear form
+      setUsername("");
+      setPassword("");
+      setPasswordConfirmation("");
+      setAge("");
   };
 
   return (

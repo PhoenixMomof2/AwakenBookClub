@@ -1,7 +1,7 @@
 class BookSerializer < ActiveModel::Serializer
-  attributes :id, :title, :book_img, :author, :stars, :category, :content
+  attributes :id, :title, :book_img, :author, :stars, :category, :content, :short_content
 
   def short_content
-    "#{self.content[0...300]...}"
+    "#{self.object.content[0...300]...}"
   end
 end

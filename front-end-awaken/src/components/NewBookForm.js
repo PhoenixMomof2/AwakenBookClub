@@ -68,7 +68,7 @@ return (
         <label htmlFor="content">Content:</label>
         <input type="text" name="content" id="content" value={content} onChange={handleChangeContent}/>
       </div>
-      <input type="submit" value="Submit" />
+      <input type="submit" class="btn btn-secondary"value="Submit" />
     </form>
   </div>
   )

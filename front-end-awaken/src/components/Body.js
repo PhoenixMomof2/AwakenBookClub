@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './Footer';
 import Stamped from '../images/Stamped.jpeg';
 import HowToBeAntiRacist from '../images/HowToBeAntiRacist.jpeg';
 import WhiteLikeMe from '../images/WhiteLikeMe.jpeg';
