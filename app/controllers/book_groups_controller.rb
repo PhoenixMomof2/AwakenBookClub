@@ -1,0 +1,2 @@
+class BookGroupsController < ApplicationController
+end

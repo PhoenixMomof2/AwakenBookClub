@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_04_040945) do
+ActiveRecord::Schema.define(version: 2023_02_09_155248) do
+
+  create_table "book_groups", force: :cascade do |t|
+    t.string "name"
+    t.string "comments"
+    t.integer "user_id"
+    t.integer "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -19,15 +28,6 @@ ActiveRecord::Schema.define(version: 2023_02_04_040945) do
     t.integer "stars"
     t.string "category"
     t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "groups", force: :cascade do |t|
-    t.string "name"
-    t.string "comments"
-    t.integer "user_id"
-    t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

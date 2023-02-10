@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :groups
+  resources :book_groups
   resources :users, only: [:index, :show, :create]
   resources :books
 

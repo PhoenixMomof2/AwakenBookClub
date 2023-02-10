@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { redirect } from "react-router-dom";
 import Header from "../components/Header";
 import Body from "../components/Body";
+import { headers } from "../components/Globals";
 
 const SignUp = () => {
   console.log("I'm in the SignUp Component");
@@ -16,9 +17,7 @@ const SignUp = () => {
     e.preventDefault();
     fetch("/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({
         username,
         password,
@@ -29,6 +28,7 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((user) => {
         if (!user.errors) {
+          console.log(user)
           signup(user);
           redirect("/me");
         } else {
@@ -43,10 +43,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container-md">
+    <div className="container mx-auto mt-3 px-5 bg-warning">
       <Header />
-      <div className="row d-inline-block">
-        <form className="form-horizontal" onSubmit={handleSubmit}>
+      <div className="row d-block">
+        <form className="form mx-auto text-center bg-light border-dark p-2 m-5" onSubmit={handleSubmit}>
           <div className="col d-grid gap-3">
             <div className="p-2 bg-light border">
               <input
@@ -95,7 +95,7 @@ const SignUp = () => {
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary" onClick={redirect('/me')}>
+          <button type="submit" className="btn btn-outline-primary fw-bold">
             Submit
           </button>
         </form>

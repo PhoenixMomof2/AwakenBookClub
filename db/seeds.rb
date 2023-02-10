@@ -3,7 +3,7 @@ puts "🌱 Seeding..."
 puts "Deleting User/Books data...."
 User.destroy_all
 Book.destroy_all
-Group.destroy_all
+BookGroup.destroy_all
 
 puts "Creating users..."
 User.create([
@@ -65,7 +65,7 @@ Between the World and Me is Ta-Nehisi Coates’s attempt to answer these questio
 ])
 
 puts "Creating groups..."
-Group.create([
+BookGroup.create([
   {name: "Anti-Racist", comments: [""], user_id: 1, book_id: 1},
   {name: "Pro-Education", comments: [""], user_id: 2, book_id: 2},
   {name: "Pro-Justice-Reform", comments: [""], user_id: 3, book_id: 3},

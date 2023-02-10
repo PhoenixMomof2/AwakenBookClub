@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def show
     book = find_book
-    render json: book
+    render json: book, include: :users
   end
 
   def create

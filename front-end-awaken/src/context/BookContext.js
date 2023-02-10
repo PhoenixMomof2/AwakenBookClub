@@ -8,16 +8,14 @@ const BookProvider = ({ children }) => {
   // value that will be given to the context
   const [books, setBooks] = useState([])
 
-  console.log("I'm in BookProvider")
+  // console.log("I'm in BookProvider")
 
   // fetch the books
   useEffect(() => {
       const fetchBooks = () => {
         fetch('/books')
         .then(res => res.json())
-        .then(data => 
-          // console.log(data, "In the book fetch")
-          setBooks(data, "Inside setBooks" ))
+        .then(data => setBooks(data))
         .catch((error) => console.log("An error occurred."));
       };
   fetchBooks();

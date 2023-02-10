@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from "react";
 
 // Create context
-const UserContext = createContext(null);
+const UserContext = createContext();
 
 // Create provider
 function UserProvider ({ children }) {
@@ -10,18 +10,15 @@ function UserProvider ({ children }) {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   // const [errors, setErrors] = useState([])
-
+console.log(user, loggedIn)
   useEffect(() => {
-    const fetchUser = () => {
       fetch("/me")
       .then(res => res.json())
       .then(data => {
         console.log("I'm in the UserContext fetch")
         setUser(data)
-        data.error ? setLoggedIn(false) : setLoggedIn(true)
+        // data.error ? setLoggedIn(false) : setLoggedIn(true)
       })
-    }
-    fetchUser({})
   }, []);
 
   const login = (user) => {
