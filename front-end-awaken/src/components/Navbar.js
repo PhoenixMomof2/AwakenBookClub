@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
 import UserNavbar from "./UserNavbar";
-import Welcome from './Welcome';
 
 const Navbar = () => {
   // console.log("I'm in the Navbar Component")
@@ -13,9 +12,8 @@ const Navbar = () => {
           <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
             <div className="container-xxl">
             <Link className="navbar-brand fw-bold text-secondary" to="/home">
-              AWAKEN - Social Justice Book Club
+            <i class="bi bi-unity"></i> AWAKEN - Social Justice Book Club
             </Link>
-            <Welcome />
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

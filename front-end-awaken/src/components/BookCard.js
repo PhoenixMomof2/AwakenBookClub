@@ -5,8 +5,7 @@ const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
 
   return (
-    <div className="col-8 col-lg-4 col-xl-3 mx-2 my-2">
-      <div className="card-header text-center text-danger fw-bolder">BookGroup</div>
+    <div className="col-xl-2 mx-2 my-2">
       <img
         src={book_img}
         className="card-img-top rounded mx-auto d-block "
@@ -20,13 +19,13 @@ const BookCard = ({ book }) => {
         <p className="card-text text-light fw-bold">Preview: {short_content}</p>
       </div>
       <div className="btn-group border border-warning">
-        <Link to={`/books/${id}`} className="btn btn-danger">
+        <Link to={`/books/${id}`} className="btn btn-danger pt-4">
           Expand
         </Link>
-        <Link to="#" className="btn btn-dark">
+        <Link to="/book_groups/book_id/comments" className="btn btn-dark pt-3">
           Leave a Comment
         </Link>
-        <Link to={`/book_groups/${id}`} className="btn btn-success">
+        <Link to={"/book_groups"} className="btn btn-success">
           Join Reading Group
         </Link>
       </div>

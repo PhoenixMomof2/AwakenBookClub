@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { redirect } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Body from "../components/Body";
+import Welcome from "../components/Welcome";
 
 const SignUp = () => {
   console.log("I'm in the SignUp Component");
@@ -29,7 +30,7 @@ const SignUp = () => {
         if (!user.errors) {
           console.log(user)
           signup(user);
-          redirect("/me");
+          redirect("/books");
         } else {
           setUsername("");
           setPassword("");
@@ -47,61 +48,75 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container-flex mx-auto mt-3 px-2 bg-warning">
-      <div className="row d-block">
-        <form className="form mx-auto justify-content-center text-center bg-dark border-dark p-3" onSubmit={handleSubmit}>
-          <div className="col d-grid gap-3">
-            <div className="col p-3 bg-light border">
+    <div className="container-flex">
+     
+      <div className="row justify-content-center">
+      <div className="col-lg-6">
+        <form className="my-5 justify-content-center text-center bg-dark border-dark p-3" onSubmit={handleSubmit}>
+        <div className="form-group">
+            <div className="mb-3 input-group">
+            <span className="input-group-text">Username</span>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Username"
+                placeholder="Enter Username"
                 aria-label="Username"
+                id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           </div>
-          <div className="col d-grid gap-3">
-            <div className="col p-3 bg-light border">
+          <div className="form-group">
+            <div className="mb-3 input-group">
+            <span className="input-group-text">Enter Password</span>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Password"
                 aria-label="Password"
+                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
-          <div className="col d-grid gap-3">
-            <div className="col p-3 bg-light border">
+          <div className="form-group">
+            <div className="mb-3 input-group">
+            <span className="input-group-text">Password Confirmation</span>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Password Confirmation"
+                placeholder="Enter Password Confirmation"
                 aria-label="password_confirmation"
+                id="password-confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
               />
             </div>
           </div>
-          <div className="col d-grid gap-3">
-            <div className="col p-3 bg-light border">
+          <div className="form-group">
+            <div className="mb-3 input-group">
+            <span className="input-group-text">Age</span>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Age"
+                placeholder="Enter Age"
                 aria-label="Age"
+                id="age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
               />
             </div>
           </div>
-          <button type="submit" className="btn bg-warning p-3 mt-2 btn-outline-primary fw-bold">
-            Submit
+          <div className="text-center text-light fw-bolder pb-3">
+            <Welcome />Please sign up for an account.
+          </div>
+          <button type="submit" className="btn bg-warning p-2 btn-outline-primary fw-bold">
+            Sign Up
           </button>
         </form>
+      </div>
       </div>
       <Body />
     </div>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :book_groups
-  resources :books
+  resources :books, except: [:update, :destroy]
 
   # Custom book routes
   

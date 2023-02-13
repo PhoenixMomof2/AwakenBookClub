@@ -4,7 +4,7 @@ const Header = () => {
   // console.log("I'm in the Header Component")
   return (
     <section id="header">
-      <div className="container-xxl-flex pt-5 pb-5 pe-3 ps-3 bg-warning border-dark">
+      <div className="container-flex pt-3 pb-3 pe-3 ps-3 bg-warning border-dark">
         <header className="masthead text-center text-white pt-3 pb-3">
           <div className="masthead-content">
               <div className="container px-5">
