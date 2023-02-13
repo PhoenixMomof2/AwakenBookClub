@@ -1,18 +1,19 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: :index
+  skip_before_action :authorized, only: [:index, :show]
   
   def index
     books = Book.all
     render json: books
-    #how to include group comments
   end
 
   def show
     book = find_book
-    render json: book, include: :users
+    render json: book
   end
 
   def create
+    book = Book.create!(book_params)
+    render json: book
   end
 
   private

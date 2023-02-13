@@ -5,8 +5,8 @@ const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
 
   return (
-    <div className="col-sm-4">
-      <div className="card-header">BookGroup</div>
+    <div className="col-8 col-lg-4 col-xl-3 mx-2 my-2">
+      <div className="card-header text-center text-danger fw-bolder">BookGroup</div>
       <img
         src={book_img}
         className="card-img-top rounded mx-auto d-block "
@@ -26,7 +26,7 @@ const BookCard = ({ book }) => {
         <Link to="#" className="btn btn-dark">
           Leave a Comment
         </Link>
-        <Link to="#" className="btn btn-success">
+        <Link to={`/book_groups/${id}`} className="btn btn-success">
           Join Reading Group
         </Link>
       </div>

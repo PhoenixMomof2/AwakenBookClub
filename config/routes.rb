@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   resources :book_groups
-  resources :users, only: [:index, :show, :create]
   resources :books
 
+  # Custom book routes
+  
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
+  get "/users", to: "users#index"
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

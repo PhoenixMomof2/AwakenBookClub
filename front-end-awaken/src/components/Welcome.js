@@ -6,9 +6,9 @@ const Welcome = () => {
   console.log("I'm in the Welcome Component", user)
 
   if (!loggedIn) {
-    return( <li className="nav-item fw-bolder text-warning">Welcome, Reader!</li> )
+    return( <span className="nav-item fw-bolder text-warning pe-5 justify-content-start">Welcome, Reader!</span> )
   } else {
-    return ( <li className="nav-item fw-bolder text-warning">Welcome, {user.username}!</li> )
+    return ( <span className="nav-item fw-bolder text-warning pe-5 justify-content-start">Welcome, {user.username}!</span> )
   }
 }
 export default Welcome;

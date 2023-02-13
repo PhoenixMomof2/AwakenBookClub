@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import BookCard from "../components/BookCard";
 import { BookContext } from "../context/BookContext";
-import NewBookForm from "../components/NewBookForm";
+
 
 const BookList = () => {
   const books  = useContext(BookContext)
@@ -10,13 +10,13 @@ const BookList = () => {
   console.log("I'm in the BookList Component")
 
   return (
-    <div className="container-lg my-5 bg-dark p-3">
-      <NewBookForm />
-      <div className="row justify-content-center">
-        { bookCards }
-      </div>
-    </div>
-    
+      <section id="book-list">
+        <div className="container-flex bg-dark">
+          <div className="row align-items-center justify-content-center">
+            { bookCards }
+          </div>
+        </div>
+      </section>
   );
 };
 

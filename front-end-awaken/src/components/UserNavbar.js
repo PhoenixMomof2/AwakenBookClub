@@ -17,32 +17,30 @@ const UserNavbar = () => {
   }
   
   return (
-    <div className="container-xx1">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark m-3">
-        <div className="container-xx1">
-        <Link className="navbar-brand" to="/home">
-          <span className ="fw-bold text-secondary">Awaken</span>
+      <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-xxl">
+        <Link className="navbar-brand fw-bold text-secondary" to="/home">
+          AWAKEN - Social Justice Book Club
         </Link>
+        <Welcome />
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         </div>
-        <div className="collapse navbar-collapse" id="main-nav">
-          <ul className="navbar-nav me-auto">
+        <div className="collapse navbar-collapse justify-content-end align-center me-4" id="main-nav">
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
+              <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/home">Home</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link text-danger active" aria-current="page" to="/books">Book List</Link>
+                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">Book List</Link>
             </li>
-            <Welcome />
-            <li className="nav-item">
-              <Link className="nav-link active" to="#" onClick={logoutUser}>Log Out</Link>
+            <li className="nav-item ">
+              <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="#" onClick={logoutUser}>Log Out</Link>
             </li>
           </ul>
         </div>
       </nav>
-    </div>
   )
 }
 
