@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Body from "../components/Body";
 import Welcome from "../components/Welcome";
@@ -11,7 +11,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [age, setAge] = useState("");
-  const { signup, setErrors } = useContext(UserContext);
+  const { signup, setErrors, errors } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,21 +31,18 @@ const SignUp = () => {
         if (!user.errors) {
           console.log(user)
           signup(user);
-          redirect("/books");
+          navigate(`/users/${user.id}/books`);
         } else {
-          setUsername("");
-          setPassword("");
-          setPasswordConfirmation("");
-          setAge("");
+          console.log("else branch", user)
           const errorLis = user.errors.map((e) => <li>{e}</li>);
           setErrors(errorLis);
         }
       });
       //clear form
-      setUsername("");
-      setPassword("");
-      setPasswordConfirmation("");
-      setAge("");
+      // setUsername("");
+      // setPassword("");
+      // setPasswordConfirmation("");
+      // setAge("");
   };
 
   return (
@@ -115,6 +113,7 @@ const SignUp = () => {
           <button type="submit" className="btn bg-warning p-2 btn-outline-primary fw-bold">
             Sign Up
           </button>
+          <div className="text-light">{errors}</div>
         </form>
       </div>
       </div>

@@ -1,11 +1,10 @@
 class CreateBookGroups < ActiveRecord::Migration[6.1]
   def change
     create_table :book_groups do |t|
-      t.string :name
-      t.string :comments
+      t.text :comments
       t.integer :user_id
       t.integer :book_id
-
+      
       t.timestamps
     end
   end

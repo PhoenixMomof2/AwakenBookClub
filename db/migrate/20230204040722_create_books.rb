@@ -4,9 +4,9 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :book_img
       t.string :author
-      t.integer :stars
+      t.float :stars
       t.string :category
-      t.string :content
+      t.text :content
 
       t.timestamps
     end

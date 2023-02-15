@@ -7,13 +7,9 @@ const UserNavbar = () => {
   const { logout } = useContext(UserContext)
 
   const logoutUser = () => {
-    fetch('/logout', { 
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(() => {
-      logout() 
-    })
+    fetch('/logout', 
+    { method: 'DELETE'})
+    .then(() => { logout() })
   }
   
   return (

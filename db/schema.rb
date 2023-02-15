@@ -13,8 +13,7 @@
 ActiveRecord::Schema.define(version: 2023_02_09_155248) do
 
   create_table "book_groups", force: :cascade do |t|
-    t.string "name"
-    t.string "comments"
+    t.text "comments"
     t.integer "user_id"
     t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
@@ -25,9 +24,9 @@ ActiveRecord::Schema.define(version: 2023_02_09_155248) do
     t.string "title"
     t.string "book_img"
     t.string "author"
-    t.integer "stars"
+    t.float "stars"
     t.string "category"
-    t.string "content"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
-
+  const { book_id, user_id } = useParams();
   return (
-    <div className="col-xl-2 mx-2 my-2">
+    <div className="col-9-lg col-6-md col-2 mx-2 my-2">
       <img
         src={book_img}
         className="card-img-top rounded mx-auto d-block "
@@ -22,10 +22,10 @@ const BookCard = ({ book }) => {
         <Link to={`/books/${id}`} className="btn btn-danger pt-4">
           Expand
         </Link>
-        <Link to="/book_groups/book_id/comments" className="btn btn-dark pt-3">
+        <Link to={`/users/${id}/book_groups/new`} className="btn btn-dark pt-3">
           Leave a Comment
         </Link>
-        <Link to={"/book_groups"} className="btn btn-success">
+        <Link to={`/book_groups/${user_id}`} className="btn btn-success">
           Join Reading Group
         </Link>
       </div>

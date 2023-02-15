@@ -19,7 +19,7 @@ function UserProvider ({ children }) {
       .then(data => {
         console.log("I'm in the UserContext fetch")
         setUser(data)
-        data.error ? setLoggedIn(false) : setLoggedIn(true)
+        // data.errors ? setLoggedIn(false) : setLoggedIn(true)
       })
   }, []);
 
@@ -39,7 +39,7 @@ function UserProvider ({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout, signup, loggedIn }}>
+    <UserContext.Provider value={{ user, login, logout, signup, loggedIn, setErrors, errors }}>
       {children}
     </UserContext.Provider>
   )

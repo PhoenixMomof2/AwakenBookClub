@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+  
   before_action :authorized
 
   private
@@ -11,7 +13,12 @@ class ApplicationController < ActionController::API
     render json: { error: ["Not Authorized"] }, status: :unauthorized unless @current_user
   end
 
-  def render_unprocessable_entity_response(exception)
-    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+  # Error handling methods
+  def render_not_found_response
+    render json: { errors: {error.model => "Not found" } }, status: :not_found
+  end
+
+  def render_unprocessable_entity_response(invalid)
+    render json: { errors: ErrorSerializer.serialize(invalid.record.errors) }, status: :unprocessable_entity
   end
 end

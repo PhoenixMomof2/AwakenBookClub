@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useParams } from "react";
 import {redirect} from "react-router-dom";
 import { postMethodHeaders } from "./Globals";
+import { BookGroupsContext } from "../context/BookGroupsContext";
 
 const NewCommentForm = () => {
 
   const [comments, setComments] = useState("")
   const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { comment, handleAddNewComment } = useContext(BookGroupsContext);
+  const { id } = useParams()
   
   
 
@@ -21,7 +24,7 @@ const NewCommentForm = () => {
     };
     console.log(newCommentData);
   
-    fetch("/book_groups/book_id/comments", {
+    fetch(`/book_groups/${id}`, {
       postMethodHeaders,
       body: JSON.stringify(newCommentData),
     })

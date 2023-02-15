@@ -1,5 +1,4 @@
 import React from 'react'
-import CommentsImage from '../images/CommentsImage.jpg';
 
 const BookCommentsList = () => {
   return (

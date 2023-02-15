@@ -3,14 +3,13 @@ class BooksController < ApplicationController
   
   def index
     books = Book.all
-    render json: books
+    render json: books, status: :ok
   end
 
   def show
     book = find_book
-    render json: book
+    render json: book, status: :ok
   end
-
 
   private
   def book_params
@@ -19,10 +18,5 @@ class BooksController < ApplicationController
 
   def find_book
     Book.find_by_id(params[:id])
-  end
-
-  #Error handling
-  def render_unprocessable_entity(invalid)
-    render json: { error: invalid.record.errors }, status: :unprocessable_entity
   end
 end

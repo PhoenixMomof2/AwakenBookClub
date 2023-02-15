@@ -1,3 +1,3 @@
 class BookGroupSerializer < ActiveModel::Serializer
-  attributes :id, :name, :comments, :user_id, :book_id
+  attributes :id, :comments, :user_id, :book_id, :created_at, :updated_at
 end

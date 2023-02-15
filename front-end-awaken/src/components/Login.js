@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Body from "../components/Body";
 import Welcome from "../components/Welcome";
@@ -9,31 +9,37 @@ const Login = () => {
   // console.log("I'm in the Login Component");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { login } = useContext(UserContext);
+  const { login, setErrors, errors } = useContext(UserContext);
+  
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    const user = {
-      username,
-      password,
-    };
-
+    
     fetch("/login", {
       method: "POST",
       headers,
-      body: JSON.stringify(user),
+      body: JSON.stringify({
+        username,
+        password,
+      })
     }).then((res) => {
       if (res.ok) {
-        res.json().then(user => login(user));
-        redirect("/books");
+        res.json().then(user => {
+          login(user)
+          navigate(`/users/${user.id}/books`)
+        })
       } else {
-        res.json().then(() => setError(error));
+        res.json().then((err) => {
+          // debugger;
+          console.log(err.errors)
+          setErrors(err.errors)
+        })
       }
-    });
+    })
     // clear form
-    setUsername("");
-    setPassword("");
+    // setUsername("");
+    // setPassword("");
   }
 
   return (
@@ -75,6 +81,7 @@ const Login = () => {
           <button type="submit" className="btn bg-warning p-2 btn-outline-primary fw-bold">
             Login
           </button>
+          <div className="text-light">{errors}</div>
         </form>
       </div>
       </div>
