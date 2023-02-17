@@ -2,15 +2,19 @@ Rails.application.routes.draw do
   resources :book_groups
   resources :books, except: [:create, :update, :destroy]
 
-  # Custom book routes
-  # to="/books/:user_id"
-  # to="/book_groups/:user_id"
-  # to="/book_groups/:book_id/comments"
-
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
   get "/users", to: "users#index"
+  # resources :users do
+  #   resources :books
+  # end
+
+  # resources :users do
+  #   resources :book_groups
+  # end
+  get "/users/:user_id/book_groups", to: "book_groups#index"
+  
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

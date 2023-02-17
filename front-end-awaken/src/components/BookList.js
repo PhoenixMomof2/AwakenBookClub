@@ -17,7 +17,7 @@ const BookList = () => {
           </div>
         </div>
       </section>
-  );
-};
+  )
+}
 
 export default BookList;

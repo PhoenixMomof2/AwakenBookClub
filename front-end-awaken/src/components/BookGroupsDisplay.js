@@ -20,7 +20,7 @@ const BookGroupsDisplay = () => {
 
         <div className="row my-5 g-5 justify-content-around align-items-center">
           <div className="col-6 col-lg-4">
-            <img src={CommentsImage} class="img-fluid" alt="placeholder" />
+            <img src={CommentsImage} className="img-fluid" alt="placeholder" />
           </div>
 
           <div className="col-lg-6">

@@ -3,7 +3,7 @@ import { UserContext } from '../context/UserContext';
 
 const Welcome = () => {
   const { user, loggedIn } = useContext(UserContext);
-  console.log("I'm in the Welcome Component", user)
+  // console.log("I'm in the Welcome Component", user)
 
   if (!loggedIn) {
     return( <span className="fw-bolder text-warning pe-5 justify-content-start">Welcome, Reader!</span> )

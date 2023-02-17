@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { UserContext } from '../context/UserContext';
 import Welcome from './Welcome';
 
 const UserNavbar = () => {
   const { logout } = useContext(UserContext)
+  const { user_id } = useParams()
 
+  // debugger
   const logoutUser = () => {
     fetch('/logout', 
     { method: 'DELETE'})
@@ -16,7 +18,7 @@ const UserNavbar = () => {
       <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
         <div className="container-xxl">
         <Link className="navbar-brand fw-bold text-secondary" to="/home">
-        <i class="bi bi-unity"></i> AWAKEN - Social Justice Book Club
+        <i className="bi bi-unity"></i> AWAKEN - Social Justice Book Club
         </Link>
         <Welcome />
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,8 +31,11 @@ const UserNavbar = () => {
               <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/home">Home</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">Book List</Link>
+                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to={`/users/${user_id}/books`}>User Book List</Link>
             </li>
+            <li className="nav-item">
+                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to={`/users/${user_id}/book_groups`}>User Book Group List</Link>
+            </li> 
             <li className="nav-item ">
               <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="#" onClick={logoutUser}>Log Out</Link>
             </li>

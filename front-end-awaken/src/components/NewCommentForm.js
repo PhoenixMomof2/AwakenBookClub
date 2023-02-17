@@ -24,7 +24,7 @@ const NewCommentForm = () => {
     };
     console.log(newCommentData);
   
-    fetch(`/book_groups/${id}`, {
+    fetch(`/book_groups/${user.id}`, {
       postMethodHeaders,
       body: JSON.stringify(newCommentData),
     })
@@ -51,7 +51,7 @@ return (
           <label htmlFor="comments">Comment:</label>
           <input type="text" name="comments" id="comments" value={comments} onChange={(e) => setComments(e.target.value)}/>
         </div>
-        <input type="submit" class="btn btn-secondary"value="Submit" />
+        <input type="submit" className="btn btn-secondary"value="Submit" />
       </form>
     </div>
   </div>

@@ -10,15 +10,15 @@ class ApplicationController < ActionController::API
 
   def authorized
     @current_user = User.find_by(id: session[:user_id])
-    render json: { error: ["Not Authorized"] }, status: :unauthorized unless @current_user
+    render json: { error: "Not Authorized" }, status: :unauthorized unless @current_user
   end
 
   # Error handling methods
   def render_not_found_response
-    render json: { errors: {error.model => "Not found" } }, status: :not_found
+    render json: { errors:  "Not found" }, status: :not_found
   end
 
   def render_unprocessable_entity_response(invalid)
-    render json: { errors: ErrorSerializer.serialize(invalid.record.errors) }, status: :unprocessable_entity
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 end

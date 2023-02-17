@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Body from "../components/Body";
 import Welcome from "../components/Welcome";
@@ -10,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, setErrors, errors } = useContext(UserContext);
+  const { id } = useParams()
   
   const navigate = useNavigate();
 

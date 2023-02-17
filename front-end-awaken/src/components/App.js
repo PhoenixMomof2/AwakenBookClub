@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useParams } from "react-router-dom";
 
 //context
 import { UserProvider, UserContext } from "../context/UserContext";
@@ -28,7 +28,9 @@ import BookCommentsList from "../components/BookCommentsList";
 
 const App = () => {
   const loggedIn = useContext(UserContext);
+  const { user_id, id } = useParams()
   console.log("I'm in the App Component");
+
   return (
     <div className="App bg-danger">
       <UserProvider>
@@ -40,26 +42,26 @@ const App = () => {
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/users/:id" element={<UserProfile />} />
+              <Route path={`/users/${user_id}`} element={<UserProfile />} />
               <Route
                 path="/books"
-                element={ loggedIn ? <Navigate to="users/:id/books" /> : <BookList /> }/>
-              <Route path="/books/:id" element={<BookDetails />} />
-              <Route path="/users/:id/books" element={<UserBookList />} />
+                element={ loggedIn ? <Navigate to={`/users/${user_id}/books/${id}`} /> : <BookList /> }/>
+              <Route path={`/books/${id}`} element={<BookDetails />} />
+              <Route path={`/users/${user_id}/books/${id}`} element={<UserBookList />} />
               <Route
                 path="/book_groups"
-                element={ loggedIn ? <Navigate to="/users/:id/book_groups/" /> : <BookGroups /> }
+                element={ loggedIn ? <Navigate to={`/users/${user_id}/book_groups${id}`} /> : <BookGroups /> }
               />
               <Route
-                path="/users/:id/book_groups"
+                path={`/book_groups/${id}`}
                 element={<UserBookGroups />}
               />
               {/* <Route
-                path="/users/:id/book_groups/new"
+                path="/book_groups/new"
                 element={<NewCommentForm />}
               /> */}
               <Route
-                path="/users/:id/books/comments"
+                path={`/users/${user_id}/book_groups${id}`}
                 element={<BookCommentsList />}
               />
             </Routes>

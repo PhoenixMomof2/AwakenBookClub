@@ -6,5 +6,5 @@ class User < ApplicationRecord
   has_many :book_groups
   has_many :books, through: :book_groups
 
-  has_secure_password
+  has_secure_password   
 end

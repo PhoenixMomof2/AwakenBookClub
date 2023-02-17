@@ -7,12 +7,12 @@ BookGroup.destroy_all
 
 puts "Creating users..."
 User.create([
-  {username: "Taraji P. Henson", password: "booklover1", age: 39},
-  {username: "Kal Logan", password: "booklover2",  age: 19},
-  {username: "Viola Davis", password: "booklover3",  age: 23},
-  {username: "Sanai Kelly", password: "booklover4",  age: 48},
-  {username: "Angela Bassett Carter", password: "booklover5",  age: 35},
-  {username: "Michael B. Jordan", password: "booklover5",  age: 35},
+  {username: "Taraji Henson", password: "booklover1", age: 39},
+  {username: "Kal Logan", password: "booklover2",  age: 18},
+  {username: "Viola Davis", password: "booklover3",  age: 50},
+  {username: "Sanai Kelly", password: "booklover4",  age: 24},
+  {username: "Angela Bassett", password: "booklover5",  age: 55},
+  {username: "Michael Jordan", password: "booklover6",  age: 35},
   ])
 
 

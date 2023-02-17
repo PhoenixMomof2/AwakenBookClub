@@ -12,8 +12,9 @@ class BookGroupsController < ApplicationController
   
   # GET /book_groups/:id
   def show
-    book_group = find_book_group
-    render json: book_group, status: :ok
+    @book_group = find_book_group
+    # user = User.find(id: session[:user_id])
+    render json: @book_group, status: :ok
   end
 
   # POST /book_groups
@@ -42,6 +43,6 @@ class BookGroupsController < ApplicationController
   end
 
   def find_book_group
-    BookGroup.find(id: params[:id])
+    @book_group = BookGroup.find(id: params[:id])
   end
 end

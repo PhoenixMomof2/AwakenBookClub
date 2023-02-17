@@ -29,12 +29,10 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((user) => {
         if (!user.errors) {
-          console.log(user)
           signup(user);
           navigate(`/users/${user.id}/books`);
         } else {
-          console.log("else branch", user)
-          const errorLis = user.errors.map((e) => <li>{e}</li>);
+          const errorLis = user.errors.map((e, ind) => <li key={ind}>{e}</li>);
           setErrors(errorLis);
         }
       });

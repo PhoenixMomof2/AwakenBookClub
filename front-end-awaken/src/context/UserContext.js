@@ -19,7 +19,6 @@ function UserProvider ({ children }) {
       .then(data => {
         console.log("I'm in the UserContext fetch")
         setUser(data)
-        // data.errors ? setLoggedIn(false) : setLoggedIn(true)
       })
   }, []);
 

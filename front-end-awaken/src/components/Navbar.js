@@ -12,7 +12,7 @@ const Navbar = () => {
           <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
             <div className="container-xxl">
             <Link className="navbar-brand fw-bold text-secondary" to="/home">
-            <i class="bi bi-unity"></i> AWAKEN - Social Justice Book Club
+            <i className="bi bi-unity"></i> AWAKEN - Social Justice Book Club
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -25,6 +25,9 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">Book List</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/book_groups">Group List</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/signup">Signup</Link>
