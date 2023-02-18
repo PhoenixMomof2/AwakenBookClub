@@ -53,3 +53,4 @@ gem "active_model_serializers", "~> 0.10.12"
 
 gem 'bootstrap', '~> 5.2.3'
 gem 'sprockets', '~>3.0'
+gem 'cancancan'

@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show]
+  # skip_before_action :authorized, only: [:index, :show]
+  load_and_authorize_resource
   
   def index
     books = Book.all
@@ -7,9 +8,14 @@ class BooksController < ApplicationController
   end
 
   def show
-    book = find_book
-    render json: book, status: :ok
+    @book = Book.find(params[:id])
+    authorize! :read, @book
   end
+
+  # def show
+  #   book = find_book
+  #   render json: book, status: :ok
+  # end
 
   private
   def book_params
@@ -17,6 +23,6 @@ class BooksController < ApplicationController
   end
 
   def find_book
-    Book.find_by_id(params[:id])
+    @book = Book.find(params[:id])
   end
 end

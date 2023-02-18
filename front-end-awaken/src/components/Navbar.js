@@ -24,10 +24,7 @@ const Navbar = () => {
                   <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/home">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">Book List</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/book_groups">Group List</Link>
+                  <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">See Books</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/signup">Signup</Link>

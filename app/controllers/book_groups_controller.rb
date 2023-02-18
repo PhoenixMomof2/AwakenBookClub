@@ -1,5 +1,5 @@
 class BookGroupsController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show]
+  # skip_before_action :authorized, only: [:index, :show]
   # etag { current_user&.id }
   # Allows you to consider additional controller-wide information when generating an ETag. 
   # For example, if you serve pages tailored depending on who's logged in at the moment,
@@ -12,30 +12,29 @@ class BookGroupsController < ApplicationController
   
   # GET /book_groups/:id
   def show
-    @book_group = find_book_group
+    book_group = find_book_group
     # user = User.find(id: session[:user_id])
-    render json: @book_group, status: :ok
+    render json: book_group, status: :ok
+    # render json: @book_group.current_user, status: :ok
   end
 
   # POST /book_groups
-  def create
-    book_group = BookGroup.create!(book_groups_params)
-    render json: book_group, status: :created
-  end
+  # def create
+  #   book_group = current_user.book_group.create!(book_groups_params)
+  #   render json: book_group, status: :created
+  # end
 
   # PATCH /book_groups/:id
-  def update
-    book_group = find_book_group
-    book_group.update!(book_groups_params)
-    render json: book_group, status: :ok
-  end
+  # def update
+  #   @book_group.update!(book_groups_params)
+  #   render json: @book_group, status: :ok
+  # end
 
   # DELETE /book_groups/:id
-  def destroy
-    book_group = find_book_group
-    book_group.destroy
-    head :no_content
-  end
+  # def destroy
+  #   @book_group.destroy
+  #   head :no_content
+  # end
 
   private
   def book_groups_params
@@ -43,6 +42,6 @@ class BookGroupsController < ApplicationController
   end
 
   def find_book_group
-    @book_group = BookGroup.find(id: params[:id])
+    BookGroup.find(params[:id])
   end
 end

@@ -22,9 +22,9 @@ import BookList from "../components/BookList";
 import UserBookList from "../components/UserBookList";
 import BookDetails from "../components/BookDetails";
 // import NewCommentForm from "../components/NewCommentForm";
-import BookGroups from "./BookGroups";
 import UserBookGroups from "../components/UserBookGroups";
 import BookCommentsList from "../components/BookCommentsList";
+import BookGroupsDisplay from "./BookGroupsDisplay";
 
 const App = () => {
   const loggedIn = useContext(UserContext);
@@ -43,27 +43,13 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path={`/users/${user_id}`} element={<UserProfile />} />
-              <Route
-                path="/books"
-                element={ loggedIn ? <Navigate to={`/users/${user_id}/books/${id}`} /> : <BookList /> }/>
-              <Route path={`/books/${id}`} element={<BookDetails />} />
-              <Route path={`/users/${user_id}/books/${id}`} element={<UserBookList />} />
-              <Route
-                path="/book_groups"
-                element={ loggedIn ? <Navigate to={`/users/${user_id}/book_groups${id}`} /> : <BookGroups /> }
-              />
-              <Route
-                path={`/book_groups/${id}`}
-                element={<UserBookGroups />}
-              />
-              {/* <Route
-                path="/book_groups/new"
-                element={<NewCommentForm />}
-              /> */}
-              <Route
-                path={`/users/${user_id}/book_groups${id}`}
-                element={<BookCommentsList />}
-              />
+              <Route path="/books" element={<BookList /> }/>
+              <Route path="/books/:id" element={<BookDetails />} />
+              <Route path="/books_groups" element={<BookGroupsDisplay /> }/>
+              <Route path="/users/:user_id/books/:id" element={<UserBookList />} />
+              <Route path="/users/:user_id/book_groups/:id" element={<UserBookGroups />} />
+              <Route path="/comments" element={<BookCommentsList />} />
+              {/* <Route path="/book_groups/new" element={<NewCommentForm />} /> */}
             </Routes>
             <Footer />
           </BookGroupsProvider>

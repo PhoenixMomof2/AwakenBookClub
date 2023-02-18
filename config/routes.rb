@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   # resources :users do
   #   resources :book_groups
   # end
-  get "/users/:user_id/book_groups", to: "book_groups#index"
-  
+  # get "/users/:id/book_groups", to: "book_groups#index"
+  # get "/users/:id/book_groups", to: "book_groups#create"
+  # get "/users/comments", to: "book"
+
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
