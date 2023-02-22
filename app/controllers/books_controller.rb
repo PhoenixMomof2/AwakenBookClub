@@ -7,8 +7,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    book = find_book
-    render json: book, status: :ok
+    @book = find_book
+    render json: @book, status: :ok
   end
 
   private
@@ -17,6 +17,6 @@ class BooksController < ApplicationController
   end
 
   def find_book
-    Book.find_by_id(params[:id])
+    @book = Book.find(params[:id])
   end
 end

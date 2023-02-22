@@ -13,21 +13,20 @@ class BookGroupsController < ApplicationController
   # GET /book_groups/:id
   def show
     @book_group = find_book_group
-    # user = User.find(id: session[:user_id])
     render json: @book_group, status: :ok
   end
 
   # POST /book_groups
   def create
-    book_group = BookGroup.create!(book_groups_params)
+    book_group = BookGroup.create!(book_group_params)
     render json: book_group, status: :created
   end
 
   # PATCH /book_groups/:id
   def update
-    book_group = find_book_group
-    book_group.update!(book_groups_params)
-    render json: book_group, status: :ok
+    @book_group = find_book_group
+    @book_group.update!(book_group_params)
+    render json: @book_group, status: :ok
   end
 
   # DELETE /book_groups/:id
@@ -38,11 +37,11 @@ class BookGroupsController < ApplicationController
   end
 
   private
-  def book_groups_params
+  def book_group_params
     params.permit(:comments, :user_id, :book_id)
   end
 
   def find_book_group
-    @book_group = BookGroup.find(id: params[:id])
+    @book_group = BookGroup.find(params[:id])
   end
 end

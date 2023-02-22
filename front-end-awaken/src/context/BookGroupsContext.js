@@ -43,7 +43,7 @@ const BookGroupsProvider = ({ children }) => {
   // }
 
   return (
-    <BookGroupsContext.Provider value={book_groups}>
+    <BookGroupsContext.Provider value={{book_groups, errors, setErrors}}>
       {children}
     </BookGroupsContext.Provider>
   )

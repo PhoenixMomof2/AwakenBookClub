@@ -4,6 +4,7 @@ import { BookGroupsContext } from "../context/BookGroupsContext";
 const BookGroups = () => {
   <div>Book Groups</div>
   const book_groups = useContext(BookGroupsContext);
+  console.log(book_groups)
   return(
     <section id="reviews" className="bg-light">
     <div className="container-flex bg-dark pt-3">

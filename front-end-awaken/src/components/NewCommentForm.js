@@ -1,44 +1,34 @@
 import React, { useState, useContext, useParams } from "react";
-import {redirect} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { postMethodHeaders } from "./Globals";
 import { BookGroupsContext } from "../context/BookGroupsContext";
 
 const NewCommentForm = () => {
-
+  // const { book_groups, handleAddNewComment } = useContext(BookGroupsContext);
+  // const { id } = useParams()
+  // const navigate = useNavigate();
   const [comments, setComments] = useState("")
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { comment, handleAddNewComment } = useContext(BookGroupsContext);
-  const { id } = useParams()
+  // const [errors, setErrors] = useState([]);
   
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    const newCommentData = {
-      comments,
-      user_id: user.id,
-      book_id: book.id
-    };
-    console.log(newCommentData);
-  
-    fetch(`/book_groups/${user.id}`, {
-      postMethodHeaders,
-      body: JSON.stringify(newCommentData),
-    })
-    .then((res) => {
-      if (res.ok) {
-        setIsLoading(false);
-        res.json().then((newComment) => handleAddNewComment(newComment)); // update state
-        redirect(`/comments/${newComment.id}`); // redirect to newComment show route
-      } else {
-        res.json().then((err) => setErrors(err.errors));
-      }
-    })
-    // clear form
-    setComments("")
+    console.log("submit clicked")
+    
+  //   fetch(`/book_groups/${id}`, {
+  //     postMethodHeaders,
+  //     body: JSON.stringify({}),
+  //   })
+  //   .then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((newComment) => handleAddNewComment(newComment)); // update state
+  //       navigate("/comments"); 
+  //     } else {
+  //       res.json().then((err) => setErrors(err.errors));
+  //     }
+  //   })
+  //   // clear form
+  //   setComments("")
     
   }
   

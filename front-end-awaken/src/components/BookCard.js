@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+
 const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
-  const user = useContext(UserContext)
 
   return (
     <div className="col-9-lg col-6-md col-2 mx-2 my-2">
@@ -23,9 +22,13 @@ const BookCard = ({ book }) => {
         <Link to={`/books/${id}`} className="btn btn-danger pt-4">
           Expand
         </Link>
-        <Link to={`users/${user.id}/book_groups/${id}`}className="btn btn-success">
+        <Link to="/book_groups"className="btn btn-success">
           Join Reading Group
         </Link>
+        <Link to="/book_groups/new"className="btn btn-success">
+          Leave A Comment
+        </Link>
+        
       </div>
     </div>
   );
