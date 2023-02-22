@@ -3,8 +3,8 @@ class User < ApplicationRecord
   validates :password, length: { in: 8..12 }
   validates :age, numericality: { greater_than_or_equal_to: 18 }
 
-  has_many :book_groups
-  has_many :books, through: :book_groups
+  has_many :comments
+  has_many :books, through: :comments
 
   has_secure_password   
 end

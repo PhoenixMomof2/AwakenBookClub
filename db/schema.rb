@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2023_02_09_155248) do
 
-  create_table "book_groups", force: :cascade do |t|
-    t.text "comments"
-    t.integer "user_id"
-    t.integer "book_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "book_img"
@@ -27,6 +19,14 @@ ActiveRecord::Schema.define(version: 2023_02_09_155248) do
     t.float "stars"
     t.string "category"
     t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

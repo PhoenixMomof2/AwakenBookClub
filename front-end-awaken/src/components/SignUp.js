@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
@@ -42,6 +42,12 @@ const SignUp = () => {
       // setPasswordConfirmation("");
       // setAge("");
   };
+
+  useEffect(() => {
+    return () => {
+      setErrors([])
+    }
+  },[setErrors])
 
   return (
     <div className="container-flex">

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :book_groups
+  resources :comments
   resources :books, except: [:create, :update, :destroy]
 
   # Users
@@ -11,16 +11,9 @@ Rails.application.routes.draw do
   # end
 
   # resources :users do
-  #   resources :book_groups
+  #   resources :comments
   # end
-<<<<<<< HEAD
     
-=======
-  # get "/users/:id/book_groups", to: "book_groups#index"
-  # get "/users/:id/book_groups", to: "book_groups#create"
-  # get "/users/comments", to: "book"
-
->>>>>>> 949f89fbce1e74c3b4ede59f3fbb6f1090b53f10
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

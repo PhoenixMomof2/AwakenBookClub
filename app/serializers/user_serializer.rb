@@ -1,5 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :username, :age
-  # has_many :books
-  has_many :book_groups, serializer: UserBookGroupSerializer
+  attributes :username, :age, :bio
+
+  has_many :books
+  has_many :comments
 end

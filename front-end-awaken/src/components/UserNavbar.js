@@ -31,10 +31,10 @@ const UserNavbar = () => {
               <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/home">Home</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to={`/users/${user_id}/books`}>User Book List</Link>
+                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">My Books</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to={`/users/${user_id}/book_groups`}>User Book Group List</Link>
+                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/comments">My Comments</Link>
             </li> 
             <li className="nav-item ">
               <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="#" onClick={logoutUser}>Log Out</Link>

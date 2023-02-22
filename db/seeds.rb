@@ -1,9 +1,9 @@
 puts "🌱 Seeding..."
 
-puts "Deleting User/Books data...."
+puts "Deleting User/Book/Comment data...."
 User.destroy_all
 Book.destroy_all
-BookGroup.destroy_all
+Comment.destroy_all
 
 puts "Creating users..."
 User.create([
@@ -36,28 +36,28 @@ Book.create([
   {title: "A Colony in a Nation", book_img: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1497195070i/35167682.jpg", author: "Christopher L. Hayes", stars: 4.19, category: "Social Justice", content: "New York Times best-selling author and Emmy Award–winning news anchor Chris Hayes argues that there are really two Americas: a Colony and a Nation.\n\nAmerica likes to tell itself that it inhabits a postracial world, yet nearly every empirical measure―wealth, unemployment, incarceration, school segregation―reveals that racial inequality has barely improved since 1968, when Richard Nixon became our first “law and order” president. With the clarity and originality that distinguished his prescient bestseller, Twilight of the Elites, Chris Hayes upends our national conversation on policing and democracy in a book of wide-ranging historical, social, and political analysis.\n\nHayes contends our country has fractured in two: the Colony and the Nation. In the Nation, we venerate the law. In the Colony, we obsess over order, fear trumps civil rights, and aggressive policing resembles occupation. A Colony in a Nation explains how a country founded on justice now looks like something uncomfortably close to a police state. How and why did Americans build a system where conditions in Ferguson and West Baltimore mirror those that sparked the American Revolution?\n\nA Colony in a Nation examines the surge in crime that began in the 1960s and peaked in the 1990s, and the unprecedented decline that followed. Drawing on close-hand reporting at flashpoints of racial conflict, as well as deeply personal experiences with policing, Hayes explores cultural touchstones, from the influential “broken windows” theory to the “squeegee men” of late-1980s Manhattan, to show how fear causes us to make dangerous and unfortunate choices, both in our society and at the personal level. With great empathy, he seeks to understand the challenges of policing communities haunted by the omnipresent threat of guns. Most important, he shows that a more democratic and sympathetic justice system already exists―in a place we least suspect.\n\nA Colony in a Nation is an essential book―searing and insightful―that will reframe our thinking about law and order in the years to come."}, 
 ])
 
-puts "Creating groups..."
-BookGroup.create([
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 1},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 2},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 3},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 4},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 2, book_id: 5},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 2, book_id: 4},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 3, book_id: 2},
-  {comments: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 3, book_id: 1},
-  {comments: "Tears.  I cried so many as I read the truth about our country and began to unpack my role in upholding systemic racism.", user_id: 2, book_id: 2},
-  {comments: "I wish I had read this book before I attended college.", user_id: 4, book_id: 1},
-  {comments: "I wish I had read this book before I attended college.", user_id: 4, book_id: 2},
-  {comments: "I wish I had read this book before I attended college.", user_id: 4, book_id: 5},
-  {comments: "I wish I had read this book before I attended college.", user_id: 5, book_id: 9},
-  {comments: "I wish I had read this book before I attended college.", user_id: 5, book_id: 10},
-  {comments: "I wish I had read this book before I attended college.", user_id: 5, book_id: 7},
-  {comments: "I wish I had read this book before I attended college.", user_id: 5, book_id: 9},
-  {comments: "I wish I had read this book before I attended college.", user_id: 6, book_id: 2},
-  {comments: "I wish I had read this book before I attended college.", user_id: 6, book_id: 4},
-  {comments: "I wish I had read this book before I attended college.", user_id: 6, book_id: 6},
-  {comments: "I wish I had read this book before I attended college.", user_id: 6, book_id: 8},
+puts "Creating comments..."
+Comment.create([
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 1},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 2},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 3},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 1, book_id: 4},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 2, book_id: 5},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 2, book_id: 4},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 3, book_id: 2},
+  {comment: "I couldn't put this book down.  It was a difficult, but necessary read.", user_id: 3, book_id: 1},
+  {comment: "Tears.  I cried so many as I read the truth about our country and began to unpack my role in upholding systemic racism.", user_id: 2, book_id: 2},
+  {comment: "I wish I had read this book before I attended college.", user_id: 4, book_id: 1},
+  {comment: "I wish I had read this book before I attended college.", user_id: 4, book_id: 2},
+  {comment: "I wish I had read this book before I attended college.", user_id: 4, book_id: 5},
+  {comment: "I wish I had read this book before I attended college.", user_id: 5, book_id: 9},
+  {comment: "I wish I had read this book before I attended college.", user_id: 5, book_id: 10},
+  {comment: "I wish I had read this book before I attended college.", user_id: 5, book_id: 7},
+  {comment: "I wish I had read this book before I attended college.", user_id: 5, book_id: 9},
+  {comment: "I wish I had read this book before I attended college.", user_id: 6, book_id: 2},
+  {comment: "I wish I had read this book before I attended college.", user_id: 6, book_id: 4},
+  {comment: "I wish I had read this book before I attended college.", user_id: 6, book_id: 6},
+  {comment: "I wish I had read this book before I attended college.", user_id: 6, book_id: 8},
 ])
 
 puts "✅ Done seeding!"
