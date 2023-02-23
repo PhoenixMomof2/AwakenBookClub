@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { UserContext } from '../context/UserContext';
 import Welcome from './Welcome';
 
 const UserNavbar = () => {
   const { logout } = useContext(UserContext)
-  const { user_id } = useParams()
-
+ 
   // debugger
   const logoutUser = () => {
     fetch('/logout', 
@@ -15,8 +14,8 @@ const UserNavbar = () => {
   }
   
   return (
-      <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-success">
-        <div className="container-xxl">
+      <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
         <Link className="navbar-brand fw-bold text-secondary" to="/home">
         <i className="bi bi-unity"></i> AWAKEN - Social Justice Book Club
         </Link>
@@ -26,18 +25,18 @@ const UserNavbar = () => {
         </button>
         </div>
         <div className="collapse navbar-collapse justify-content-end align-center me-4" id="main-nav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav n">
             <li className="nav-item">
-              <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/home">Home</Link>
+              <Link className="nav-link my-1 mx-1 active text-center text-dark fw-bolder" aria-current="page" to="/home">Home</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/books">My Books</Link>
+                <Link className="nav-link my-1 mx-1 active text-center text-dark fw-bolder" aria-current="page" to="/books">My Books</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="/comments">My Comments</Link>
+                <Link className="nav-link my-1 mx-1 active text-center text-dark fw-bolder" aria-current="page" to="/comments">My Comments</Link>
             </li> 
             <li className="nav-item ">
-              <Link className="nav-link my-2 mx-1 active text-center text-light fw-bolder" aria-current="page" to="#" onClick={logoutUser}>Log Out</Link>
+              <Link className="nav-link my-1 mx-1 active text-center text-dark fw-bolder" aria-current="page" to="#" onClick={logoutUser}>Log Out</Link>
             </li>
           </ul>
         </div>

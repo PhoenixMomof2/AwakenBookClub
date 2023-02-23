@@ -8,30 +8,28 @@ const CommentsList = () => {
   const commentsList = comments.map(comment => <CommentsDisplay key={comment.id} comment={comment}/>)
    
   return (
-    <div className="container-flex justify-content-center">
-      <section id="comments" className="bg-light">
-        <div className="container-flex">
-          <div>
-            <h2 className="text-dark text-center bg-success fw-bolder">
+    <div className="container-fluid justify-content-center align-items-center bg-dark">
+      <section id="comments">
+          <div className="row">
+            <h2 className="text-light text-center bg-dark fw-bolder pt-2">
               <i className="bi bi-wechat"></i> Reader Comments
             </h2>
           </div>
-        </div>
       </section>
-      <section>
-        <div className="row g-5 justify-content-around align-items-center">
-        <div>
+      <section id="comments-image">
+        <div className="container-fluid row justify-content-center pb-4">
           <img
             src={CommentsImage}
-            className="img-thumbnail"
+            className="img-sm px-5"
             alt="placeholder"
           />
         </div>
-        </div>
       </section>
-      <section>
-        <div>
-        { commentsList }
+      <section id="comment-list">
+        <div className="container-fluid bg-danger">
+          <div className="row">
+          { commentsList }
+          </div>
         </div>
       </section>
     </div>

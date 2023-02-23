@@ -1,33 +1,31 @@
-import React from 'react'
+import React, {useContext} from "react"
+// import { Link }  from "react-router-dom"
+import { UserContext } from "../context/UserContext"
 
-const CommentsDisplay = () => {
+
+const CommentsDisplay = ({comment}) => {
+  const user = useContext(UserContext)
+  const { id, username, age, bio, avatar } = user;
 
   return (
-    <div>
-      <section>
-        <div className="row g-5 p-3 justify-content-center">
-          <div className="col-lg-8">
-            <div className="list-group mt-3 p-3 bg-dark">
-              <div className="list-group-item py-3">
-                <div className="pb-2">
-                  <i className="bi bi-star-fill"></i>
-                  <i className="bi bi-star-fill"></i>
-                  <i className="bi bi-star-fill"></i>
-                  <i className="bi bi-star-fill"></i>
-                  <i className="bi bi-star-fill"></i>
-                </div>
-                <h5 className="mb-1">Member Comment</h5>
-                <p className="mb-1">
-                  In sit officia esse Lorem voluptate aliquip laborum ea
-                  eiusmod. Dolor officia pariatur consequat sit eu officia
-                  aute. Aliquip ad velit esse dolore dolor sint nostrud.
-                </p>
-                <small>Member: username</small>
-              </div>
-            </div>
+    <div className="col-6">
+      <div className="list-group mt-3 p-3 bg-dark">
+        <div className="list-group-item py-3" key={comment.id}>
+          <div>{username}</div>
+          <div className="pb-2">
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
+            <i className="bi bi-star-fill"></i>
           </div>
+          <h5 className="mb-1">{username}</h5>
+          <p className="mb-1">
+            {comment.comment}
+          </p>
+          <small>{username} | Age: {age}</small>
         </div>
-      </section>
+      </div>
     </div>
   )
 }

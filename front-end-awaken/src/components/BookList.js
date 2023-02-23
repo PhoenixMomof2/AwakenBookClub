@@ -11,8 +11,8 @@ const BookList = () => {
 
   return (
       <section id="book-list">
-        <div className="container-flex bg-dark">
-          <div className="row align-items-center justify-content-center">
+        <div className="container bg-dark">
+          <div className="row">
             { bookCards }
           </div>
         </div>

@@ -21,7 +21,7 @@ const BookDetails = () => {
             <p className="card-text text-light fw-bold">Preview: {getBook.content}</p>
           </div>
           <div className="btn-group border border-warning">
-          <Link to="/books" className="btn btn-dark">Back To Book List</Link>
+          <Link to="/books" className="btn btn-danger text-dark fw-bolder">Back To Book List</Link>
           </div>
         </div>
       </div>
