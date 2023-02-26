@@ -6,6 +6,9 @@ class ApplicationController < ActionController::API
   
   before_action :authorized
   
+  def current_user
+    @current_user = User.find_by(id: session[:user_id])
+  end
 
   private
   def authorized
@@ -15,7 +18,7 @@ class ApplicationController < ActionController::API
 
   # Error handling methods
   def render_not_found_response
-    render json: { errors:  "Not found" }, status: :not_found
+    render json: { errors:  ["Not found"] }, status: :not_found
   end
 
   def render_unprocessable_entity_response(invalid)

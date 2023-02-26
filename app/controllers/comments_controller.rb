@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   skip_before_action :authorized, only: [:index, :show]
-  
+    
   # GET /comments
   def index
     render json: Comment.all, status: :ok
@@ -9,20 +9,20 @@ class CommentsController < ApplicationController
   # GET /comments/:id
   def show
     @comment = find_comment
-    render json: @comment, status: :ok
+    render json: @comment, serializer: CommentBookSerializer, status: :ok
   end
 
   # POST /comments
   def create
-    comment = Comment.create!(comment_params)
-    render json: comment, status: :created
+    comment = current_user.comments.create!(comment_params)
+    render json: comment, serializer: CommentBookSerializer, status: :created
   end
 
   # PATCH /comments/:id
   def update
     @comment = find_comment
     @comment.update!(comment_params)
-    render json: @comment, status: :ok
+    render json: @comment, serializer: CommentBookSerializer, status: :ok
   end
 
   # DELETE /comments/:id

@@ -1,33 +1,49 @@
-import React, {useContext} from "react"
-// import { Link }  from "react-router-dom"
-import { UserContext } from "../context/UserContext"
+import React, { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+// import { BookContext } from "../context/BookContext"
+import { CommentContext } from "../context/CommentContext";
 
-
-const CommentsDisplay = ({comment}) => {
-  const user = useContext(UserContext)
-  const { id, username, age, bio, avatar } = user;
-
+const CommentsDisplay = ({ comment }) => {
+  const { id } = useParams();
+  const { user } = useContext(UserContext);
+  const { handleDeleteComment } = useContext(CommentContext);
+ 
   return (
-    <div className="col-6">
-      <div className="list-group mt-3 p-3 bg-dark">
-        <div className="list-group-item py-3" key={comment.id}>
-          <div>{username}</div>
-          <div className="pb-2">
-            <i className="bi bi-star-fill"></i>
-            <i className="bi bi-star-fill"></i>
-            <i className="bi bi-star-fill"></i>
-            <i className="bi bi-star-fill"></i>
-            <i className="bi bi-star-fill"></i>
+    <div className="container-flex">
+      <div className="row py-2">
+        <div className="list-group  bg-dark">
+          <div className="list-group-item" key={comment.id}>
+            <h3 className="text-danger text-center">User Name</h3>
+            <div className="text-center">
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+              <i className="bi bi-star-fill text-warning"></i>
+            </div>
+            <p className="mb-1 text-dark fw-bold text-center p-3">{comment.comment}</p>
+            <small>
+            Comment by:  || Age: 
+            </small>
+            <div className="btn-group border fw-bold border-danger p-1 bg-dark ms-4">
+              <Link className="btn btn-center bg-success text-light fw-bold p-2" to={`/comments/${comment.id}/edit`}>
+                Edit
+              </Link>
+              <Link className="btn btn-center bg-danger text-light fw-bold p-2" to="/comments" onClick={() => {handleDeleteComment(id)}}>
+                Delete
+              </Link>
+            </div>
           </div>
-          <h5 className="mb-1">{username}</h5>
-          <p className="mb-1">
-            {comment.comment}
-          </p>
-          <small>{username} | Age: {age}</small>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CommentsDisplay
+export default CommentsDisplay;

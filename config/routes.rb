@@ -6,14 +6,10 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
   get "/users", to: "users#index"
-  # resources :users do
-  #   resources :books
-  # end
-
-  # resources :users do
-  #   resources :comments
-  # end
-    
+   
+  # Custom Routes
+  get "/user/books", to: "users#user_books"
+  get "/user/comments", to: "users#user_comments"
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

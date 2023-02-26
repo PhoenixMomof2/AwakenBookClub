@@ -4,7 +4,7 @@ import HowToBeAntiRacist from '../images/HowToBeAntiRacist.jpeg';
 import WhiteLikeMe from '../images/WhiteLikeMe.jpeg';
 
 const Body = () => {
-    // console.log("I'm in the Body Component")
+
   return ( 
     <section id="body">
         <div className="container-flex bg-warning ">

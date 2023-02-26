@@ -8,18 +8,25 @@ const UserContext = createContext();
 function UserProvider ({ children }) {
 
   const [user, setUser] = useState({});
+  const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([])
-
-  console.log(user, loggedIn)
 
   useEffect(() => {
       fetch("/me")
       .then(res => res.json())
       .then(data => {
-        console.log("I'm in the UserContext fetch")
         setUser(data)
       })
+  }, []);
+
+  useEffect(() => {
+    fetch("/users")
+    .then(res => res.json())
+    .then(data => {
+      console.log(data, "I'm in the UserContext fetch")
+      setUsers(data)
+    })
   }, []);
 
   const login = (user) => {
@@ -38,7 +45,7 @@ function UserProvider ({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout, signup, loggedIn, setErrors, errors }}>
+    <UserContext.Provider value={{ user, users, login, logout, signup, loggedIn, setErrors, errors }}>
       {children}
     </UserContext.Provider>
   )

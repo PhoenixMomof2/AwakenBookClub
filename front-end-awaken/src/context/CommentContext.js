@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from "react"
 
 // // Create context
-const CommentContext = createContext();
+const CommentContext = createContext()
 
 const CommentProvider = ({ children }) => {
   // value that will be given to the context
@@ -19,26 +19,27 @@ const CommentProvider = ({ children }) => {
     };
     fetchComments()
   }, [])
- 
-  // // Updating comments state to add new comment.
-  // const handleAddNewComment = (newComment) => {
-  //   setComments([...comments, newComment])
-  // }
 
-  // // // Updating comments state to delete comment.
-  // const handleDeleteComment = (id) => {
-  //   const deletedComment = comments.filter(comment => comment.id !== id)
-  //   setComments(deletedComment)
-  // }
+  // Updating comments state to add new comment.
+  const handleAddNewComment = (newComment) => {
+    setComments([...comments, newComment])
+  }
 
-  // // Updating comments state to update comments.
-  // const handleEditComment = (updatedComment) => {
-  //   const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
-  //   setComments(updatedComments)
-  // }
+  // // Updating comments state to delete comment.
+  const handleDeleteComment = (id) => {
+    const deletedComment = comments.filter(comment => comment.id !== id)
+    setComments(deletedComment) 
+    console.log("Comment Deleted")
+  }
+
+  // Updating comments state to update comments.
+  const handleEditComment = (updatedComment) => {
+    const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
+    setComments(updatedComments)
+  }
 
   return (
-    <CommentContext.Provider value={ comments }>
+    <CommentContext.Provider value={{ comments, handleAddNewComment, handleEditComment, handleDeleteComment, errors, setErrors }}>
       {children}
     </CommentContext.Provider>
   )

@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-const BookCard = ({ book }) => {
+const UserBookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
- 
+
   return (
     <div className="col mx-2 my-2 text-justify justify-content-center round">
       <img
@@ -20,19 +19,15 @@ const BookCard = ({ book }) => {
         <p className="card-text text-light fw-bold">Preview: {short_content}</p>
       </div>
       <div className="btn-group border fw-bold border-warning">
-        <Link to={`/books/${id}`} className="btn btn-success py-2">
-          Expand
+        <Link to="/comments" className="btn btn-sm btn-dark py-2">
+          My Comments
         </Link>
-        <Link to={`/comments/${id}`}className="btn btn-sm btn-dark py-2">
-          Readers Comments
-        </Link>
-        <Link to="/comments/new"className="btn btn-sm btn-danger py-2">
+        <Link to="/comments/new" className="btn btn-sm btn-danger py-2">
           Leave A Comment
         </Link>
-        
       </div>
     </div>
   );
 };
 
-export default BookCard;
+export default UserBookCard;

@@ -16,26 +16,26 @@ const BookProvider = ({ children }) => {
       fetch("/books")
         .then((res) => res.json())
         .then((data) => setBooks(data))
-        .catch((error) => console.log("An error occurred."))
+        .catch(() => console.log("An error occurred."))
     };
     fetchBooks()
   }, [])
 
-  // const handleAddNewBook = (newBook) => {
-  //   setBooks([...books, newBook]);
-  // };
+  const handleAddNewBook = (newBook) => {
+    setBooks([...books, newBook]);
+  };
 
-  // const handleDeleteBook = (id) => {
-  //   fetch(`books/${id}`, {
-  //   method: "DELETE",
-  //   }).then(() => {
-  //     handleDeleteBook(id);
-  //     // console.log("Deleted")
-  //   })
-  // }
+  const handleDeleteBook = (id) => {
+    fetch(`books/${id}`, {
+    method: "DELETE",
+    }).then(() => {
+      handleDeleteBook(id);
+      // console.log("Deleted")
+    })
+  }
 
   return (
-    <BookContext.Provider value={ books }>
+    <BookContext.Provider value={{books, handleAddNewBook, handleDeleteBook}}>
       {children}
     </BookContext.Provider>
   );
