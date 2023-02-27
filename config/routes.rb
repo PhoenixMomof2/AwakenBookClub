@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :books, except: [:create, :update, :destroy]
+  resources :books, except: [:update, :destroy]
 
   # Users
   get "/me", to: "users#show"
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Custom Routes
   get "/user/books", to: "users#user_books"
   get "/user/comments", to: "users#user_comments"
+ 
   # Sessions
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

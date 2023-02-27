@@ -25,8 +25,8 @@ const Login = () => {
       if (res.ok) {
         res.json().then((user) => {
           login(user);
-          navigate("/books");
-          console.log(user, "I'm in the Login Component");
+          navigate("/me");
+          console.log(user, "Logged in user.");
         });
       } else {
         res.json().then((err) => {

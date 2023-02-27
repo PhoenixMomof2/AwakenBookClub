@@ -9,20 +9,20 @@ class CommentsController < ApplicationController
   # GET /comments/:id
   def show
     @comment = find_comment
-    render json: @comment, serializer: CommentBookSerializer, status: :ok
+    render json: @comment, status: :ok
   end
 
   # POST /comments
   def create
     comment = current_user.comments.create!(comment_params)
-    render json: comment, serializer: CommentBookSerializer, status: :created
+    render json: comment, status: :created
   end
 
   # PATCH /comments/:id
   def update
     @comment = find_comment
     @comment.update!(comment_params)
-    render json: @comment, serializer: CommentBookSerializer, status: :ok
+    render json: @comment, status: :ok
   end
 
   # DELETE /comments/:id
@@ -37,6 +37,6 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by(id: params[:id])
   end
 end

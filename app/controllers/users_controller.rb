@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: current_user, serializer: UserBookCommentSerializer
+    render json: current_user
   end
   
   def user_comments
@@ -26,6 +26,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:username, :password, :password_confirmation, :age)
+    params.permit(:username, :password, :password_confirmation, :age, :bio)
   end
 end

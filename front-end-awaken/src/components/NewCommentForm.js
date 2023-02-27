@@ -1,32 +1,37 @@
 import React, { useState, useEffect, useContext } from "react"; 
 import { useNavigate } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
-// import { UserContext } from "../context/UserContext";
-// import { BookContext } from "../context/BookContext";
+import { UserContext } from "../context/UserContext";
 
-const NewCommentForm = ({ book }) => {
+const NewCommentForm = ({book}) => {
   const [comment, setComment] = useState("");
-  const [title, setTitle] = useState([]);
+  const [book_title, setBook_Title] = useState("");
+  const [username, setUsername] = useState("")
   const navigate = useNavigate();
-  const { handleAddNewComment, setErrors } = useContext(CommentContext);
-  // const {user} = useContext(UserContext)
-  // const {book} = useContext(BookContext)
-  console.log(book, "NewCommentForm");
+  const { user } = useContext(UserContext)
+  const { handleAddNewComment, errors, setErrors } = useContext(CommentContext);
+  console.log(user, book, "NewCommentForm");
+
+  const newCommentData = {
+    comment, 
+    bookId: book.id, 
+    userId: user.id
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("Clicked submit new comment")
     //UPDATE (PATCH REQUEST)
     fetch("/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(comment, book.id),
+      body: JSON.stringify(newCommentData),
     }).then((res) => {
       if (res.ok) {
         res.json().then((comment) => handleAddNewComment(comment)); // update state
-        navigate("/comments");
+        navigate("/user/comments");
       } else {
         res.json().then((err) => setErrors(err.errors));
       }
@@ -35,11 +40,11 @@ const NewCommentForm = ({ book }) => {
     setComment("");
   };
 
-  // useEffect(() => {
-  //   return () => {
-  //     setErrors([]);
-  //   };
-  // }, [setErrors]);
+  useEffect(() => {
+    return () => {
+      setErrors([]);
+    };
+  }, [setErrors]);
 
   return (
     <div className="container-flex">
@@ -52,13 +57,25 @@ const NewCommentForm = ({ book }) => {
             <h4 className="bg-warning">Add New Comment</h4>
             <div className="form-group text-center">
               <div className="mb-3 input-group">
-                <span className="input-group-text">Book Title </span>
+                <span className="input-group-text">Username</span>
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  id="username"
+                  defaultValue={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="form-group text-center">
+              <div className="mb-3 input-group">
+                <span className="input-group-text">Book Title</span>
                 <input
                   type="text"
                   className="form-control text-center"
                   id="new-book-id"
-                  defaultValue={comment.title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  defaultValue={book_title}
+                  onChange={(e) => setBook_Title(e.target.value)}
                 />
               </div>
             </div>
@@ -81,6 +98,7 @@ const NewCommentForm = ({ book }) => {
               className="btn bg-warning p-2 btn-outline-primary fw-bold"
               value="Submit"
             />
+            <div>{errors}</div>
           </form>
         </div>
       </div>

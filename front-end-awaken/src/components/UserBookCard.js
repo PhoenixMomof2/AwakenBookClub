@@ -19,7 +19,7 @@ const UserBookCard = ({ book }) => {
         <p className="card-text text-light fw-bold">Preview: {short_content}</p>
       </div>
       <div className="btn-group border fw-bold border-warning">
-        <Link to="/comments" className="btn btn-sm btn-dark py-2">
+        <Link to="/user/comments" className="btn btn-sm btn-dark py-2">
           My Comments
         </Link>
         <Link to="/comments/new" className="btn btn-sm btn-danger py-2">

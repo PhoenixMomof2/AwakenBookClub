@@ -1,83 +1,87 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import ProfilePic from "../images/ProfilePic.jpg";
+import MomSanai from "../images/MomSanai.jpeg";
+import OffCanvas from "../components/OffCanvas";
 
 const Profile = () => {
-  const {user} = useContext(UserContext)
-  console.log(user, "User object for the profile")
+  const { user } = useContext(UserContext)
+  console.log(user, "Owner of profile.")
  
   return (
-    <div className="container-flex">
-      <div className="container-flex bg-warning">
-        <div className="row">
-          <div className="col">
-            <section id="profile-top">
-              <div className="card-group">
-                <div className="card">          
-                  <div className="card-body bg-danger">
-                  <i className="px-5 bi bi-book"></i>
-                  <h1 className="text-danger py-2 text-center bg-dark fw-bolder pt-2">   
+    <div className="container-flex bg-dark">
+      <div className="container bg-dark border-bottom border-danger border-3">
+        <div className="row bg-dark">
+          <div className="container-flex bg-dark col">
+            <section id="profile-top" className="container-flex">                     
+            <OffCanvas /> 
+              <div className="card-group pt-4">
+                <div className="card bg-dark">          
+                  <div className="text-justify mx-2 card-body bg-dark">
+                  <h2 className="text-danger text-center bg-dark fw-bolder">
+                  <i className="px-2 bi bi-book text-center"></i> 
                     {user.username}
-                  </h1>
-                  <i className="px-5 bi bi-book"></i>
-                    <h4 className="text-center text-light bg-dark">Age | {user.age}</h4>
-                    <p className="card-text">{user.bio}</p>
+                  </h2>
+                  <p className="card-text-justify text-light">{user.bio}</p>
                   </div>          
                 </div>
               </div>
             </section>
           </div>
-          <div className="col">
-            <section id="profile-body">
-              <img src={ProfilePic} className="card-img-top img-fluid" alt="profile-placeholder"/>
+          <div className="container-fluid bg-dark col">
+            <section id="profile-body" className="container-fluid">
+              <div className="container-flex py-5 my-5">
+                <img src={MomSanai} className="text-center card-img-top img-fluid bg-dark ms-1" alt="profile-placeholder"/>
+              </div>
             </section>
           </div>
         </div>
       </div>
-      <section id="user-books">
-        <div className="row">
-        {user.books.map(book => (<div key={book.id} className="col mx-2 my-2 text-justify justify-content-center round">
-          <img
-            src={book.book_img}
-            className="card-img-top img-fluid imy-thumbnail rounded mx-auto d-block "
-            alt={book.title}
-          />
-          <div className="card-body" key={book.id}>
-            <h4 className="card-title text-danger fw-bolder">{book.title}</h4>
-            <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
-            <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
-            <p className="card-text text-success fw-bold">Category: {book.category}</p>
-            <p className="card-text text-light fw-bold">Preview: {book.short_content}</p>
-          </div>
-          </div>))}
-        </div>
-      </section>
-      <section id="user-comments">
-        <div className="row">
-          {user.comments.map(comment => (
-            <div className="col">
-                <div className="list-group  bg-dark">
-                  <div className="list-group-item" key={comment.id}>
-                    <h3 className="text-danger text-center"> <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>User Name</h3><i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                    <div className="text-center">
-                      
-                      
-                      <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                      <i className="bi bi-star-fill text-warning"></i>
-                    </div>
-                    <p className="mb-1 text-dark fw-bold text-center p-3">{comment.comment}</p>
-                    <small>
-                    Comment by:{user.username}  || Age:{user.age}
-                    </small>
-                  </div>
+      <section id="user-books" className="container-flex">
+        <div className="container bg-dark py-3">
+          <div className="container-fluid row">
+          <h2 className="mx-3 text-warning text-center">
+            <i className="bi bi-book p-3 m-3"></i>
+             My Engagement
+          <i className="bi bi-book p-3 m-3"></i>
+          </h2>
+              {user.books.map(book => (<div key={book.id} className="col border border-light mx-2 my-2 py-3 text-justify justify-content-center round">
+                <img
+                  src={book.book_img}
+                  className="card-img-top img-fluid imy-thumbnail rounded mx-auto d-block "
+                  alt={book.title}
+                />
+                <div className="card-body" key={book.id}>
+                  <h4 className="card-title text-danger fw-bolder">{book.title}</h4>
+                  <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
+                  <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
+                  <p className="card-text text-success fw-bold">Category: {book.category}</p>
+                  <p className="card-text text-light fw-bold">Preview: {book.short_content}</p>
                 </div>
+                <div>{user.comments.map(comment => (
+                  <div className="col" key={comment.id}>
+                    <div className="list-group py-3 bg-dark">
+                      <div className="list-group-item" key={comment.id}>
+                        <h5><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h5>
+                        <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
+                        <h6 className="py-1">
+                        <i className="bi bi-calendar-plus text-dark">  Last updated: {comment.format_updated_at_date}</i>
+                        </h6>                         
+                      </div>
+                    </div>
+              </div>))}</div>
               </div>))}
+            </div>
+        </div>
+      </section>         
+      <section className="container-fluid py-2">
+        <div className="container btn-group justify-content-center">
+          <div className="container-fluid text-center p-2">
+            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">Back To Book List</Link>
+          </div>
+          <div className="container-fluid text-center p-2">
+            <Link to="/comments" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">Back To All Comments</Link>
+          </div>
         </div>
       </section>
     </div>

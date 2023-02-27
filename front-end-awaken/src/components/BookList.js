@@ -6,7 +6,7 @@ const BookList = () => {
   const { books }  = useContext(BookContext)
   const bookCards = books.map(book => <BookCard key={book.id} book={book}/>)
   
-  console.log("I'm in the BookList Component")
+  console.log(books, "I'm in the BookList Component")
 
   return (
       <section id="book-list">

@@ -24,7 +24,6 @@ function UserProvider ({ children }) {
     fetch("/users")
     .then(res => res.json())
     .then(data => {
-      console.log(data, "I'm in the UserContext fetch")
       setUsers(data)
     })
   }, []);

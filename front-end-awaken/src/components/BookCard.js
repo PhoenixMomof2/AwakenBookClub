@@ -6,7 +6,7 @@ const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
  
   return (
-    <div className="col mx-2 my-2 text-justify justify-content-center round">
+    <div key={id} className="col mx-2 my-2 text-justify justify-content-center round">
       <img
         src={book_img}
         className="card-img-top img-fluid imy-thumbnail rounded mx-auto d-block "
@@ -23,7 +23,7 @@ const BookCard = ({ book }) => {
         <Link to={`/books/${id}`} className="btn btn-success py-2">
           Expand
         </Link>
-        <Link to={`/comments/${id}`}className="btn btn-sm btn-dark py-2">
+        <Link to="/comments"className="btn btn-sm btn-dark py-2">
           Readers Comments
         </Link>
         <Link to="/comments/new"className="btn btn-sm btn-danger py-2">

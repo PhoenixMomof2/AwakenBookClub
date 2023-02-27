@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 
 const UserBookList = () => {
   const { user } = useContext(UserContext);
-  console.log(user, "CommentsList")
+  console.log(user, "UserBookList")
   const userBooks = user.books.map((book) => (<UserBookCard key={book.id} book={book} />));
   
   return (

@@ -7,15 +7,15 @@ const Welcome = () => {
 
   if (!loggedIn) {
     return (
-      <span className="fw-bolder text-warning pe-5 justify-content-start">
-        Welcome, Reader!
-      </span>
+      <h4 className="fw-bolder text-warning pe-5 justify-content-start">
+        <i className="bi bi-book-half px-3"></i>Welcome, Reader!
+      </h4>
     );
   } else {
     return (
-      <span className="fw-bolder text-warning pe-5 justify-content-start">
-        Hello, {user.username}!
-      </span>
+      <h4 className="fw-bolder text-warning pe-5 justify-content-start">
+        <i className="bi bi-book-half px-3"></i>Welcome, {user.username}!
+      </h4>
     );
   }
 };

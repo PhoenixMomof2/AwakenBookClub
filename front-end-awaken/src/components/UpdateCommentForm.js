@@ -1,19 +1,22 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
+import Body from "../components/Body";
 
 const UpdateCommentForm = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const {comments, handleEditComment } = useContext(CommentContext);
   const update = comments.find(comment => comment.id === parseInt(id))
+  
 
   console.log(update, "Update Form")
 
   const [comment, setComment] = useState("");
-  const [username, setUsername] = useState("");
-  const [title, setTitle] = useState("");
+  const [username, setUsername] = useState(update.user.username);
+  const [title, setTitle] = useState(update.book.title);
 
+  // debugger
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,7 +37,7 @@ const UpdateCommentForm = () => {
           .then((res) => res.json())
           .then((data) => {
             handleEditComment(data);
-            navigate("/comments");
+            navigate("/user/comments");
           })
           
           //clear form
@@ -54,8 +57,8 @@ const UpdateCommentForm = () => {
                   type="text"
                   className="form-control text-center"
                   id="book-id"
-                  defaultValue={comment.title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  defaultValue={update.book.title}
+                  onChange={(e) => setTitle(title)}
                 />
               </div>
             </div>
@@ -66,8 +69,8 @@ const UpdateCommentForm = () => {
                   type="text"
                   className="form-control text-center"
                   id="username"
-                  defaultValue={comment.username}
-                  onChange={(e) => setTitle(e.target.value)}
+                  defaultValue={update.user.username}
+                  onChange={(e) => setUsername(username)}
                 />
               </div>
             </div>
@@ -87,6 +90,7 @@ const UpdateCommentForm = () => {
         </form>
       </div>
     </div>
+    <Body />
   </div>
   );
 };

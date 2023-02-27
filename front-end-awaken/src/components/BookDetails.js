@@ -19,7 +19,7 @@ const BookDetails = () => {
           <img src={getBook.book_img} className="card-img-top img-thumbnail rounded mx-auto d-block " alt={getBook.title}/>
           </div>
           <div className="col">
-            <div className="card-body" key={id}>
+            <div className="card-body" key={getBook.id}>
               <h5 className="card-title text-danger fw-bolder">{getBook.title}</h5>
               <h6 className="card-subtitle mb-2 text-muted">Author: {getBook.author}</h6>
               <p className="card-text text-warning fw-bold">Stars: {getBook.stars}</p>

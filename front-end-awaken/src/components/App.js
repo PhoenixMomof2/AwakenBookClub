@@ -8,7 +8,7 @@ import { CommentProvider } from "../context/CommentContext";
 
 //static pages
 import Navbar from "../components/Navbar";
-// import OffCanvas from "../components/OffCanvas";
+import OffCanvas from "../components/OffCanvas";
 import Header from "../components/Header";
 import Home from "../components/Home";
 import Footer from "../components/Footer";
@@ -18,36 +18,45 @@ import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 
 //dynamic pages
-import Profile from '../components/Profile';
+import Profile from "../components/Profile";
 import BookList from "../components/BookList";
+import BookComments from "../components/BookComments";
+import NewBookForm from "../components/NewBookForm";
 import UserBookList from "../components/UserBookList";
 import BookDetails from "../components/BookDetails";
-import UserComments from "../components/UserComments";
+import UserCommentCard from "../components/UserBookCard";
+import UserCommentList from "../components/UserCommentList";
 import NewCommentForm from "../components/NewCommentForm";
 import UpdateCommentForm from "../components/UpdateCommentForm";
 import CommentsList from "../components/CommentsList";
 
 const App = () => {
   return (
-    <div className="App bg-danger">
+    <div className="container-flex bg-danger">
       <UserProvider>
         <BookProvider>
           <CommentProvider>
             <Navbar />
-            {/* <OffCanvas /> */}
+            <OffCanvas />
             <Header />
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/me" element={<Profile />} />
-              <Route path="/user/books" element={<UserBookList />} /> 
-              <Route path="/user/comments" element={<UserComments />} />
+              <Route path="/user/books" element={<UserBookList />} />
+              <Route path="/user/comments" element={<UserCommentList />} />
               <Route path="/books" element={<BookList />} />
+              <Route path="/books/new" element={<NewBookForm />} />
+              <Route path="/book/comments" element={<BookComments />} />
               <Route path="/books/:id" element={<BookDetails />} />
               <Route path="/comments" element={<CommentsList />} />
-              <Route path="/comments/new" element={<NewCommentForm />} />     
-              <Route path="/comments/:id/edit" element={<UpdateCommentForm />} />          
+              <Route path="/comments/:id" element={<UserCommentCard />} />
+              <Route path="/comments/new" element={<NewCommentForm />} />
+              <Route
+                path="/comments/:id/edit"
+                element={<UpdateCommentForm />}
+              />
             </Routes>
             <Footer />
           </CommentProvider>

@@ -3,15 +3,17 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Welcome from "../components/Welcome";
+import Body from "../components/Body";
 
 const SignUp = () => {
-  console.log("I'm in the SignUp Component");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [age, setAge] = useState("");
-  const { signup, setErrors, errors } = useContext(UserContext);
-  const navigate = useNavigate();
+  console.log("I'm in the SignUp Component")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+  const [age, setAge] = useState("")
+  const [bio, setBio] = useState("")
+  const { signup, setErrors, errors } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const SignUp = () => {
         password,
         password_confirmation: passwordConfirmation,
         age,
+        bio,
       }),
     })
       .then((res) => res.json())
@@ -40,6 +43,7 @@ const SignUp = () => {
     // setPassword("");
     // setPasswordConfirmation("");
     // setAge("");
+    // setBio("")
   };
 
   useEffect(() => {
@@ -49,9 +53,9 @@ const SignUp = () => {
   }, [setErrors]);
 
   return (
-    <div className="container-flex">
-      <div className="row justify-content-center">
-        <div className="col-lg-6">
+    <div className="container-flex bg-danger">
+      <div className="container-flex bg-danger row justify-content-center">
+        <div className="container-flex col-lg-6">
           <form
             className="my-5 justify-content-center text-center bg-dark border-dark p-3"
             onSubmit={handleSubmit}
@@ -113,6 +117,20 @@ const SignUp = () => {
                 />
               </div>
             </div>
+            <div className="form-group">
+              <div className="mb-3 input-group">
+                <span className="input-group-text">Bio</span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Bio"
+                  aria-label="Bio"
+                  id="bio"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </div>
+            </div>
             <div className="text-center text-light fw-bolder pb-3">
               <Welcome />
               Please sign up for an account.
@@ -127,6 +145,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+      <Body />
     </div>
   );
 };
