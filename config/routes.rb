@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :books, except: [:update, :destroy]
+  resources :comments, except: [:create, :update, :destroy]
+  resources :books, except: [:create, :update, :destroy]
+  resources :users, except: [:update, :delete]
+
+   # Sessions
+   post "/login", to: "sessions#create"
+   delete "/logout", to: "sessions#destroy"
 
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
-  get "/users", to: "users#index"
-   
-  # Custom Routes
-  get "/user/books", to: "users#user_books"
-  get "/user/comments", to: "users#user_comments"
+    
+  # Custom User Routes
+  resources :users, only: :index do
+    resources :books, except: [:update, :destroy]
+  end
+
+  resources :users, only: :index do
+    resources :comments 
+  end
  
-  # Sessions
-  post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
-  
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../context/UserContext";
 
 const BookCard = ({ book }) => {
   const { id, title, book_img, author, stars, category, short_content } = book;
- 
+  const { user } = useContext(UserContext)
+  
   return (
     <div key={id} className="col mx-2 my-2 text-justify justify-content-center round">
       <img
@@ -23,10 +24,10 @@ const BookCard = ({ book }) => {
         <Link to={`/books/${id}`} className="btn btn-success py-2">
           Expand
         </Link>
-        <Link to="/comments"className="btn btn-sm btn-dark py-2">
+        <Link to={`/users/${user.id}/comments`} className="btn btn-sm btn-dark py-2">
           Readers Comments
         </Link>
-        <Link to="/comments/new"className="btn btn-sm btn-danger py-2">
+        <Link to={`/users/${user.id}/comments/new`}className="btn btn-sm btn-danger py-2">
           Leave A Comment
         </Link>
         

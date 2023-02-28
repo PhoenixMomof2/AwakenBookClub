@@ -14,8 +14,8 @@ const NewCommentForm = ({book}) => {
 
   const newCommentData = {
     comment, 
-    bookId: book.id, 
-    userId: user.id
+    book_id: book.id, 
+    user_id: user.id
   }
 
   const handleSubmit = (e) => {

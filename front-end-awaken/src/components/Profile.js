@@ -69,7 +69,8 @@ const Profile = () => {
                         </h6>                         
                       </div>
                     </div>
-              </div>))}</div>
+              </div>))}
+              </div>
               </div>))}
             </div>
         </div>

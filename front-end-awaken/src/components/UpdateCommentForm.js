@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
 import Body from "../components/Body";
 
-const UpdateCommentForm = () => {
+const UpdateCommentForm = ({getBook}) => {
   const { id } = useParams()
   const navigate = useNavigate()
   const {comments, handleEditComment } = useContext(CommentContext);

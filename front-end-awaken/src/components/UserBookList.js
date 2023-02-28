@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 const UserBookList = () => {
   const { user } = useContext(UserContext);
   console.log(user, "UserBookList")
-  const userBooks = user.books.map((book) => (<UserBookCard key={book.id} book={book} />));
+  const userBooks = user.books.map((book) => (<UserBookCard key={book.id} book={book} />))
   
   return (
     <section id="user-book-list">

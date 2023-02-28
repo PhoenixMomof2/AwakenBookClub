@@ -6,9 +6,8 @@ const UserContext = createContext();
 
 // Create provider
 function UserProvider ({ children }) {
-
-  const [user, setUser] = useState({});
   const [users, setUsers] = useState([])
+  const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([])
 

@@ -14,20 +14,19 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    comment = current_user.comments.create!(comment_params)
-    render json: comment, status: :created
+    @comment = current_user.comments.create!(comment_params)
+    render json: @comment, status: :created
   end
 
   # PATCH /comments/:id
   def update
-    @comment = find_comment
-    @comment.update!(comment_params)
+    @comment = current_user.comment.update!(comment_params)
     render json: @comment, status: :ok
   end
 
   # DELETE /comments/:id
   def destroy
-    @comment.destroy
+    @comment = current_user.comment.destroy
     head :no_content
   end
 
@@ -37,6 +36,6 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = Comment.find_by(id: params[:id])
+    @comment = Comment.find(params[:id])
   end
 end

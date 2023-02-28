@@ -1,45 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useParams } from "react";
 import { Link } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
 
-const UserCommentCard = ({comment}) => {
-  
-  console.log(comment, "UserCommentCard");
+const UserCommentCard = ({ comment }) => {
   const { handleDeleteComment } = useContext(CommentContext)
+  console.log(comment, "User Comment Card")
 
   return (
-      <div className="col mx-2 my-2 text-justify justify-content-center round">
-        <div className="list-group  bg-dark">
-          <div className="list-group-item" key={comment.id}>
-            <h1 className="text-success text-center">{comment.book.title}</h1>
-            <h3 className="text-danger text-center">{comment.user.username}</h3>
-            <div className="text-center">
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-              <i className="bi bi-star-fill text-warning"></i>
-            </div>
-            <p className="mb-1 text-dark fw-bold text-center p-3">{comment}</p>
-            <small>
-            Comment by:  || Age: 
-            </small>
-            <div className="btn-group border fw-bold border-danger p-1 bg-dark ms-4">
-              <Link className="btn btn-center bg-success text-light fw-bold p-2" to={`/comments/${comment.id}/edit`}>
-                Edit
-              </Link>
-              <Link className="btn btn-center bg-danger text-light fw-bold p-2" to="/user/comments" onClick={() => {handleDeleteComment(comment.id)}}>
-                Delete
-              </Link>
-            </div>
-          </div>
+    <div className="row text-center">
+      <div className="list-group py-3 bg-danger my-2">
+        <div className="list-group-item" key={comment.id}>
+          {/* <h3 className="text-center">{comment.book.title}</h3> */}
+          <h4 className="text-danger fw-bolder text-center"><i className="bi bi-book-half"></i> {comment.user.username}</h4>
+          <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
+          <p className="mb-1 text-dark px-2">{comment}</p>                    
+          <small className="py-1 text-dark fst-italic">
+          <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
+          </small>                         
         </div>
       </div>
+      <div className="btn-group border fw-bold border-warning">
+        <Link to={`/users/${user.id}/comments/${comment.id}/edit`} className="btn btn-sm btn-dark py-2">
+          Edit
+        </Link>
+        <Link to={`/users/${user.id}/comments/${comment.id}`} className="btn btn-sm btn-danger py-2" onClick={() => {handleDeleteComment()}}>
+          Delete
+        </Link>
+      </div>
+    </div>   
   )
 }
 

@@ -30,12 +30,12 @@ const NewBookForm = () => {
       author, 
       stars, 
       category, 
-      content,
+      content
     }
-    console.log(newBookData, "book to add")
+    // console.log(newBookData, "book to add")
   
     // CREATE (POST REQUEST)
-    fetch("/books", {
+    fetch(`/users/${user.id}/books`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,43 +43,45 @@ const NewBookForm = () => {
       body: JSON.stringify(newBookData),
     })
     .then((res) => res.json())
-    .then((newBook) => { 
-      handleAddNewBook(newBook)
-
-      const newCommentData = {
-        comment,
-        user_id: user.id,
+    .then((newBook) => {
+          
+        handleAddNewBook(newBook)
+        console.log(newBook)
+        const newCommentData = {
+          comment,
+          user_id: user.id,
+          book_id: newBook.id
+        }
+        console.log(newCommentData, "new comment to add")
+          fetch(`/users/${user.id}/comments`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newCommentData),
+          })
+            .then((res) => {
+            if (res.ok) {
+              res.json().then((newComment) => handleAddNewComment(newComment)) // update state
+              navigate("/me")
+            } else {
+              res.json().then((errorData) => {
+                console.log(errorData)
+                const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+                setErrors(errorLis);
+              })
+            }
+          }) // update state
+      })
+        // clear form
+        // setTitle("")
+        // setBook_Img("")
+        // setAuthor("")
+        // setStars("")
+        // setCategory("")
+        // setContent("")
+        // setComment("")
       }
-      console.log(newCommentData, "new comment to add")
-        fetch("/comments", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newCommentData),
-        })
-          .then((res) => {
-          if (res.ok) {
-            res.json().then((newComment) => handleAddNewComment(newComment)) // update state
-            navigate("/user/books")
-          } else {
-            res.json().then((errorData) => {
-              const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-              setErrors(errorLis);
-            })
-          }
-        }) // update state
-      }
-    )
-       // clear form
-    // setTitle("")
-    // setBook_Img("")
-    // setAuthor("")
-    // setStars("")
-    // setCategory("")
-    // setContent("")
-    // setComment("")
-    }
    
   useEffect(() => {
     return () => {

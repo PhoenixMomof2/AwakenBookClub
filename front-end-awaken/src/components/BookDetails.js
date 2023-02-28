@@ -10,7 +10,7 @@ const BookDetails = () => {
   const { id } = useParams();
   const getBook = books.find(book => book.id === parseInt(id))
  
-  
+  console.log(getBook, "book details")
    return (
     <section id="card-details">
       <div className="container pt-1 pb-1 pe-3 ps-3 bg-dark border-dark">
@@ -32,7 +32,7 @@ const BookDetails = () => {
      {loggedIn === true ?  (
                   <div>
                     <div className="container-fluid bg-warning p-2 btn-outline-primary fw-bold text-center">
-                      <Link className="btn border-dark px-4 m-1 border-2 bg-success text-light fw-bolder" to="/user/books">Go To My BookList</Link>
+                      <Link className="btn border-dark px-4 m-1 border-2 bg-success text-light fw-bolder" to="/about">Go To My BookList</Link>
                     </div>
                     <NewCommentForm key={getBook.id} getBook={getBook}/>
                   </div>
@@ -46,3 +46,4 @@ const BookDetails = () => {
 }
 
 export default BookDetails;
+ // {`/users/${user.id}/books`}
