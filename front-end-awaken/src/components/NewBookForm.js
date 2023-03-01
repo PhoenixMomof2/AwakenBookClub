@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BookContext } from "../context/BookContext";
 import { UserContext } from "../context/UserContext";
 import { CommentContext } from "../context/CommentContext";
@@ -22,7 +22,7 @@ const NewBookForm = () => {
   const [errors, setErrors] = useState("")
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     
     const newBookData = {
       title, 
@@ -32,9 +32,8 @@ const NewBookForm = () => {
       category, 
       content
     }
-    // console.log(newBookData, "book to add")
-  
-    // CREATE (POST REQUEST)
+    
+    // CREATE (POST REQUEST BOOK)
     fetch(`/users/${user.id}/books`, {
       method: "POST",
       headers: {
@@ -52,21 +51,21 @@ const NewBookForm = () => {
           user_id: user.id,
           book_id: newBook.id
         }
-        console.log(newCommentData, "new comment to add")
+        //CREATE (POST REQUEST COMMENT)
           fetch(`/users/${user.id}/comments`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newCommentData),
-          })
-            .then((res) => {
+          }).then((res) => {
             if (res.ok) {
-              res.json().then((newComment) => handleAddNewComment(newComment)) // update state
-              navigate("/me")
+              res.json().then((newComment) => {
+                handleAddNewComment(newComment)// update state
+                navigate("/me")
+              })
             } else {
               res.json().then((errorData) => {
-                console.log(errorData)
                 const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
                 setErrors(errorLis);
               })

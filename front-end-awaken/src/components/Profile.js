@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import MomSanai from "../images/MomSanai.jpeg";
-import OffCanvas from "../components/OffCanvas";
+import  from "../components/";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -14,7 +14,7 @@ const Profile = () => {
         <div className="row bg-dark">
           <div className="container-flex bg-dark col">
             <section id="profile-top" className="container-flex">                     
-            <OffCanvas /> 
+            < /> 
               <div className="card-group pt-4">
                 <div className="card bg-dark">          
                   <div className="text-justify mx-2 card-body bg-dark">
@@ -62,25 +62,32 @@ const Profile = () => {
                   <div className="col" key={comment.id}>
                     <div className="list-group py-3 bg-dark">
                       <div className="list-group-item" key={comment.id}>
-                        <h5><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h5>
+                        <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
                         <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
-                        <h6 className="py-1">
-                        <i className="bi bi-calendar-plus text-dark">  Last updated: {comment.format_updated_at_date}</i>
-                        </h6>                         
+                        <small className="py-1 text-dark fst-italic">
+                        <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
+                        </small>                         
                       </div>
                     </div>
               </div>))}
               </div>
+              <Link
+              className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1"
+              aria-current="page"
+              to={`/users/${user.id}/comments/new`}
+            >
+              Add A New Comment
+            </Link>
               </div>))}
             </div>
         </div>
       </section>         
       <section className="container-fluid py-2">
-        <div className="container btn-group justify-content-center">
-          <div className="container-fluid text-center p-2">
-            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">Back To Book List</Link>
+        <div className="container row text-center btn-group">
+          <div className="container-fluid col text-center p-2">
+            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Awaken List</Link>
           </div>
-          <div className="container-fluid text-center p-2">
+          <div className="container-fluid col text-center p-2">
             <Link to="/comments" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">Back To All Comments</Link>
           </div>
         </div>

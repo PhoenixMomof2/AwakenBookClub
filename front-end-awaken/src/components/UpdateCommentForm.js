@@ -37,7 +37,7 @@ const UpdateCommentForm = ({getBook}) => {
           .then((res) => res.json())
           .then((data) => {
             handleEditComment(data);
-            navigate("/user/comments");
+            navigate(`/users/${user.id}/comments/${comment.id}`);
           })
           
           //clear form
@@ -79,7 +79,7 @@ const UpdateCommentForm = ({getBook}) => {
             <span className="input-group-text">Comment</span>
             <input
               type="text"
-              className="form-control text-center"
+              className="form-control text-light text-center"
               id="update-book-id"
               defaultValue={update.comment}
               onChange={(e) => setComment(e.target.value)}

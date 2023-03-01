@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comments, except: [:create, :update, :destroy]
   resources :books, except: [:create, :update, :destroy]
-  resources :users, except: [:update, :delete]
+  resources :users, except: [:update, :destroy]
 
    # Sessions
    post "/login", to: "sessions#create"

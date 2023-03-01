@@ -4,8 +4,6 @@ import { UserContext } from "../context/UserContext";
 const UserCommentList = () => {
   const { user } = useContext(UserContext);
   console.log(user, "UserCommentList");
-  // const userCommentCards = 
-  //   <UserCommentCard key={comment.id} comment={comment} />))
 
   return (
     <div className="list-group py-3 bg-danger my-2">
@@ -14,9 +12,9 @@ const UserCommentList = () => {
         <i className="bi bi-book-half"></i> {book.title}
         </h4>
            {user.comments.map((comment) => (
-      <div className="row text-center" key={comment.id}>
+      <div  key={comment.id} className="row text-center">
       <div className="list-group py-3 bg-danger my-2">
-        <div className="list-group-item" key={comment.id}>
+        <div className="list-group-item">
           
           
           <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
