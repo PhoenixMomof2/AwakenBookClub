@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import MomSanai from "../images/MomSanai.jpeg";
-import  from "../components/";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -13,8 +12,7 @@ const Profile = () => {
       <div className="container bg-dark border-bottom border-danger border-3">
         <div className="row bg-dark">
           <div className="container-flex bg-dark col">
-            <section id="profile-top" className="container-flex">                     
-            < /> 
+            <section id="profile-top-left" className="container-flex">                     
               <div className="card-group pt-4">
                 <div className="card bg-dark">          
                   <div className="text-justify mx-2 card-body bg-dark">
@@ -29,7 +27,7 @@ const Profile = () => {
             </section>
           </div>
           <div className="container-fluid bg-dark col">
-            <section id="profile-body" className="container-fluid">
+            <section id="profile-top-right" className="container-fluid">
               <div className="container-flex py-5 my-5">
                 <img src={MomSanai} className="text-center card-img-top img-fluid bg-dark ms-1" alt="profile-placeholder"/>
               </div>
@@ -37,7 +35,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <section id="user-books" className="container-flex">
+      <section id="profile-body" className="container-flex">
         <div className="container bg-dark py-3">
           <div className="container-fluid row">
           <h2 className="mx-3 text-warning text-center">

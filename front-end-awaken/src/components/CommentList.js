@@ -9,7 +9,7 @@ const CommentList = () => {
   return (
     <section id="comment-list">
       <div className="container bg-dark">
-        <div className="col">
+        <div className="row">
           { commentCards }
         </div>
       </div>

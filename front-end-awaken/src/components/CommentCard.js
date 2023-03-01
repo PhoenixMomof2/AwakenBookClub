@@ -3,7 +3,7 @@ import React from "react";
 const CommentCard = ({ comment }) => {
  
   return ( 
-    <div className="row text-center" key={comment.id}>
+    <div className="col-6 text-center" key={comment.id}>
       <div className="list-group py-3 bg-danger my-2">
         <div className="list-group-item" key={comment.id}>
           <h3 className="text-center">{comment.book.title}</h3>

@@ -7,18 +7,19 @@ const NewCommentForm = () => {
   const navigate = useNavigate()
   const { handleAddNewComment } = useContext(CommentContext) 
   const { user } = useContext(UserContext)
-  
+  // const bookToCommentOn = user.books.find(book => book.id === book.comment.book_id)
+
   const [comment, setComment] = useState("")
-  const [book_id, setBook_Id] = useState([])
+  const [book_id, setBook_Id] = useState("")
   const [username, setUsername] = useState(user.username)
   const [errors, setErrors] = useState("")
-  const book = user.comments.filter(comment => comment.book_id === user.id)
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const newCommentData = {
       comment, 
-      book_id: book.id
+      book_id: 2
     }
 
     console.log(newCommentData)
@@ -35,8 +36,9 @@ const NewCommentForm = () => {
         navigate(`/users/${user.id}/comments`);
       } else {
         res.json().then((errorData) => {
-          const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-          setErrors(errorLis)
+          console.log(errorData.errors, "There are errors.")
+          // const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+          // setErrors(errorLis)
         });
       }
     });
@@ -61,26 +63,15 @@ const NewCommentForm = () => {
             onSubmit={handleSubmit}
           >
             <h4 className="bg-warning">Add New Comment</h4>
-            {/* <div className="form-group text-center">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Book Title</span>             
-                  {user.books.map(book =>(<div key={book.id}><input
-                    type="text"
-                    className="form-control"
-                    id={book.id} defaultValue={book.title}
-                    onChange={(e) => setUsername(e.target.value)}/>
-                    </div>))}
-              </div>
-            </div>         */}
-            <div className="dropdown">
-              <button className="btn btn-warning border-2 border-light mb-2 dropdown-toggle" type="button" data-toggle="dropdown">Select Book Title
-              <span className="caret"></span></button>
-              <ul className="dropdown-menu">
-              {user.books.map(book => (<div><input key={book.id} type="text"
-                    defaultValue={book.title}
-                    onChange={(e) => setBook_Id(e.target.value)}/></div>))}
-              </ul>
-            </div>
+           
+              
+              <select 
+            id="book_id"
+            defaultValue={book_id}
+            onChange={(e) => setBook_Id(e.target.value)} >
+              {user.books.map(book => (<option key={book.id} value={book.id}>{book.title}</option>))}
+              </select>
+          
             <div className="form-group text-center">
               <div className="mb-3 input-group">
                 <span className="input-group-text">Username</span>

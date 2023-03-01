@@ -12,10 +12,10 @@ class BooksController < ApplicationController
     render json: @book, status: :ok
   end
 
-  # POST /books
+  # POST /books (do I need the include user?)
   def create
       @book = Book.create!(book_params)
-      render json: @book, include: :user, status: :created
+      render json: @book, status: :created
   end
 
   private

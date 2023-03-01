@@ -6,29 +6,30 @@ const UserCommentList = () => {
   console.log(user, "UserCommentList");
 
   return (
-    <div className="list-group py-3 bg-danger my-2">
-      {user.books.map((book) => (<div key={book.id}>
-       <h4 className="text-light fw-bolder text-center">
-        <i className="bi bi-book-half"></i> {book.title}
-        </h4>
-           {user.comments.map((comment) => (
-      <div  key={comment.id} className="row text-center">
-      <div className="list-group py-3 bg-danger my-2">
-        <div className="list-group-item">
-          
-          
-          <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
-          <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
-          <small className="py-1 text-dark fst-italic">
-          <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
-          </small>                         
-        </div>
+    <div className="container list-group">
+    <div className="col text-center bg-warning">    
+        <div className="list-group-item bg-warning py-1 my-2">
+          {user.books.map((book) => (<div key={book.id}>
+          <h4 className="text-light py-1 bg-dark border fw-bolder text-center">
+            <i className="bi bi-book-half"></i> {book.title}
+          </h4>
+          <h4 className="text-dark bg-success py-2 fw-bolder text-center"><i className="bi bi-book-half"></i> {user.username}</h4>
+          {user.comments.map((comment) => (
+          <div  key={comment.id} className="text-center">
+          <div className="list-group py-3 bg-danger my-2">
+            <div className="list-group-item">       
+              <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
+              <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
+              <small className="py-1 text-dark fst-italic">
+              <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
+              </small>                         
+            </div>
+          </div>
+        </div>))}
+        </div>))}
+        </div>   
       </div>
-    </div>   ))}
-        </div>
-    
-    ))}
-    </div>   
+    </div>
   )
 }
 

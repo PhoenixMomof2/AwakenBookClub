@@ -17,7 +17,7 @@ function UserProvider ({ children }) {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        setUser(data)
+        setLoggedIn(data)
       })
   }, [])
 
