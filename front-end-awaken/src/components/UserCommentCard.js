@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
 
 const UserCommentCard = ({ comment }) => {
+  const { user_id } = useParams()
   const { handleDeleteComment } = useContext(CommentContext)
   console.log(comment, "User Comment Card")
 
@@ -20,10 +21,10 @@ const UserCommentCard = ({ comment }) => {
         </div>
       </div>
       <div className="btn-group border fw-bold border-warning">
-        <Link to={`/users/${user.id}/comments/${comment.id}/edit`} className="btn btn-sm btn-dark py-2">
+        <Link to={`/users/${user_id}/comments/${comment.id}/edit`} className="btn btn-sm btn-dark py-2">
           Edit
         </Link>
-        <Link to={`/users/${user.id}/comments/${comment.id}`} className="btn btn-sm btn-danger py-2" onClick={() => {handleDeleteComment()}}>
+        <Link to={`/users/${user_id}/comments/${comment.id}`} className="btn btn-sm btn-danger py-2" onClick={() => {handleDeleteComment()}}>
           Delete
         </Link>
       </div>

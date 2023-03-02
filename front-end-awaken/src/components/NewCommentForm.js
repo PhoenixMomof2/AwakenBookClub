@@ -11,7 +11,7 @@ const NewCommentForm = () => {
 
   const [comment, setComment] = useState("")
   const [book_id, setBook_Id] = useState("")
-  const [username, setUsername] = useState(user.username)
+  const [user_id, setUser_Id] = useState(user.username)
   const [errors, setErrors] = useState("")
   
   const handleSubmit = (e) => {
@@ -19,7 +19,8 @@ const NewCommentForm = () => {
 
     const newCommentData = {
       comment, 
-      book_id: 2
+      book_id, 
+      user_id: user.id
     }
 
     console.log(newCommentData)
@@ -36,9 +37,9 @@ const NewCommentForm = () => {
         navigate(`/users/${user.id}/comments`);
       } else {
         res.json().then((errorData) => {
-          console.log(errorData.errors, "There are errors.")
-          // const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-          // setErrors(errorLis)
+          // console.log(errorData.errors, "There are errors.")
+          const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+          setErrors(errorLis)
         });
       }
     });
@@ -79,8 +80,8 @@ const NewCommentForm = () => {
                   type="text"
                   className="form-control"
                   id="username"
-                  defaultValue={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  defaultValue={user_id}
+                  onChange={(e) => setUser_Id(e.target.value)}
                 />
               </div>
             </div>            

@@ -13,8 +13,8 @@ const UpdateCommentForm = ({getBook}) => {
   console.log(update, "Update Form")
 
   const [comment, setComment] = useState("");
-  const [username, setUsername] = useState(update.user.username);
-  const [title, setTitle] = useState(update.book.title);
+  const [username, setUsername] = useState(comment.user.username);
+  const [title, setTitle] = useState(comment.book.title);
 
   // debugger
   const handleSubmit = (e) => {
@@ -22,12 +22,12 @@ const UpdateCommentForm = ({getBook}) => {
 
     const updateCommentData = {
       comment, 
-      book_id: update.book_id, 
-      user_id: update.user_id
+      book_id,
+      user_id,
     }
 
     //UPDATE (PATCH REQUEST)
-    fetch(`/comments${id}`, {
+    fetch(`/users/${user.id}/comments/${comment.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const UpdateCommentForm = ({getBook}) => {
           .then((res) => res.json())
           .then((data) => {
             handleEditComment(data);
-            navigate(`/users/${user.id}/comments/${comment.id}`);
+            navigate(`/users/${user.id}/comments`);
           })
           
           //clear form
@@ -57,7 +57,7 @@ const UpdateCommentForm = ({getBook}) => {
                   type="text"
                   className="form-control text-center"
                   id="book-id"
-                  defaultValue={update.book.title}
+                  defaultValue={comment.book.title}
                   onChange={(e) => setTitle(title)}
                 />
               </div>
@@ -69,7 +69,7 @@ const UpdateCommentForm = ({getBook}) => {
                   type="text"
                   className="form-control text-center"
                   id="username"
-                  defaultValue={update.user.username}
+                  defaultValue={comment.user.username}
                   onChange={(e) => setUsername(username)}
                 />
               </div>

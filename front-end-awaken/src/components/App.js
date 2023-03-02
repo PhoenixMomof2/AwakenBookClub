@@ -28,6 +28,7 @@ import UserBookList from "../components/UserBookList";
 import UserBookCard from "../components/UserBookCard";
 import NewBookForm from "../components/NewBookForm";
 import UserCommentList from "../components/UserCommentList";
+import UserCommentCard from "../components/UserCommentCard";
 import NewCommentForm from "../components/NewCommentForm";
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/users/:user_id/books/:id" element={<UserBookCard />} />
               <Route path="/users/:user_id/books/new" element={<NewBookForm />} />
               <Route path="/users/:user_id/comments" element={<UserCommentList />} /> 
+              <Route path="/users/:user_id/comments/:id" element={<UserCommentCard />} /> 
               <Route path="/users/:user_id/comments/new" element={<NewCommentForm />} />
             </Routes>
             <Footer />

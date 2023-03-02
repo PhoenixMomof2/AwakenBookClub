@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = current_user.comments.create!(comment_params)
-    render json: @comment, serializer: CommentBookSerializer, status: :created
+    render json: @comment, status: :created
   end
 
   # PATCH /comments/:id
