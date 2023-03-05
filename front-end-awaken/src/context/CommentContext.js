@@ -25,17 +25,14 @@ const CommentProvider = ({ children }) => {
     setComments([...comments, newComment])
   }
 
-  // // Updating comments state to delete comment.
-  const handleDeleteComment = (id) => {
-    const deletedComment = comments.filter(comment => comment.id !== id)
-    setComments(deletedComment) 
-    console.log("Comment Deleted")
+  const handleEditComment = (updatedComment) => {
+    const updatedComs = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
+    setComments(updatedComs);
   }
 
-  // Updating comments state to update comments.
-  const handleEditComment = (updatedComment) => {
-    const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
-    setComments(updatedComments)
+  const handleDeleteComment = (deletedComment) => {  
+    const delCom = comments.filter(comment => comment.id !== deletedComment)
+    setComments(delCom)
   }
 
   return (

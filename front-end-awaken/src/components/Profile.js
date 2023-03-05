@@ -5,7 +5,7 @@ import MomSanai from "../images/MomSanai.jpeg";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
-  console.log(user, "Owner of profile.")
+  // console.log(user, "Owner of profile.")
  
   return (
     <div className="container-flex bg-dark">

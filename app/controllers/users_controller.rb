@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorize, only: [:create]
 
   #SignUp
   def create
@@ -8,22 +8,14 @@ class UsersController < ApplicationController
     render json: user, status: 201
   end
 
+  def show
+    render json: current_user, status: :ok
+  end
+
   def index
     render json: User.all, status: :ok
   end
-
-  def show
-    render json: current_user
-  end
   
-  def user_comments
-    render json: current_user.comments
-  end
-
-  def user_books
-    render json: current_user.books
-  end
-
   private
   def user_params
     params.permit(:username, :password, :password_confirmation, :age, :bio)

@@ -6,7 +6,7 @@ import { CommentContext } from "../context/CommentContext";
 
 const NewBookForm = () => {
   const { handleAddNewBook } = useContext(BookContext)
-  const { user } = useContext(UserContext)
+  const { user, handleAddNewUserBook } = useContext(UserContext)
   const { handleAddNewComment } = useContext(CommentContext) 
   const navigate = useNavigate()
 
@@ -44,13 +44,16 @@ const NewBookForm = () => {
     .then((res) => res.json())
     .then((newBook) => {
           
-        handleAddNewBook(newBook)
+        handleAddNewBook(newBook) // update books state
+        handleAddNewUserBook(newBook) // update user books state
         console.log(newBook)
+
         const newCommentData = {
           comment,
           user_id: user.id,
           book_id: newBook.id
         }
+        
         //CREATE (POST REQUEST COMMENT)
           fetch(`/users/${user.id}/comments`, {
             method: "POST",

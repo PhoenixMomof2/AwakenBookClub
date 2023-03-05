@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments, except: [:create, :update, :destroy]
+  resources :comments, only: :index
   resources :books, except: [:create, :update, :destroy]
   resources :users, except: [:update, :destroy]
 
@@ -12,12 +12,9 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
     
   # Custom User Routes
-  resources :users, only: :index do
-    resources :books, except: [:update, :destroy]
-  end
-
-  resources :users, only: :index do
-    resources :comments 
+  resources :users, only: [:index , :show] do 
+    resources :books, except: :show
+    resources :comments
   end
  
   # Routing logic: fallback requests for React Router.

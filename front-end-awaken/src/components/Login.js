@@ -6,13 +6,13 @@ import Body from "./Body";
 import Welcome from "./Welcome";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { login, setErrors, errors } = useContext(UserContext);
-  const navigate = useNavigate();
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const { login, setErrors, errors } = useContext(UserContext)
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     fetch("/login", {
       method: "POST",
@@ -24,28 +24,25 @@ const Login = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
-          login(user);
-          navigate("/me");
-          console.log(user, "Logged in user.");
+          login(user)
+          navigate("/me")
         });
       } else {
         res.json().then((err) => {
-          // debugger;
-          console.log(err.errors);
-          setErrors(err.errors);
+          setErrors(err.errors)
         });
       }
     });
     // clear form
-    setUsername("");
-    setPassword("");
+    setUsername("")
+    setPassword("")
   }
 
   useEffect(() => {
     return () => {
-      setErrors([]);
-    };
-  }, [setErrors]);
+      setErrors([])
+    }
+  }, [setErrors])
 
   return (
     <div className="container-flex">
@@ -100,7 +97,7 @@ const Login = () => {
       </div>
       <Body />
     </div>
-  );
-};
+  )
+}
 
 export default Login;

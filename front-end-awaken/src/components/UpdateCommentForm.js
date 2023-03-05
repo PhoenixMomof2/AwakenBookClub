@@ -1,33 +1,34 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
+import { UserContext } from "../context/UserContext";
 import Body from "../components/Body";
 
-const UpdateCommentForm = ({getBook}) => {
-  const { id } = useParams()
+const UpdateCommentForm = () => {
   const navigate = useNavigate()
-  const {comments, handleEditComment } = useContext(CommentContext);
-  const update = comments.find(comment => comment.id === parseInt(id))
+  const { handleEditComment } = useContext(CommentContext)
+  const { user, handleEditUserComment } = useContext(UserContext)
+  const update = user.comments.find(comment => comment.user_id === user.id)
   
 
   console.log(update, "Update Form")
 
   const [comment, setComment] = useState("");
-  const [username, setUsername] = useState(comment.user.username);
-  const [title, setTitle] = useState(comment.book.title);
+  const [username, setUsername] = useState("user.update.username")
+  const [title, setTitle] = useState("")
 
   // debugger
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const updateCommentData = {
-      comment, 
-      book_id,
-      user_id,
+      comment,
+      book_id: update.book_id,
+      user_id: update.user_id
     }
 
     //UPDATE (PATCH REQUEST)
-    fetch(`/users/${user.id}/comments/${comment.id}`, {
+    fetch(`/users/${user.id}/comments/${update.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -35,9 +36,10 @@ const UpdateCommentForm = ({getBook}) => {
           body: JSON.stringify(updateCommentData),
         })
           .then((res) => res.json())
-          .then((data) => {
-            handleEditComment(data);
-            navigate(`/users/${user.id}/comments`);
+          .then((updatedComment) => {
+            handleEditComment(updatedComment)
+            handleEditUserComment(updatedComment)
+            navigate(`/users/${user.id}/comments`)
           })
           
           //clear form
@@ -57,7 +59,7 @@ const UpdateCommentForm = ({getBook}) => {
                   type="text"
                   className="form-control text-center"
                   id="book-id"
-                  defaultValue={comment.book.title}
+                  defaultValue={update.book_id}
                   onChange={(e) => setTitle(title)}
                 />
               </div>
@@ -69,7 +71,7 @@ const UpdateCommentForm = ({getBook}) => {
                   type="text"
                   className="form-control text-center"
                   id="username"
-                  defaultValue={comment.user.username}
+                  defaultValue={update.user.username}
                   onChange={(e) => setUsername(username)}
                 />
               </div>
@@ -79,7 +81,7 @@ const UpdateCommentForm = ({getBook}) => {
             <span className="input-group-text">Comment</span>
             <input
               type="text"
-              className="form-control text-light text-center"
+              className="form-control text-dark text-center"
               id="update-book-id"
               defaultValue={update.comment}
               onChange={(e) => setComment(e.target.value)}

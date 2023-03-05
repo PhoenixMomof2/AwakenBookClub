@@ -1,9 +1,14 @@
 class BooksController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show]
   
   # GET /books
   def index
-    render json: Book.all, status: :ok
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+      render json: @user.books, status: :ok
+    else
+      render json: Book.all, status: :ok
+    end    
   end
 
   # GET /books/:id
@@ -24,6 +29,6 @@ class BooksController < ApplicationController
   end
 
   def find_book
-    @book = Book.find(params[:id])
+    @book = Book.find_by_id(params[:id])
   end
 end

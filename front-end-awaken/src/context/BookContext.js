@@ -8,8 +8,6 @@ const BookProvider = ({ children }) => {
   // value that will be given to the context
   const [books, setBooks] = useState([])
 
-  // console.log("I'm in BookProvider")
-
   // fetch the books
   useEffect(() => {
     const fetchBooks = () => {
@@ -25,17 +23,8 @@ const BookProvider = ({ children }) => {
     setBooks([...books, newBook]);
   };
 
-  const handleDeleteBook = (id) => {
-    fetch(`books/${id}`, {
-    method: "DELETE",
-    }).then(() => {
-      handleDeleteBook(id);
-      // console.log("Deleted")
-    })
-  }
-
   return (
-    <BookContext.Provider value={{books, handleAddNewBook, handleDeleteBook}}>
+    <BookContext.Provider value={{ books, handleAddNewBook }}>
       {children}
     </BookContext.Provider>
   );

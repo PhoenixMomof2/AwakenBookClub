@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import Welcome from "./Welcome";
+import Welcome from "../components/Welcome";
 
 const UserNavbar = () => {
-  const { logout, user } = useContext(UserContext);
+  const { logout, user } = useContext(UserContext)
 
   const logoutUser = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
-      logout();
-    });
-  };
+      logout()
+    })
+  }
 
   return (
     <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
@@ -40,9 +40,9 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to="/home"
+              to="/books"
             >
-              Home
+              Book Club Book List
             </Link>
           </li>
           <li className="nav-item">
@@ -103,7 +103,7 @@ const UserNavbar = () => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}
 
 export default UserNavbar;

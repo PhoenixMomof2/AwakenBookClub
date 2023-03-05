@@ -6,14 +6,15 @@ import { UserContext } from "../context/UserContext";
 const NewCommentForm = () => {
   const navigate = useNavigate()
   const { handleAddNewComment } = useContext(CommentContext) 
-  const { user } = useContext(UserContext)
-  // const bookToCommentOn = user.books.find(book => book.id === book.comment.book_id)
-
+  const { user, handleAddNewUserComment } = useContext(UserContext)
+ 
   const [comment, setComment] = useState("")
   const [book_id, setBook_Id] = useState("")
   const [user_id, setUser_Id] = useState(user.username)
   const [errors, setErrors] = useState("")
-  
+
+  console.log(user, "New Comment Form")
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -23,7 +24,7 @@ const NewCommentForm = () => {
       user_id: user.id
     }
 
-    console.log(newCommentData)
+    console.log(newCommentData, "new comment form data before .then")
     //CREATE (POST REQUEST)
     fetch(`/users/${user.id}/comments`, {
       method: "POST",
@@ -33,11 +34,14 @@ const NewCommentForm = () => {
       body: JSON.stringify(newCommentData),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((newComment) => handleAddNewComment(newComment)); // update state
-        navigate(`/users/${user.id}/comments`);
+        res.json().then((newComment) => {
+          handleAddNewComment(newComment) // update comments state
+          handleAddNewUserComment(newComment) // update user comments state
+          console.log(newComment, "new comment form data after if res.ok block")
+          navigate(`/users/${user.id}/comments`)
+        })        
       } else {
         res.json().then((errorData) => {
-          // console.log(errorData.errors, "There are errors.")
           const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
           setErrors(errorLis)
         });
@@ -58,22 +62,24 @@ const NewCommentForm = () => {
   return (
     <div className="container-flex">
       <div className="row justify-content-center">
-        <div className="col-lg-6">
+        <div className="col-10">
           <form
             className="my-5 justify-content-center text-center bg-dark border-dark p-3"
             onSubmit={handleSubmit}
           >
-            <h4 className="bg-warning">Add New Comment</h4>
-           
-              
+            <h4 className="bg-warning">Add New Comment</h4>      
+            <div className="form-group text-center">
+            <div className="mb-3 input-group">  
+            <span className="input-group-text">Book Title</span>
               <select 
             id="book_id"
             defaultValue={book_id}
             onChange={(e) => setBook_Id(e.target.value)} >
               {user.books.map(book => (<option key={book.id} value={book.id}>{book.title}</option>))}
               </select>
-          
-            <div className="form-group text-center">
+              </div>   
+              </div>   
+              <div className="form-group text-center">
               <div className="mb-3 input-group">
                 <span className="input-group-text">Username</span>
                 <input
