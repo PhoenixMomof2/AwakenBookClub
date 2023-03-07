@@ -25,6 +25,7 @@ const NewCommentForm = () => {
     }
 
     console.log(newCommentData, "new comment form data before .then")
+    
     //CREATE (POST REQUEST)
     fetch(`/users/${user.id}/comments`, {
       method: "POST",
@@ -44,9 +45,9 @@ const NewCommentForm = () => {
         res.json().then((errorData) => {
           const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
           setErrors(errorLis)
-        });
+        })
       }
-    });
+    })
     // clear form
     // setComment("")
     // setUserName("")
@@ -85,7 +86,7 @@ const NewCommentForm = () => {
                 <input
                   type="text"
                   className="form-control"
-                  id="username"
+                  id="user_id"
                   defaultValue={user_id}
                   onChange={(e) => setUser_Id(e.target.value)}
                 />

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
 import { UserContext } from "../context/UserContext";
@@ -10,23 +10,24 @@ const UpdateCommentForm = () => {
   const { user, handleEditUserComment } = useContext(UserContext)
   const update = user.comments.find(comment => comment.user_id === user.id)
   
-
-  console.log(update, "Update Form")
-
-  const [comment, setComment] = useState("");
-  const [username, setUsername] = useState("user.update.username")
-  const [title, setTitle] = useState("")
+  const [comment, setComment] = useState(update.comment)
+  const [user_id, setUser_Id] = useState(user.username)
+  const [book_id, setBook_Id] = useState(user.book.title)
+  const [errors, setErrors] = useState([])
 
   // debugger
+  console.log(update, "Update Comment Form comment to update")
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const updateCommentData = {
       comment,
       book_id: update.book_id,
-      user_id: update.user_id
+      user_id: user.id
     }
 
+    console.log(updateCommentData, "update comment form data before .then")
     //UPDATE (PATCH REQUEST)
     fetch(`/users/${user.id}/comments/${update.id}`, {
           method: "PATCH",
@@ -35,16 +36,32 @@ const UpdateCommentForm = () => {
           },
           body: JSON.stringify(updateCommentData),
         })
-          .then((res) => res.json())
-          .then((updatedComment) => {
-            handleEditComment(updatedComment)
-            handleEditUserComment(updatedComment)
-            navigate(`/users/${user.id}/comments`)
-          })
-          
+          .then((res) => { 
+            if (res.ok) {
+              res.json().then((updatedComment) => {
+                handleEditComment(updatedComment) // update comments state
+                handleEditUserComment(updatedComment) // update user comments state
+                navigate(`/users/${user.id}/comments`)
+              })
+            } else {
+              res.json().then((errorData) => {
+                console.log(errorData.errors)
+                // const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+                // setErrors(errorLis)
+              })
+            }
+          })          
           //clear form
-          setComment("")
-  }
+          // setComment("")
+          // setUserName("")
+          // setBook_Title("")
+    }
+
+  useEffect(() => {
+    return () => {
+      setErrors([]);
+    };
+  }, [setErrors]);
 
   return (
     <div className="container-flex">
@@ -59,8 +76,8 @@ const UpdateCommentForm = () => {
                   type="text"
                   className="form-control text-center"
                   id="book-id"
-                  defaultValue={update.book_id}
-                  onChange={(e) => setTitle(title)}
+                  defaultValue={book_id}
+                  onChange={(e) => setBook_Id(e.target.value)}
                 />
               </div>
             </div>
@@ -70,9 +87,9 @@ const UpdateCommentForm = () => {
                 <input
                   type="text"
                   className="form-control text-center"
-                  id="username"
-                  defaultValue={update.user.username}
-                  onChange={(e) => setUsername(username)}
+                  id="user_id"
+                  defaultValue={user_id}
+                  onChange={(e) => setUser_Id(e.target.value)}
                 />
               </div>
             </div>
@@ -83,12 +100,13 @@ const UpdateCommentForm = () => {
               type="text"
               className="form-control text-dark text-center"
               id="update-book-id"
-              defaultValue={update.comment}
+              defaultValue={comment}
               onChange={(e) => setComment(e.target.value)}
             />
           </div>
         </div>
           <input type="submit" className="btn bg-warning p-2 btn-outline-primary fw-bold" value="Submit" />
+          <div className="text-light">{errors}</div>
         </form>
       </div>
     </div>

@@ -7,7 +7,7 @@ import NewCommentForm from "./NewCommentForm";
 const BookDetails = () => {
   const { books }  = useContext(BookContext)
   const { loggedIn }  = useContext(UserContext)
-  const { id } = useParams();
+  const { id } = useParams()
   const getBook = books.find(book => book.id === parseInt(id))
  
   console.log(getBook, "book details")
@@ -32,7 +32,7 @@ const BookDetails = () => {
      {loggedIn === true ?  (
                   <div>
                     <div className="container-fluid bg-warning p-2 btn-outline-primary fw-bold text-center">
-                      <Link className="btn border-dark px-4 m-1 border-2 bg-success text-light fw-bolder" to="/about">Go To My BookList</Link>
+                      <Link className="btn border-dark px-4 m-1 border-2 bg-success text-light fw-bolder" to={`/users/${user.id}/books`}>Go To My BookList</Link>
                     </div>
                     <NewCommentForm key={getBook.id} getBook={getBook}/>
                   </div>
@@ -46,4 +46,3 @@ const BookDetails = () => {
 }
 
 export default BookDetails;
- // {`/users/${user.id}/books`}

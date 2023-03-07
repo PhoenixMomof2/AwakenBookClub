@@ -17,7 +17,7 @@ class BooksController < ApplicationController
     render json: @book, status: :ok
   end
 
-  # POST /books (do I need the include user?)
+  # POST /books 
   def create
       @book = Book.create!(book_params)
       render json: @book, status: :created

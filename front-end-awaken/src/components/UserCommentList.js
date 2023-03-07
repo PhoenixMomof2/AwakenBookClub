@@ -23,12 +23,9 @@ const UserCommentList = () => {
     <div className="container list-group">
       <div className="col text-center bg-dark pt-2">    
         <div className="list-group-item bg-dark py-1 my-2">
-          <h6 className="text-light bg-danger border border-2 border-dark py-2 fw-bolder text-center"><i className="bi bi-chat-heart-fill"></i> My Commentary</h6>
-          {user.books.map((book) => (<div key={book.id}><h4 className="text-light py-1 bg-dark border border-2 fw-bolder text-center">
-            <i className="bi bi-book-half"></i> {book.title}
-          </h4>
+          <h6 className="text-light bg-danger border border-2 border-dark py-2 fw-bolder text-center"><i className="bi bi-chat-heart-fill"></i> My Commentary</h6>          
           {user.comments.map((comment) => (           
-          <div  key={comment.user_id} className="text-center">
+          <div  key={comment.id} className="text-center">
           <div className="list-group p-2 bg-dark my-1">
             <div className="list-group-item">       
               <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i>{comment.format_created_at_date}</h6>
@@ -47,15 +44,15 @@ const UserCommentList = () => {
             <Link
               className="btn btn-sm btn-dark py-2"
               aria-current="page"
-              to={`/users/${user.id}/comment/${comment.id}/edit`}
+              to={`/users/${user.id}/comments/${comment.id}/edit`}
             >
               Edit
             </Link>      
             <Link
               className="btn btn-sm btn-danger py-2"
               aria-current="page"
-              to={`/users/${user.id}/comments`} 
-              onClick={handleDeleteClick} 
+              to="#"
+              onClick={() => {handleDeleteClick(comment.id)}} 
             >
               Delete
             </Link>    
@@ -63,8 +60,7 @@ const UserCommentList = () => {
             </div>
           </div>
           </div>))}
-          </div>))}
-        </div>   
+        </div>           
       </div>
     </div>
   )

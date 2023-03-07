@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :bio, presence: true
 
   has_many :comments
-  has_many :books, through: :comments
+  has_many :books, -> { distinct }, through: :comments
 
+  #proc ->
   has_secure_password   
 end

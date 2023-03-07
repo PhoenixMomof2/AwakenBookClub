@@ -21,33 +21,36 @@ class CommentsController < ApplicationController
 
   # POST /users/:user_id/comments
   def create  
-    # @comment = current_user.comments.create!(comment_params)
-    # render json: @comment, include: :book_id, status: :created
-    if params[:user_id]
-      @user = User.find_by_id(params[:user_id])
-      @comment = @user.comments.create!(comment_params)
-      render json: @comment, status: :created  
-    else
-      render json: { message: "Not authorized!" }, status: :unauthorized
-    end
+    # byebug
+    @comment = current_user.comments.create!(comment_params)
+    render json: @comment, status: :created
+    # if params[:user_id]
+    #   @user = User.find_by_id(params[:user_id])
+    #   @comment = @user.comments.create!(comment_params)
+    #   render json: @comment, status: :created  
+    # else
+    #   render json: { message: "Not authorized!" }, status: :unauthorized
+    # end
   end
 
   # PATCH /users/:user_id/comments/:id
   def update
+    # byebug
+    find_comment
     if @comment.user_id == current_user.id
-      find_comment
-      @comment = current_user.comment.update!(comment_params)
-      render json: @comment, status: :updated  
+      @comment.update!(comment_params)
+      render json: @comment, status: :accepted  
     else
       render json: Comment.all, status: :unauthorized
     end
   end
 
   # DELETE /users/:user_id/comments/:id
+  # because a comment belongs to a user, it's already associated
   def destroy
+    find_comment
     if @comment.user_id == current_user.id
-      find_comment
-      @comment = current_user.comment.destroy
+      @comment.destroy
       head :no_content
     else
       render json: { message: "You've been had!" }
