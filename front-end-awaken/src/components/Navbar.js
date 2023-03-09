@@ -48,7 +48,7 @@ const Navbar = () => {
                 aria-current="page"
                 to="/forum"
               >
-                ReaderForum
+                Reader Forum
               </Link>
             </li>
             <li className="nav-item">

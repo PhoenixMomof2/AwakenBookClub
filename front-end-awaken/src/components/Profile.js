@@ -5,7 +5,6 @@ import MomSanai from "../images/MomSanai.jpeg";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
-  // console.log(user, "Owner of profile.")
  
   return (
     <div className="container-flex bg-dark">
@@ -56,7 +55,7 @@ const Profile = () => {
                   <p className="card-text text-success fw-bold">Category: {book.category}</p>
                   <p className="card-text text-light fw-bold">Preview: {book.short_content}</p>
                 </div>
-                <div>{user.comments.map(comment => (
+                <div>{book.comments.map(comment => (
                   <div className="col" key={comment.id}>
                     <div className="list-group py-3 bg-dark">
                       <div className="list-group-item" key={comment.id}>

@@ -42,14 +42,14 @@ function UserProvider ({ children }) {
 
   // Updating user comments state to update comments.
   const handleEditUserComment = (update) => {
-    const updatedComment = user.comments.map((comment) => (comment.id === update.id ? update : comment))
-    setUser({...user, comments: [updatedComment]})
+    const updatedComments = user.comments.map((comment) => (comment.id === update.id ? update : comment))
+    setUser({...user, comments: updatedComments})
   }
 
   // Updating user comments state to delete comment.
   const handleDeleteUserComment = (id) => {
-    const deletedComment = user.comments.filter(comment => comment.id !== id)
-    setUser({...user, comments: deletedComment}) 
+    const filteredComments = user.comments.filter(comment => comment.id !== id)
+    setUser({...user, comments: filteredComments}) 
     console.log("Comment Deleted")
   }
 

@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CommentContext } from "../context/CommentContext";
 import { UserContext } from "../context/UserContext";
 import Body from "../components/Body";
 
 const UpdateCommentForm = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
   const { handleEditComment } = useContext(CommentContext)
   const { user, handleEditUserComment } = useContext(UserContext)
-  const update = user.comments.find(comment => comment.user_id === user.id)
-  
-  const [comment, setComment] = useState(update.comment)
-  const [user_id, setUser_Id] = useState(user.username)
-  const [book_id, setBook_Id] = useState(user.book.title)
-  const [errors, setErrors] = useState([])
+  const update = user.comments.find(comment => comment.id === parseInt(id))
 
-  // debugger
-  console.log(update, "Update Comment Form comment to update")
+  const [comment, setComment] = useState(update.comment)
+  const [errors, setErrors] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const updateCommentData = {
       comment,
-      book_id: update.book_id,
-      user_id: user.id
     }
 
     console.log(updateCommentData, "update comment form data before .then")
@@ -39,22 +33,24 @@ const UpdateCommentForm = () => {
           .then((res) => { 
             if (res.ok) {
               res.json().then((updatedComment) => {
+                console.log(updatedComment, "res.ok")
                 handleEditComment(updatedComment) // update comments state
+                console.log("after handleEditComment")
                 handleEditUserComment(updatedComment) // update user comments state
+                console.log("after handleEditUserComment")
                 navigate(`/users/${user.id}/comments`)
+                
               })
             } else {
               res.json().then((errorData) => {
-                console.log(errorData.errors)
-                // const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-                // setErrors(errorLis)
+                // console.log(errorData.errors)
+                const errorLis = errorData.errors.full_messages.map((e, ind) => <li key={ind}>{e}</li>)
+                setErrors(errorLis)
               })
             }
           })          
           //clear form
           // setComment("")
-          // setUserName("")
-          // setBook_Title("")
     }
 
   useEffect(() => {
@@ -70,29 +66,11 @@ const UpdateCommentForm = () => {
         <form className="my-5 justify-content-center text-center bg-dark border-dark p-3" onSubmit={handleSubmit}>
         <h4 className="bg-warning">Edit Comment</h4>
         <div className="form-group">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Title</span>
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  id="book-id"
-                  defaultValue={book_id}
-                  onChange={(e) => setBook_Id(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Reader</span>
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  id="user_id"
-                  defaultValue={user_id}
-                  onChange={(e) => setUser_Id(e.target.value)}
-                />
-              </div>
-            </div>
+          <div className="justify-content-center pt-2 mb-3 input-group">
+            <span className="input-group-text">Book Title</span>
+            <span className="input-group-text bg-danger text-light fw-bold">{update.book.title}</span>
+          </div>
+        </div>
         <div className="form-group">
           <div className="mb-3 input-group">
             <span className="input-group-text">Comment</span>

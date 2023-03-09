@@ -26,13 +26,13 @@ const CommentProvider = ({ children }) => {
   }
 
   const handleEditComment = (updatedComment) => {
-    const updatedComs = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
-    setComments(updatedComs);
+    const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
+    setComments(updatedComments);
   }
 
   const handleDeleteComment = (deletedComment) => {  
-    const delCom = comments.filter(comment => comment.id !== deletedComment)
-    setComments(delCom)
+    const filteredComments = comments.filter(comment => comment.id !== deletedComment)
+    setComments(filteredComments)
   }
 
   return (

@@ -21,17 +21,14 @@ const UserBookList = () => {
               <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
               <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
               <p className="card-text text-success fw-bold">Category: {book.category}</p>
-              <p className="card-text text-light fw-bold">Preview: {book.short_content}</p>
+              <p className="card-text text-light">Preview: {book.short_content}</p>
             </div>
             <div className="btn-group border fw-bold border-warning">
               <Link to={`/users/${user.id}/comments`} className="btn btn-sm btn-dark py-2">
                 My Comments
-              </Link>
-              <Link to={`/users/${user.id}/comments/new`} className="btn btn-sm btn-danger py-2">
-                Leave A Comment
-              </Link>
+              </Link>             
             </div>
-          </div>)}
+        </div>)}
         </div>
       </div>
     </section>

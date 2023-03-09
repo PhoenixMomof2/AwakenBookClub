@@ -23,8 +23,6 @@ const NewCommentForm = () => {
       book_id, 
       user_id: user.id
     }
-
-    console.log(newCommentData, "new comment form data before .then")
     
     //CREATE (POST REQUEST)
     fetch(`/users/${user.id}/comments`, {
@@ -38,7 +36,6 @@ const NewCommentForm = () => {
         res.json().then((newComment) => {
           handleAddNewComment(newComment) // update comments state
           handleAddNewUserComment(newComment) // update user comments state
-          console.log(newComment, "new comment form data after if res.ok block")
           navigate(`/users/${user.id}/comments`)
         })        
       } else {

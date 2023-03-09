@@ -34,13 +34,6 @@ const UserCommentList = () => {
               <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
               </small>     
           <div className="btn-group border mx-2 fw-bold border-warning"> 
-            <Link 
-              className="btn btn-success py-2" 
-              aria-current="page" 
-              to={`/users/${user.id}/comments/${comment.id}`}
-            > 
-              Expand
-            </Link>
             <Link
               className="btn btn-sm btn-dark py-2"
               aria-current="page"
@@ -57,7 +50,7 @@ const UserCommentList = () => {
               Delete
             </Link>    
           </div>           
-            </div>
+          </div>
           </div>
           </div>))}
         </div>           
