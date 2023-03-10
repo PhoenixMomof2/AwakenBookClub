@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import MomSanai from "../images/MomSanai.jpeg";
+import HoldHands from "../images/HoldHands.jpg";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -28,7 +28,7 @@ const Profile = () => {
           <div className="container-fluid bg-dark col">
             <section id="profile-top-right" className="container-fluid">
               <div className="container-flex py-5 my-5">
-                <img src={MomSanai} className="text-center card-img-top img-fluid bg-dark ms-1" alt="profile-placeholder"/>
+                <img src={HoldHands} className="text-center card-img-top img-fluid bg-dark ms-1" alt="profile-placeholder"/>
               </div>
             </section>
           </div>
@@ -59,7 +59,7 @@ const Profile = () => {
                   <div className="col" key={comment.id}>
                     <div className="list-group py-3 bg-dark">
                       <div className="list-group-item" key={comment.id}>
-                        <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> {comment.format_created_at_date}</h6>
+                        <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> Created: {comment.format_created_at_date}</h6>
                         <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
                         <small className="py-1 text-dark fst-italic">
                         <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
@@ -82,10 +82,10 @@ const Profile = () => {
       <section className="container-fluid py-2">
         <div className="container row text-center btn-group">
           <div className="container-fluid col text-center p-2">
-            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Awaken List</Link>
+            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Books</Link>
           </div>
           <div className="container-fluid col text-center p-2">
-            <Link to="/comments" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">Back To All Comments</Link>
+            <Link to="/comments" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Comments</Link>
           </div>
         </div>
       </section>

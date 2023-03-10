@@ -6,32 +6,30 @@ const UserBookList = () => {
   const { user } = useContext(UserContext);
      
   return (
-    <section id="user-book-list">
-      <div className="container bg-dark py-5">
-        <div className="row">
+    <div className="container-xl">
+      <div className="card bg-dark py-5">
+        <div className="row no-gutters">
         {user.books.map((book) =>
-        <div key={book.id} className="col mx-2 my-2 text-justify justify-content-center round">
+        <div key={book.id} className="col-md-4 mx-2 my-2 text-justify justify-content-center round">
             <img
               src={book.book_img}
-              className="card-img-top img-fluid imy-thumbnail rounded mx-auto d-block "
+              className="card-img rounded"
               alt={book.title}
             />
-            <div className="card-body" key={book.id}>
+            <div className="col-md-8">
               <h4 className="card-title text-danger fw-bolder">{book.title}</h4>
               <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
-              <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
+              <p className="card-text text-warning pt-2 fw-bold">Stars: {book.stars}</p>
               <p className="card-text text-success fw-bold">Category: {book.category}</p>
               <p className="card-text text-light">Preview: {book.short_content}</p>
-            </div>
-            <div className="btn-group border fw-bold border-warning">
-              <Link to={`/users/${user.id}/comments`} className="btn btn-sm btn-dark py-2">
+              <Link to={`/users/${user.id}/comments`} className="btn btn-sm btn-danger fw-bold justify-content-center py-2">
                 My Comments
-              </Link>             
-            </div>
-        </div>)}
+              </Link>  
+            </div>        
+          </div>)}
         </div>
-      </div>
-    </section>
+      </div>   
+    </div>
   )
 }
 

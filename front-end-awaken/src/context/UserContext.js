@@ -7,7 +7,7 @@ const UserContext = createContext();
 // Create provider
 function UserProvider ({ children }) {
   const [users, setUsers] = useState([])
-  const [user, setUser] = useState({comments: []})
+  const [user, setUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false)
   const [errors, setErrors] = useState([])
   
@@ -31,6 +31,7 @@ function UserProvider ({ children }) {
     })
   }, [])
 
+  // Updating user books state to add new book. 
   const handleAddNewUserBook = (newBook) => {
     setUser({...user, books: [...user.books, newBook]});
   };
@@ -40,17 +41,16 @@ function UserProvider ({ children }) {
     setUser({...user, comments: [...user.comments, newComment]})
   }
 
-  // Updating user comments state to update comments.
+  // Updating user comments state after editing a comment.
   const handleEditUserComment = (update) => {
     const updatedComments = user.comments.map((comment) => (comment.id === update.id ? update : comment))
     setUser({...user, comments: updatedComments})
   }
 
-  // Updating user comments state to delete comment.
+  // Updating user comments state after deleting a comment.
   const handleDeleteUserComment = (id) => {
     const filteredComments = user.comments.filter(comment => comment.id !== id)
     setUser({...user, comments: filteredComments}) 
-    console.log("Comment Deleted")
   }
 
   const login = (user) => {
@@ -77,3 +77,5 @@ function UserProvider ({ children }) {
 }
 
 export { UserContext, UserProvider };
+
+// comments: [] removed from useState([was here]) on line 9

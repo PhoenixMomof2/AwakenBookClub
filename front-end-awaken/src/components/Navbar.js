@@ -33,6 +33,15 @@ const Navbar = () => {
           id="main-nav"
         >
           <ul className="navbar-nav main-nav">
+          <li className="nav-item">
+              <Link
+                className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
+                aria-current="page"
+                to="/"
+              >
+                About
+              </Link>
+            </li>
             <li className="nav-item">
               <Link
                 className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"

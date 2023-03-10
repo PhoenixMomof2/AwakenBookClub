@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = () => {
-  // console.log("I'm in the Header Component")
+ 
   return (
     <section id="header">
       <div className="container-flex pt-3 pb-3 pe-3 ps-3 bg-warning border-dark">

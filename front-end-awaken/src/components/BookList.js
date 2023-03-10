@@ -6,12 +6,11 @@ const BookList = () => {
   const { books }  = useContext(BookContext)
   const bookCards = books.map(book => <BookCard key={book.id} book={book}/>)
   
-  console.log(books, "I'm in the BookList Component")
-
   return (
       <section id="book-list">
-        <div className="container bg-dark py-5">
-          <div className="row">
+        <h2 className="bg-dark text-light text-center">Book List</h2>
+        <div className="container-lg bg-dark py-2">
+          <div className="justify-content-center row">
             { bookCards }
           </div>
         </div>

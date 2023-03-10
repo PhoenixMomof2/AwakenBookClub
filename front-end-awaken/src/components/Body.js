@@ -8,7 +8,6 @@ const Body = () => {
   return ( 
     <section id="body">
         <div className="container-flex bg-warning ">
-            {/* <!-- Content section 1--> */}
             <section>
                 <div className="container px-5">
                     <div className="row gx-5 align-items-center">
@@ -18,13 +17,12 @@ const Body = () => {
                         <div className="col-lg-6 order-lg-1">
                             <div className="p-5">
                                 <h2 className="display-4 text-white bg-dark">For those about to awaken...</h2>
-                                <p className="text-dark bg-danger">When you have been asleep, complicit, or so neutral that you aren't even involved in the conversation, it can be very scary.  But join this supportive community and take it one page at a time.</p>
+                                <p className="text-dark bg-danger">When you have been asleep, complicit, or so neutral that you aren't even involved in the conversation, taking the first to step to do away with cognitive dissonance can be very scary.  But join this supportive community and take it one page at a time.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            {/* <!-- Content section 2--> */}
             <section>
                 <div className="container px-5">
                     <div className="row gx-5 align-items-center">
@@ -40,7 +38,6 @@ const Body = () => {
                     </div>
                 </div>
             </section>
-            {/* <!-- Content section 3--> */}
             <section>
                 <div className="container px-5">
                     <div className="row gx-5 align-items-center">

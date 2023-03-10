@@ -10,9 +10,9 @@ const BookDetails = () => {
   console.log(getBook, "book details")
    return (
     <section id="card-details">
-      <div className="container pt-1 pb-1 pe-3 ps-3 bg-dark border-dark">
-        <div className="row">
-        <div className="col" key={getBook.id}>
+      <div key={id} className="col mx-1 my-2 text-justify justify-content-center round">
+      <div className="card border-1 border-light">
+        <div className="card-body bg-dark">
           <img src={getBook.book_img} className="card-img-top img-thumbnail rounded mx-auto d-block " alt={getBook.title}/>
           </div>
             <div className="card-body">

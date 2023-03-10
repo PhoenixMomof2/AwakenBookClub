@@ -5,7 +5,7 @@ import BooksSign from "../images/BooksSign.jpg";
 import WomanReading from "../images/WomanReading.jpg";
 
 const Home = () => {
-  // console.log("I'm in the Home Component")
+  
   return (
     <section id="carousel">
       <div className="container">
@@ -40,19 +40,13 @@ const Home = () => {
             <div className="carousel-item active">
               <img src={WomanReading} className="d-block w-100" alt="..." />
               <div className="carousel-caption d-none d-md-block">
-                <h5 className="text-danger fw-bolder">First slide label</h5>
-                <p className=" fw-bolder">
-                  Some representative placeholder content for the first slide.
-                </p>
+                <h4 className="text-light fw-bolder rounded-pill bg-danger">Become A Member</h4>
               </div>
             </div>
             <div className="carousel-item">
               <img src={BooksSign} className="d-block w-100" alt="..." />
               <div className="carousel-caption d-none d-md-block">
-                <h5 className="text-danger fw-bolder">Second slide label</h5>
-                <p className=" fw-bolder">
-                  Some representative placeholder content for the second slide.
-                </p>
+                <h4 className="text-light fw-bolder rounded-pill bg-danger">Join The Movement</h4>
               </div>
             </div>
             <div className="carousel-item">
@@ -62,10 +56,7 @@ const Home = () => {
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block">
-                <h5 className="text-danger fw-bolder">Third slide label</h5>
-                <p className=" fw-bolder">
-                  Some representative placeholder content for the third slide.
-                </p>
+                <h4 className="text-light fw-bolder rounded-pill bg-danger">Be A Social Justice Ally</h4>
               </div>
             </div>
           </div>
