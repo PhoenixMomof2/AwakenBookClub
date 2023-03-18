@@ -5,7 +5,7 @@ import HoldHands from "../images/HoldHands.jpg";
 
 const Profile = () => {
   const { user } = useContext(UserContext)
- 
+ console.log(user)
   return (
     <div className="container-flex bg-dark">
       <div className="container bg-dark border-bottom border-danger border-3">
@@ -53,17 +53,17 @@ const Profile = () => {
                   <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
                   <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
                   <p className="card-text text-success fw-bold">Category: {book.category}</p>
-                  <p className="card-text text-light fw-bold">Preview: {book.short_content}</p>
+                  <p className="card-text text-light">{book.short_content}</p>
                 </div>
                 <div>{book.comments.map(comment => (
                   <div className="col" key={comment.id}>
                     <div className="list-group py-3 bg-dark">
-                      <div className="list-group-item" key={comment.id}>
-                        <h6 className="text-success fst-italic"><i className="bi bi-chat-quote-fill"></i> Created: {comment.format_created_at_date}</h6>
-                        <p className="mb-1 text-dark px-2">{comment.comment}</p>                    
-                        <small className="py-1 text-dark fst-italic">
-                        <i className="bi bi-calendar-plus text-secondary fw-bold">  Last updated: {comment.format_updated_at_date}</i>
-                        </small>                         
+                      <div className="list-group-item" key={comment.id}>  
+                      <small className="py-1 text-dark fst-italic">
+                        <i className="bi bi-calendar-plus text-secondary fw-bold"> </i>
+                        </small>   
+                        <p className="mb-1 text-dark px-2">{comment.comment}</p>                  
+                                              
                       </div>
                     </div>
               </div>))}

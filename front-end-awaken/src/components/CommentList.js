@@ -7,13 +7,11 @@ const CommentList = () => {
   const commentCards = comments.map((comment) => (<CommentCard key={comment.id} comment={comment} />))
 
   return (
-    <section id="comment-list">
-      <div className="container bg-dark">
-        <div className="row">
+      <div className="container bg-dark list-group">
+        <div className="col text-center bg-dark pt-2">
           { commentCards }
         </div>
       </div>
-    </section>
   );
 };
 

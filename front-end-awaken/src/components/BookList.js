@@ -7,14 +7,9 @@ const BookList = () => {
   const bookCards = books.map(book => <BookCard key={book.id} book={book}/>)
   
   return (
-      <section id="book-list">
-        <h2 className="bg-dark text-light text-center">Book List</h2>
-        <div className="container-lg bg-dark py-2">
-          <div className="justify-content-center row">
-            { bookCards }
-          </div>
-        </div>
-      </section>
+    <div className="container-xl bg-danger">
+      { bookCards }        
+    </div>
   )
 }
 

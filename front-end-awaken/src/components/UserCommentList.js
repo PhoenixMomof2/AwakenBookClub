@@ -7,15 +7,12 @@ const UserCommentList = () => {
   const { user, handleDeleteUserComment } = useContext(UserContext)
   const { handleDeleteComment } = useContext(CommentContext)
   
-  console.log(user, "UserCommentList")
-
   const handleDeleteClick = (id) => {
     fetch(`/users/${user.id}/comments/${id}`, {
       method: "DELETE", 
       }).then(() => {
         handleDeleteComment(id)
         handleDeleteUserComment(id)
-      console.log("Deleted")
       })
   }
 

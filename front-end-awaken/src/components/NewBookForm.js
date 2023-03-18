@@ -18,7 +18,7 @@ const NewBookForm = () => {
   const [content, setContent] = useState("")
 
   const [comment, setComment] = useState("")
-  const [username, setUsername] = useState(user.username)
+  // const [username, setUsername] = useState(user.username)
   const [errors, setErrors] = useState("")
 
   const handleSubmit = (e) => {
@@ -184,36 +184,29 @@ const NewBookForm = () => {
                 />
               </div>
             </div>
-            <h4 className="bg-warning">Add A Comment</h4>
-            <div className="form-group">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Username</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  defaultValue={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Comment</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Comment"
-                  aria-label="comment"
-                  id="comment"
+            <h4 className="bg-warning">Add A Comment</h4>          
+              <div className="form-group">
+                <div className="mb-3 input-group">
+                  <span className="input-group-text">Username</span>
+                  <span className="input-group-text bg-danger text-light fw-bold">{user.username}</span>
+                </div>
+              </div>                 
+              <div className="form-group">
+              <div className="form-floating">                  
+                <textarea
+                  className="form-control pt-2 text-dark text-justify" 
+                  placeholder="Type comment here..."
+                  style={{height: '150px'}}
+                  id="comment-textarea"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                />
+                >
+                </textarea>
               </div>
-            </div>
+              </div>           
             <button
               type="submit"
-              className="btn bg-warning p-2 btn-outline-primary fw-bold"
+              className="btn bg-warning mt-3 btn-outline-primary fw-bold"
             >
               Submit New Book
             </button>

@@ -21,22 +21,13 @@ class CommentsController < ApplicationController
 
   # POST /users/:user_id/comments
   def create  
-    # byebug
     @comment = current_user.comments.create!(comment_params)
-    render json: @comment, status: :created
-    # if params[:user_id]
-    #   @user = User.find_by_id(params[:user_id])
-    #   @comment = @user.comments.create!(comment_params)
-    #   render json: @comment, status: :created  
-    # else
-    #   render json: { message: "Not authorized!" }, status: :unauthorized
-    # end
+    render json: @comment, status: :created   
   end
 
   # PATCH /users/:user_id/comments/:id
   def update
-    # byebug
-    find_comment
+     find_comment
     if @comment.user_id == current_user.id
       @comment.update!(comment_params)
       render json: @comment, status: :accepted  

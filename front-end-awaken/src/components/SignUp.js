@@ -6,7 +6,6 @@ import Welcome from "../components/Welcome";
 import Body from "../components/Body";
 
 const SignUp = () => {
-  console.log("I'm in the SignUp Component")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -118,19 +117,18 @@ const SignUp = () => {
               </div>
             </div>
             <div className="form-group">
-              <div className="mb-3 input-group">
-                <span className="input-group-text">Bio</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Bio"
-                  aria-label="Bio"
-                  id="bio"
-                  value={bio}
-                  onChange={(e) => setBio(e.target.value)}
-                />
-              </div>
-            </div>
+          <div className="form-floating pb-3">       
+          <span className="input-group-text">Enter bio in text area below...</span>           
+            <textarea              
+              className="form-control text-dark text-justify" 
+              style={{height: '150px'}}
+              id="comment-textarea"
+              defaultValue={bio}
+              onChange={(e) => setBio(e.target.value)}
+            >
+            </textarea>
+          </div>
+        </div>
             <div className="text-center text-light fw-bolder pb-3">
               <Welcome />
               Please sign up for an account.

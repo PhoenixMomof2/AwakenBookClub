@@ -9,30 +9,31 @@ import { CommentProvider } from "../context/CommentContext";
 //static pages
 import Navbar from "../components/Navbar";
 import About from "../components/About";
-import Header from "../components/Header";
-import Home from "../components/Home";
-import Footer from "../components/Footer";
+import Header from "./Header";
+import Home from "./Home";
+import Footer from "./Footer";
+import NotFound from "./NotFound";
 
 //auth forms
-import SignUp from "../components/SignUp";
-import Login from "../components/Login";
+import SignUp from "./SignUp";
+import Login from "./Login";
 
 //dynamic pages
-import Profile from "../components/Profile";
-import ReaderForum from "../components/ReaderForum";
-import BookList from "../components/BookList";
-import BookDetails from "../components/BookDetails";
-import CommentList from "../components/CommentList";
-import CommentDetails from "../components/CommentDetails";
-import UserBookList from "../components/UserBookList";
-import NewBookForm from "../components/NewBookForm";
-import UserCommentList from "../components/UserCommentList";
-import NewCommentForm from "../components/NewCommentForm";
-import UpdateCommentForm from "../components/UpdateCommentForm";
+import Profile from "./Profile";
+import ReaderForum from "./ReaderForum";
+import BookList from "./BookList";
+import BookDetails from "./BookDetails";
+import CommentList from "./CommentList";
+import CommentDetails from "./CommentDetails";
+import UserBookList from "./UserBookList";
+import NewBookForm from "./NewBookForm";
+import UserCommentList from "./UserCommentList";
+import NewCommentForm from "./NewCommentForm";
+import UpdateCommentForm from "./UpdateCommentForm";
 
 const App = () => {
   return (
-    <div className="container-flex bg-danger">
+    <div className="container-flex bg-danger" style={{'paddingTop': '85px'}}>
       <UserProvider>
         <BookProvider>
           <CommentProvider>
@@ -54,6 +55,7 @@ const App = () => {
               <Route path="/users/:user_id/comments" element={<UserCommentList />} /> 
               <Route path="/users/:user_id/comments/new" element={<NewCommentForm />} />
               <Route path="/users/:user_id/comments/:id/edit" element={<UpdateCommentForm />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
           </CommentProvider>

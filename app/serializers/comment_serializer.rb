@@ -1,7 +1,6 @@
 class CommentSerializer < ActiveModel::Serializer
   attributes :id, :comment, :user_id, :book_id, :format_created_at_date, :format_updated_at_date, :book
 
-  # belongs_to :book
   belongs_to :user
 
   def format_created_at_date

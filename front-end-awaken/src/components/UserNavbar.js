@@ -13,7 +13,7 @@ const UserNavbar = () => {
   }
 
   return (
-    <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar nav-pills navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold text-secondary" to="/home">
           <i className="bi bi-unity"></i> AWAKEN - Social Justice Book Club

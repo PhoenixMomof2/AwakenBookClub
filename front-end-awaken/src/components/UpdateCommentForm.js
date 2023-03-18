@@ -33,11 +33,11 @@ const UpdateCommentForm = () => {
           .then((res) => { 
             if (res.ok) {
               res.json().then((updatedComment) => {
-                console.log(updatedComment, "res.ok")
+               
                 handleEditComment(updatedComment) // update comments state
-                console.log("after handleEditComment")
+              
                 handleEditUserComment(updatedComment) // update user comments state
-                console.log("after handleEditUserComment")
+               
                 navigate(`/users/${user.id}/comments`)
                 
               })
@@ -62,8 +62,7 @@ const UpdateCommentForm = () => {
   return (
     <div className="container-flex">
       <div className="row justify-content-center">
-      <div className="col-lg-6">
-        <form className="my-5 justify-content-center text-center bg-dark border-dark p-3" onSubmit={handleSubmit}>
+             <form className="my-5 justify-content-center text-center bg-dark border-dark p-3" onSubmit={handleSubmit}>
         <h4 className="bg-warning">Edit Comment</h4>
         <div className="form-group">
           <div className="justify-content-center pt-2 mb-3 input-group">
@@ -72,29 +71,24 @@ const UpdateCommentForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <div className="mb-3 input-group">
-            <span className="input-group-text">Comment</span>
-            <input
-              type="text"
-              className="form-control text-dark text-center"
-              id="update-book-id"
+          <div className="form-floating">                  
+            <textarea
+              className="form-control pt-2 text-dark text-justify" 
+              style={{height: '150px'}}
+              id="comment-textarea"
               defaultValue={comment}
               onChange={(e) => setComment(e.target.value)}
-            />
+            >
+            </textarea>
           </div>
         </div>
-          <input type="submit" className="btn bg-warning p-2 btn-outline-primary fw-bold" value="Submit" />
+          <input type="submit" className="btn bg-warning mt-3 btn-outline-primary fw-bold" value="Submit" />
           <div className="text-light">{errors}</div>
         </form>
       </div>
-    </div>
     <Body />
   </div>
   );
 };
 
 export default UpdateCommentForm
-
-
-
-

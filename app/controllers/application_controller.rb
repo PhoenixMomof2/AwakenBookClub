@@ -16,14 +16,6 @@ class ApplicationController < ActionController::API
     render json: { errors: ["Not Authorized"] }, status: :unauthorized unless @current_user
   end
 
-  # def authorized
-  #   if @current_user
-  #     render json: { errors: ["You are already logged in, please log out first."] }, status: :unauthorized if @current_user?
-  #   else
-  #     render json: { errors:  ["Whoops"] }
-  #   end
-  # end
-
   # Error handling methods
   def render_not_found_response
     render json: { errors:  ["Not found"] }, status: :not_found
