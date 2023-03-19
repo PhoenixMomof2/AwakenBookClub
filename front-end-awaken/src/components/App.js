@@ -12,7 +12,6 @@ import About from "../components/About";
 import Header from "./Header";
 import Home from "./Home";
 import Footer from "./Footer";
-import NotFound from "./NotFound";
 
 //auth forms
 import SignUp from "./SignUp";
@@ -54,8 +53,7 @@ const App = () => {
               <Route path="/users/:user_id/books/new" element={<NewBookForm />} />
               <Route path="/users/:user_id/comments" element={<UserCommentList />} /> 
               <Route path="/users/:user_id/comments/new" element={<NewCommentForm />} />
-              <Route path="/users/:user_id/comments/:id/edit" element={<UpdateCommentForm />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/users/:user_id/comments/:id/edit" element={<UpdateCommentForm />} />       
             </Routes>
             <Footer />
           </CommentProvider>
