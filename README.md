@@ -25,7 +25,7 @@ Open another terminal and in the project directory (front-end-awaken), you can r
 to get the front end going.
 
 ## App Demo
-[insert video link here]
+[https://youtu.be/myubSd26GxA]
 
 ## Blog
 [https://dev.to/phoenixmomof2/complex-state-management-22ae]
