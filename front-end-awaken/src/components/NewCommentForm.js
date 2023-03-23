@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useContext } from "react"; 
 import { useNavigate } from "react-router-dom";
-import { CommentContext } from "../context/CommentContext";
 import { UserContext } from "../context/UserContext";
+import { BookContext } from "../context/BookContext";
 
 const NewCommentForm = () => {
-  const navigate = useNavigate()
-  const { handleAddNewComment } = useContext(CommentContext) 
-  const { user, handleAddNewUserComment } = useContext(UserContext)
+  const navigate = useNavigate() 
+  const { user, handleAddNewUserComment, handleAddNewUserBookAfterNewComment } = useContext(UserContext)
+  const { books } = useContext(BookContext)
  
   const [comment, setComment] = useState("")
   const [book_id, setBook_Id] = useState("")
-  const [errors, setErrors] = useState("")
-
+  const [errors, setErrors] = useState("")     
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const newCommentData = {
       comment, 
       book_id, 
-      user_id: user.id
+      // user_id: user.id
     }
     
     //CREATE (POST REQUEST)
@@ -30,10 +30,24 @@ const NewCommentForm = () => {
       body: JSON.stringify(newCommentData),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((newComment) => {
-          handleAddNewComment(newComment) // update comments state
-          handleAddNewUserComment(newComment) // update user comments state
-          navigate(`/users/${user.id}/comments`)
+        res.json().then((newComment) => {  
+          console.log(newComment.book_id, "newComment's book_id")
+          const newBookToAdd = newComment.book
+          const newBookToAddToUser = user.books.find(book => book.id === newBookToAdd.id)
+          console.log(user, "user BEFORE book block evaluation ")
+          // debugger
+          if(!newBookToAddToUser){ 
+            console.log(user, "user INSIDE if block")    
+            console.log("The book does not exist.")
+            const updatedUserComments = [...user.comments, newComment]
+            const updatedBook = {...newBookToAdd, [user.comments]: updatedUserComments}
+            const updatedUserBooks = [...user.books, updatedBook]
+            handleAddNewUserBookAfterNewComment(updatedUserBooks, updatedUserComments, user) // update user comments state                      
+          } else {  
+            handleAddNewUserComment(newComment) // update user comments state
+            console.log(user, "Already a user book.")            
+          } 
+          navigate("/my_books")                        
         })        
       } else {
         res.json().then((errorData) => {
@@ -70,7 +84,7 @@ const NewCommentForm = () => {
               id="book_id"
               defaultValue={book_id}
               onChange={(e) => setBook_Id(e.target.value)} >
-              {user.books.map(book => (<option key={book.id} value={book.id}>{book.title}</option>))}
+              {books.map(book => (<option key={book.id} value={book.id}>{book.title}</option>))}
               </select>
             </span>              
               </div>   
@@ -106,3 +120,25 @@ const NewCommentForm = () => {
 };
 
 export default NewCommentForm;
+
+   // THIS FETCH ONLY HAPPENS IF THE BOOK DOES NOT ALREADY EXIST IN THE USER.BOOKS ARRAY
+          // fetch(`/users/${user.id}/comments`, {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify(newCommentData),
+          // }).then((res) => {
+          //   if (res.ok) {
+          //     res.json().then((newComment) => {
+          //       handleAddNewComment(newComment) // update comments state
+          //       handleAddNewUserComment(newComment) // update user comments state
+          //       navigate("/me")
+          //     })
+          //   } else {
+          //     res.json().then((errorData) => {
+          //       const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+          //       setErrors(errorLis);
+          //     })
+          //   }
+          // })

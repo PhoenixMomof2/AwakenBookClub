@@ -1,59 +1,40 @@
 class CommentsController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show]
+  before_action :authorize
   before_action :find_comment, only: [:update, :destroy]
 
-  # GET /comments or /users/:user_id/comments 
-  # conditional rendering using the params :user_id
-  def index
-    if params[:user_id]
-      @user = User.find_by_id(params[:user_id])
-      render json: @user.comments, status: :ok
-    else
-      render json: Comment.all, status: :ok
-    end
+  # GET /comments 
+  def index   
+      render json: current_user.comments, status: :ok    
   end
   
-  # GET /comments/:id
-  def show
-    @comment = find_comment
-    render json: @comment, status: :ok
-  end
-
-  # POST /users/:user_id/comments
+  # POST /comments
   def create  
     @comment = current_user.comments.create!(comment_params)
     render json: @comment, status: :created   
   end
+  # added include user
 
-  # PATCH /users/:user_id/comments/:id
-  def update
-     find_comment
-    if @comment.user_id == current_user.id
+  # PATCH /comments/:id
+  def update      
       @comment.update!(comment_params)
-      render json: @comment, status: :accepted  
-    else
-      render json: Comment.all, status: :unauthorized
-    end
+      render json: @comment, status: :accepted      
   end
 
-  # DELETE /users/:user_id/comments/:id
-  # because a comment belongs to a user, it's already associated
-  def destroy
-    find_comment
-    if @comment.user_id == current_user.id
+  # DELETE /comments/:id  
+  def destroy    
       @comment.destroy
       head :no_content
-    else
-      render json: { message: "You've been had!" }
-    end
   end
 
   private
   def comment_params
-    params.permit(:comment, :user_id, :book_id)
+    params.permit(:comment, :book_id)
   end
 
   def find_comment
-    @comment = Comment.find_by_id(params[:id])
+    @comment = current_user.comments.find_by_id(params[:id])
+    if !@comment
+      render json: { error: "Unauthorized" }
+    end
   end
 end

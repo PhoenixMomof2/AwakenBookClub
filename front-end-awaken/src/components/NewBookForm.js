@@ -7,7 +7,7 @@ import { CommentContext } from "../context/CommentContext";
 const NewBookForm = () => {
   const { handleAddNewBook } = useContext(BookContext)
   const { user, handleAddNewUserBook } = useContext(UserContext)
-  const { handleAddNewComment } = useContext(CommentContext) 
+  const { handleAddNewComment, handleAddNewUserComment } = useContext(CommentContext) 
   const navigate = useNavigate()
 
   const [title, setTitle] = useState("")
@@ -46,6 +46,7 @@ const NewBookForm = () => {
           
         handleAddNewBook(newBook) // update books state
         handleAddNewUserBook(newBook) // update user books state
+
         console.log(newBook)
 
         const newCommentData = {
@@ -64,7 +65,8 @@ const NewBookForm = () => {
           }).then((res) => {
             if (res.ok) {
               res.json().then((newComment) => {
-                handleAddNewComment(newComment)// update state
+                handleAddNewComment(newComment) // update comments state
+                handleAddNewUserComment(newComment) // update user comments state
                 navigate("/me")
               })
             } else {
@@ -173,15 +175,15 @@ const NewBookForm = () => {
             <div className="form-group">
               <div className="mb-3 input-group">
                 <span className="input-group-text">Content</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Content"
-                  aria-label="content"
-                  id="content"
+                <textarea
+                  className="form-control pt-2 text-dark text-justify" 
+                  placeholder="Enter content here..."
+                  style={{height: '150px'}}
+                  id="content-textarea"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                />
+                >
+                </textarea>                
               </div>
             </div>
             <h4 className="bg-warning">Add A Comment</h4>          

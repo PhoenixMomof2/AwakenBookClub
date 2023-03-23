@@ -51,7 +51,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
                 aria-current="page"
@@ -59,17 +59,17 @@ const Navbar = () => {
               >
                 Reader Forum
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link
                 className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
                 aria-current="page"
                 to="/books"
               >
-                Book List
+                All Books
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
                 aria-current="page"
@@ -77,7 +77,7 @@ const Navbar = () => {
               >
                 Comment List
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link
                 className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"

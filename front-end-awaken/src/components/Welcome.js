@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 const Welcome = () => {
-  const { user, loggedIn } = useContext(UserContext);
-  // console.log("I'm in the Welcome Component", user)
+  const { user, loggedIn } = useContext(UserContext) 
 
   if (!loggedIn) {
     return (

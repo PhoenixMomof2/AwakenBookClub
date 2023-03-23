@@ -28,7 +28,7 @@ const Login = () => {
           navigate("/me")
         });
       } else {
-        res.json().then((err) => {
+        res.json().then((err) => {          
           setErrors(err.errors)
         });
       }

@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 import Welcome from "../components/Welcome";
 
 const UserNavbar = () => {
-  const { logout, user } = useContext(UserContext)
+  const { logout } = useContext(UserContext)
 
   const logoutUser = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
@@ -58,7 +58,7 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to={`/users/${user.id}/books`}
+              to="/my_books"
             >
               My Books
             </Link>
@@ -67,7 +67,7 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to={`users/${user.id}/books/new`}
+              to="my_books/new"
             >
               Add A New Book
             </Link>
@@ -76,20 +76,11 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to={`users/${user.id}/comments/new`}
+              to="/comments/new"
             >
               Add A New Comment
             </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
-              aria-current="page"
-              to={`/users/${user.id}/comments`}
-            >
-              My Comments
-            </Link>
-          </li>
+          </li>          
           <li className="nav-item ">
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"

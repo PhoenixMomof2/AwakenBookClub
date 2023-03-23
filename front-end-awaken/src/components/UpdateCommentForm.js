@@ -21,7 +21,8 @@ const UpdateCommentForm = () => {
       comment,
     }
 
-    console.log(updateCommentData, "update comment form data before .then")
+    // console.log(updateCommentData, "update comment form data before .then")
+    
     //UPDATE (PATCH REQUEST)
     fetch(`/users/${user.id}/comments/${update.id}`, {
           method: "PATCH",
@@ -33,17 +34,13 @@ const UpdateCommentForm = () => {
           .then((res) => { 
             if (res.ok) {
               res.json().then((updatedComment) => {
-               
+                console.log(updatedComment, "updated comment")
                 handleEditComment(updatedComment) // update comments state
-              
                 handleEditUserComment(updatedComment) // update user comments state
-               
-                navigate(`/users/${user.id}/comments`)
-                
+                navigate("/my_books")
               })
             } else {
-              res.json().then((errorData) => {
-                // console.log(errorData.errors)
+              res.json().then((errorData) => {                
                 const errorLis = errorData.errors.full_messages.map((e, ind) => <li key={ind}>{e}</li>)
                 setErrors(errorLis)
               })

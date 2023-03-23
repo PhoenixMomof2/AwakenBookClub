@@ -19,14 +19,10 @@ import Login from "./Login";
 
 //dynamic pages
 import Profile from "./Profile";
-import ReaderForum from "./ReaderForum";
 import BookList from "./BookList";
 import BookDetails from "./BookDetails";
-import CommentList from "./CommentList";
-import CommentDetails from "./CommentDetails";
 import UserBookList from "./UserBookList";
 import NewBookForm from "./NewBookForm";
-import UserCommentList from "./UserCommentList";
 import NewCommentForm from "./NewCommentForm";
 import UpdateCommentForm from "./UpdateCommentForm";
 
@@ -40,20 +36,16 @@ const App = () => {
             <Header />
             <Routes>
               <Route path="/" element={<About />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/forum" element={<ReaderForum />} />
+              <Route path="/home" element={<Home />} />         
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/books" element={<BookList />} />
-              <Route path="/books/:id" element={<BookDetails />} />
-              <Route path="/comments" element={<CommentList />} />
-              <Route path="/comments/:id" element={<CommentDetails />} />
-              <Route path="/users/:user_id/books" element={<UserBookList />} />
-              <Route path="/users/:user_id/books/new" element={<NewBookForm />} />
-              <Route path="/users/:user_id/comments" element={<UserCommentList />} /> 
-              <Route path="/users/:user_id/comments/new" element={<NewCommentForm />} />
-              <Route path="/users/:user_id/comments/:id/edit" element={<UpdateCommentForm />} />       
+              <Route path="/books/:id" element={<BookDetails />} />          
+              <Route path="/my_books" element={<UserBookList />} />
+              <Route path="/my_books/new" element={<NewBookForm />} />    
+              <Route path="/comments/new" element={<NewCommentForm />} />
+              <Route path="/comments/:id/edit" element={<UpdateCommentForm />} />       
             </Routes>
             <Footer />
           </CommentProvider>

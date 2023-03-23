@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :comments
   has_many :books, -> { distinct }, through: :comments
-
+  
   #proc ->
   has_secure_password   
 end

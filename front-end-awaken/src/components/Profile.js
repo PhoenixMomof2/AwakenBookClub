@@ -2,10 +2,23 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import HoldHands from "../images/HoldHands.jpg";
+import { CommentContext } from "../context/CommentContext";
 
 const Profile = () => {
-  const { user } = useContext(UserContext)
- console.log(user)
+  const { user, loggedIn, handleDeleteUserComment } = useContext(UserContext);
+  const { handleDeleteComment } = useContext(CommentContext)
+
+  const handleDeleteClick = (id) => {
+    console.log("delete clicked")
+    fetch(`/users/${user.id}/comments/${id}`, {
+      method: "DELETE", 
+      }).then(() => {
+        handleDeleteComment(id)
+        handleDeleteUserComment(id)
+      })
+  }
+// IF COMMENT BELONGS TO USER THAT IS LOGGED IN, THE EDIT/DELETE BUTTON IS AVAILABLE
+ 
   return (
     <div className="container-flex bg-dark">
       <div className="container bg-dark border-bottom border-danger border-3">
@@ -53,40 +66,50 @@ const Profile = () => {
                   <h6 className="card-subtitle text-muted">Author: {book.author}</h6>
                   <p className="card-text text-warning fw-bold">Stars: {book.stars}</p>
                   <p className="card-text text-success fw-bold">Category: {book.category}</p>
-                  <p className="card-text text-light">{book.short_content}</p>
+                  <p className="card-text text-light">{book.content}</p>
                 </div>
                 <div>{book.comments.map(comment => (
                   <div className="col" key={comment.id}>
                     <div className="list-group py-3 bg-dark">
-                      <div className="list-group-item" key={comment.id}>  
-                      <small className="py-1 text-dark fst-italic">
-                        <i className="bi bi-calendar-plus text-secondary fw-bold"> </i>
-                        </small>   
-                        <p className="mb-1 text-dark px-2">{comment.comment}</p>                  
-                                              
+                      <div className="list-group-item" key={comment.id}>                        
+                        <p className="mb-1 text-dark px-2">{comment.comment}</p>    
                       </div>
-                    </div>
+                    </div>{ loggedIn ? (<div className="btn-group border fw-bold border-warning"> 
+                <Link
+                  className="btn btn-sm btn-dark text-center"
+                  aria-current="page"
+                  to={`/comments/${comment.id}/edit`}
+                >
+                  Edit
+                </Link>      
+                <Link
+                  className="btn btn-sm btn-danger text-center"
+                  aria-current="page"
+                  to="#"
+                  onClick={() => {handleDeleteClick(comment.id)}} 
+                >
+                  Delete
+                </Link>
+                <Link
+                  className="btn btn-sm btn-success text-center"
+                  aria-current="page"
+                  to="/comments/new"
+                >
+                  Add A New Comment
+                </Link>          
+                </div>  ) : (null) }
+                    
               </div>))}
-              </div>
-              <Link
-              className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1"
-              aria-current="page"
-              to={`/users/${user.id}/comments/new`}
-            >
-              Add A New Comment
-            </Link>
+              </div>              
               </div>))}
             </div>
         </div>
       </section>         
       <section className="container-fluid py-2">
-        <div className="container row text-center btn-group">
+        <div className="container row btn-group">
           <div className="container-fluid col text-center p-2">
-            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Books</Link>
-          </div>
-          <div className="container-fluid col text-center p-2">
-            <Link to="/comments" className="p-3 btn bg-black text-warning fw-bold text-center border-light border-1">All Comments</Link>
-          </div>
+            <Link to="/books" className="p-3 btn bg-black text-warning fw-bold border-light border-1">All Books</Link>
+          </div>                 
         </div>
       </section>
     </div>
