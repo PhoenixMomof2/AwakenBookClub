@@ -19,10 +19,16 @@ class BooksController < ApplicationController
 
   # POST /books 
   def create
-      @book = Book.create!(book_params)
-      render json: @book, status: :created
+    @book = Book.create!(book_params)
+    render json: @book, status: :created
   end
 
+  # PATCH /books/:id
+  def update      
+    @book.update!(book_params)
+    render json: @comment, status: :accepted      
+  end
+  
   private
   def book_params
     params.permit(:title, :book_img, :author, :stars, :category, :content)

@@ -18,7 +18,7 @@ const NewCommentForm = () => {
     const newCommentData = {
       comment, 
       book_id, 
-      // user_id: user.id
+      user_id: user.id
     }
     
     //CREATE (POST REQUEST)
@@ -32,18 +32,21 @@ const NewCommentForm = () => {
       if (res.ok) {
         res.json().then((newComment) => {  
           console.log(newComment.book_id, "newComment's book_id")
-          const newBookToAdd = newComment.book
+          const thisBook = newComment.book
+          const newBookToAdd = books.find(book => book.id === thisBook.id)
           const newBookToAddToUser = user.books.find(book => book.id === newBookToAdd.id)
-          console.log(user, "user BEFORE book block evaluation ")
+          const updatedUserComments = [...newBookToAdd.comments, newComment]
+          const updatedBook = {...newBookToAdd, comments: updatedUserComments}
+          const updatedUserBooks = [...user.books, updatedBook]
           // debugger
           if(!newBookToAddToUser){ 
-            console.log(user, "user INSIDE if block")    
-            console.log("The book does not exist.")
-            const updatedUserComments = [...user.comments, newComment]
-            const updatedBook = {...newBookToAdd, [user.comments]: updatedUserComments}
-            const updatedUserBooks = [...user.books, updatedBook]
-            handleAddNewUserBookAfterNewComment(updatedUserBooks, updatedUserComments, user) // update user comments state                      
+            console.log(user, "The book does not exist.")    
+            // const updatedUserComments = [...newBookToAdd.comments, newComment]
+            // const updatedBook = {...newBookToAdd, comments: updatedUserComments}
+            
+            handleAddNewUserBookAfterNewComment(updatedUserBooks) // update user comments state                      
           } else {  
+            // just update the books for the user          
             handleAddNewUserComment(newComment) // update user comments state
             console.log(user, "Already a user book.")            
           } 
@@ -120,25 +123,3 @@ const NewCommentForm = () => {
 };
 
 export default NewCommentForm;
-
-   // THIS FETCH ONLY HAPPENS IF THE BOOK DOES NOT ALREADY EXIST IN THE USER.BOOKS ARRAY
-          // fetch(`/users/${user.id}/comments`, {
-          //   method: "POST",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          //   body: JSON.stringify(newCommentData),
-          // }).then((res) => {
-          //   if (res.ok) {
-          //     res.json().then((newComment) => {
-          //       handleAddNewComment(newComment) // update comments state
-          //       handleAddNewUserComment(newComment) // update user comments state
-          //       navigate("/me")
-          //     })
-          //   } else {
-          //     res.json().then((errorData) => {
-          //       const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-          //       setErrors(errorLis);
-          //     })
-          //   }
-          // })

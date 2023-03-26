@@ -2,12 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookContext } from "../context/BookContext";
 import { UserContext } from "../context/UserContext";
-import { CommentContext } from "../context/CommentContext";
 
 const NewBookForm = () => {
   const { handleAddNewBook } = useContext(BookContext)
-  const { user, handleAddNewUserBook } = useContext(UserContext)
-  const { handleAddNewComment, handleAddNewUserComment } = useContext(CommentContext) 
+  const { user, handleAddNewUserComment } = useContext(UserContext)
   const navigate = useNavigate()
 
   const [title, setTitle] = useState("")
@@ -20,7 +18,7 @@ const NewBookForm = () => {
   const [comment, setComment] = useState("")
   // const [username, setUsername] = useState(user.username)
   const [errors, setErrors] = useState("")
-
+// debugger
   const handleSubmit = (e) => {
     e.preventDefault()
     
@@ -43,11 +41,7 @@ const NewBookForm = () => {
     })
     .then((res) => res.json())
     .then((newBook) => {
-          
-        handleAddNewBook(newBook) // update books state
-        handleAddNewUserBook(newBook) // update user books state
-
-        console.log(newBook)
+      handleAddNewBook(newBook)
 
         const newCommentData = {
           comment,
@@ -64,9 +58,11 @@ const NewBookForm = () => {
             body: JSON.stringify(newCommentData),
           }).then((res) => {
             if (res.ok) {
-              res.json().then((newComment) => {
-                handleAddNewComment(newComment) // update comments state
-                handleAddNewUserComment(newComment) // update user comments state
+              res.json().then((newComment) => { 
+                const updatedUserComments = [...newBook.comments, newComment]
+                const updatedBook = {...newBook, comments: updatedUserComments}
+                const updatedUserBooks = [...user.books, updatedBook]
+                handleAddNewUserComment(updatedUserBooks)             
                 navigate("/me")
               })
             } else {

@@ -1,20 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 import HoldHands from "../images/HoldHands.jpg";
-import { CommentContext } from "../context/CommentContext";
+import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
-  const { user, loggedIn, handleDeleteUserComment } = useContext(UserContext);
-  const { handleDeleteComment } = useContext(CommentContext)
+  const { user, handleDeleteUserComment } = useContext(UserContext)
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = (comment) => {
     console.log("delete clicked")
-    fetch(`/users/${user.id}/comments/${id}`, {
+    fetch(`/users/${user.id}/books/${comment.id}`, {
       method: "DELETE", 
       }).then(() => {
-        handleDeleteComment(id)
-        handleDeleteUserComment(id)
+        handleDeleteUserComment(comment)
       })
   }
 // IF COMMENT BELONGS TO USER THAT IS LOGGED IN, THE EDIT/DELETE BUTTON IS AVAILABLE
@@ -74,20 +71,19 @@ const Profile = () => {
                       <div className="list-group-item" key={comment.id}>                        
                         <p className="mb-1 text-dark px-2">{comment.comment}</p>    
                       </div>
-                    </div>{ loggedIn ? (<div className="btn-group border fw-bold border-warning"> 
+                    </div>
+                    <div className="btn-group border fw-bold border-warning"> 
                 <Link
                   className="btn btn-sm btn-dark text-center"
                   aria-current="page"
-                  to={`/comments/${comment.id}/edit`}
+                  to={`/my_books/${book.id}/edit`}
                 >
                   Edit
                 </Link>      
                 <Link
                   className="btn btn-sm btn-danger text-center"
-                  aria-current="page"
                   to="#"
-                  onClick={() => {handleDeleteClick(comment.id)}} 
-                >
+                  onClick={() => {handleDeleteClick(comment)}}> 
                   Delete
                 </Link>
                 <Link
@@ -97,7 +93,7 @@ const Profile = () => {
                 >
                   Add A New Comment
                 </Link>          
-                </div>  ) : (null) }
+                </div> 
                     
               </div>))}
               </div>              

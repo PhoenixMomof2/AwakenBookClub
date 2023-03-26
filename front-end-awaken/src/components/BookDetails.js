@@ -8,7 +8,6 @@ const BookDetails = () => {
   const { loggedIn }  = useContext(UserContext)
   const { id } = useParams()
   const getBook = books.find(book => book.id === parseInt(id))
-  console.log(getBook)
  
    return (
    <React.Fragment>

@@ -1,5 +1,6 @@
 // src/context/UserContext.js
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { BookContext } from "../context/BookContext";
 
 // Create context
 const UserContext = createContext()
@@ -10,6 +11,7 @@ function UserProvider({ children }) {
   const [user, setUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false)
   const [errors, setErrors] = useState([])
+  const books = useContext(BookContext)
 
   useEffect(() => {
     fetch("/me")
@@ -32,37 +34,46 @@ function UserProvider({ children }) {
 
   // Updating user books state to add new book.
   const handleAddNewUserBook = (newBook) => {
-    setUser({ ...user, books: [...user.books, newBook] })
+    setUser({ ...user, books: [...books, newBook] })
   }
 
   // Updating user comments state to add new comment. 
-  const handleAddNewUserComment = (newComment) => {    
-    setUser({ ...user, comments: [...user.comments, newComment] })
-    console.log(user, "book already exist context")
+  const handleAddNewUserComment = (updatedUserBooks) => {
+    // setUser({ ...user, books: [...books, newBook] })
+    const updatedUser = {...user, books: updatedUserBooks}    
+    setUser(updatedUser)
+    console.log(updatedUser, "She did that! -else")
   }
 
   // Updating user state after a user comments on a book not associated with them yet.
-  const handleAddNewUserBookAfterNewComment = (updatedUserBooks, updatedUserComments, user) => {
-    console.log("UPDATED_USER_BOOKS", updatedUserBooks, "UPDATED_USER_COMMENTS", updatedUserComments)
-    const updatedUser = {...user, books: updatedUserBooks, comments: updatedUserComments}
+  const handleAddNewUserBookAfterNewComment = (updatedUserBooks) => {  
+    const updatedUser = {...user, books: updatedUserBooks}
     setUser(updatedUser)
-    console.log(updatedUser, "UPDATED_USER ... She did that!")    
+    console.log(updatedUser, "She did that! -if")    
   }
 
   // Updating user comments state after editing a comment.
-  const handleEditUserComment = (update) => {
-    const updatedComments = user.comments.map((comment) =>
-      comment.id === update.id ? update : comment
-    );
-    setUser({ ...user, comments: updatedComments });
+  const handleEditUserComment = (updatedComments) => {
+    // const book = user.books.find(book => book.id === updatedComment.book_id)
+    // const updatedComments = book.comments.map((c) =>
+    //   c.id === updatedComment.id ? updatedComment : c
+    // );
+    // setUser({ ...user, books: {...books, comments: updatedComments }});
+    const updatedUser = {...user, comments: updatedComments}
+    setUser(updatedUser)
   };
-
+  
   // Updating user comments state after deleting a comment.
-  const handleDeleteUserComment = (id) => {
-    const filteredComments = user.comments.filter(
-      (comment) => comment.id !== id
-    );
-    setUser({ ...user, comments: filteredComments });
+  const handleDeleteUserComment = (deletedComment) => {
+    const book = user.books.find(book => book.id === deletedComment.book_id)
+    const updatedBook = {...book, comments: book.comments.filter(
+        (c) => c.id !== deletedComment.id
+      )}
+    const updatedBooks = user.books.map((book) =>
+       book.id === updatedBook.id ? updatedBook : book
+     )
+// debugger
+    setUser({ ...user, books: updatedBooks });
   };
 
   const login = (user) => {
@@ -92,9 +103,9 @@ function UserProvider({ children }) {
         setErrors,
         errors,
         handleAddNewUserBook,
-        handleAddNewUserComment,
-        handleDeleteUserComment,
+        handleAddNewUserComment,        
         handleEditUserComment,
+        handleDeleteUserComment,
         handleAddNewUserBookAfterNewComment        
       }}
     >

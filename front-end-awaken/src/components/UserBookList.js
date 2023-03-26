@@ -1,20 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { CommentContext } from "../context/CommentContext";
 
 const UserBookList = () => {
   const { user, handleDeleteUserComment } = useContext(UserContext);
-  const { handleDeleteComment } = useContext(CommentContext)
-  // debugger
-  const handleDeleteClick = (id) => {
-    fetch(`/users/${user.id}/comments/${id}`, {
+  
+  const handleDeleteClick = (comment) => {
+    console.log(comment, "delete clicked in userbooklist")
+    fetch(`/users/${user.id}/books/${comment.id}`, {
       method: "DELETE", 
       }).then(() => {
-        handleDeleteComment(id)
-        handleDeleteUserComment(id)
+        handleDeleteUserComment(comment)
       })
   }
+
   return (
     <div className="container-xl bg-danger">
       {user.books.map((book) =>
@@ -49,18 +48,16 @@ const UserBookList = () => {
                 <Link
                   className="btn btn-sm btn-dark text-center"
                   aria-current="page"
-                  to={`/comments/${comment.id}/edit`}
+                  to={`/my_books/${book.id}/edit`}
                 >
                   Edit
                 </Link>      
                 <Link
                   className="btn btn-sm btn-danger text-center"
-                  aria-current="page"
                   to="#"
-                  onClick={() => {handleDeleteClick(comment.id)}} 
-                >
+                  onClick={() => {handleDeleteClick(comment)}}> 
                   Delete
-                </Link>
+                </Link>    
                 <Link
                   className="btn btn-sm btn-success text-center"
                   aria-current="page"

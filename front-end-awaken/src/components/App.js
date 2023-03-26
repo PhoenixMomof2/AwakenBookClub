@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 //context
 import { UserProvider } from "../context/UserContext";
 import { BookProvider } from "../context/BookContext";
-import { CommentProvider } from "../context/CommentContext";
 
 //static pages
 import Navbar from "../components/Navbar";
@@ -30,8 +29,7 @@ const App = () => {
   return (
     <div className="container-flex bg-danger" style={{'paddingTop': '85px'}}>
       <UserProvider>
-        <BookProvider>
-          <CommentProvider>
+        <BookProvider>         
             <Navbar />
             <Header />
             <Routes>
@@ -42,13 +40,12 @@ const App = () => {
               <Route path="/me" element={<Profile />} />
               <Route path="/books" element={<BookList />} />
               <Route path="/books/:id" element={<BookDetails />} />          
+              <Route path="/books/new" element={<NewBookForm />} />    
               <Route path="/my_books" element={<UserBookList />} />
-              <Route path="/my_books/new" element={<NewBookForm />} />    
               <Route path="/comments/new" element={<NewCommentForm />} />
-              <Route path="/comments/:id/edit" element={<UpdateCommentForm />} />       
+              <Route path="/my_books/:id/edit" element={<UpdateCommentForm />} />       
             </Routes>
-            <Footer />
-          </CommentProvider>
+            <Footer />         
         </BookProvider>
       </UserProvider>
     </div>

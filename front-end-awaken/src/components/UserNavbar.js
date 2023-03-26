@@ -67,7 +67,7 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to="my_books/new"
+              to="/books/new"
             >
               Add A New Book
             </Link>

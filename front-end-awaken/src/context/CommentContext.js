@@ -26,20 +26,20 @@ const [errors, setErrors] = useState([])
   // }
 
   // Updating comments state after a user edits a comment
-  const handleEditComment = (updatedComment) => {
-    console.log(updatedComment, "handleEditComment")
-    const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
-    setComments(updatedComments);
-  }
+  // const handleEditComment = (updatedComment) => {
+  //   console.log(updatedComment, "handleEditComment")
+  //   const updatedComments = comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment))
+  //   setComments(updatedComments);
+  // }
 
-  // Updating comments state after a user deletes a comment
-  const handleDeleteComment = (deletedComment) => {  
-    const filteredComments = comments.filter(comment => comment.id !== deletedComment)
-    setComments(filteredComments)
-  }
+  // // Updating comments state after a user deletes a comment
+  // const handleDeleteComment = (deletedComment) => {  
+  //   const filteredComments = comments.filter(comment => comment.id !== deletedComment)
+  //   setComments(filteredComments)
+  // }
 
   return (
-    <CommentContext.Provider value={{ comments, handleEditComment, handleDeleteComment, errors, setErrors }}>
+    <CommentContext.Provider value={{comments, setErrors, errors}}>
       {children}
     </CommentContext.Provider>
   )
