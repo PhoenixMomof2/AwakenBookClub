@@ -22,12 +22,6 @@ class BooksController < ApplicationController
     @book = Book.create!(book_params)
     render json: @book, status: :created
   end
-
-  # PATCH /books/:id
-  def update      
-    @book.update!(book_params)
-    render json: @comment, status: :accepted      
-  end
   
   private
   def book_params

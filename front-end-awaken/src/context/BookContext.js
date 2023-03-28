@@ -23,8 +23,13 @@ const BookProvider = ({ children }) => {
     setBooks([...books, newBook]);
   };
 
+  const handleUpdateBookComments = (updatedBook) => {
+    const updatedBooks = books.map(book => book.id === updatedBook.id ? updatedBook : book)
+    setBooks(updatedBooks);
+  }
+
   return (
-    <BookContext.Provider value={{ books, handleAddNewBook }}>
+    <BookContext.Provider value={{ books, handleAddNewBook, handleUpdateBookComments }}>
       {children}
     </BookContext.Provider>
   );

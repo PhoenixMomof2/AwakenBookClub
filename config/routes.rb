@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     
   # Custom User Routes
   resources :users, only: [:index , :show] do 
-    resources :books
+    resources :books 
     resources :comments
   end
  

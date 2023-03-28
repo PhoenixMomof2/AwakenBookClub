@@ -38,29 +38,22 @@ function UserProvider({ children }) {
   }
 
   // Updating user comments state to add new comment. 
-  const handleAddNewUserComment = (updatedUserBooks) => {
-    // setUser({ ...user, books: [...books, newBook] })
-    const updatedUser = {...user, books: updatedUserBooks}    
+  const handleAddNewUserComment = (updatedUser) => {  
     setUser(updatedUser)
-    console.log(updatedUser, "She did that! -else")
+    console.log(updatedUser, "User update from -else block")
   }
 
   // Updating user state after a user comments on a book not associated with them yet.
   const handleAddNewUserBookAfterNewComment = (updatedUserBooks) => {  
     const updatedUser = {...user, books: updatedUserBooks}
     setUser(updatedUser)
-    console.log(updatedUser, "She did that! -if")    
+    console.log(updatedUser, "User update from -if block")    
   }
 
   // Updating user comments state after editing a comment.
-  const handleEditUserComment = (updatedComments) => {
-    // const book = user.books.find(book => book.id === updatedComment.book_id)
-    // const updatedComments = book.comments.map((c) =>
-    //   c.id === updatedComment.id ? updatedComment : c
-    // );
-    // setUser({ ...user, books: {...books, comments: updatedComments }});
-    const updatedUser = {...user, comments: updatedComments}
+  const handleEditUserComment = (updatedUser) => {
     setUser(updatedUser)
+    console.log(updatedUser, "user")
   };
   
   // Updating user comments state after deleting a comment.
@@ -72,7 +65,6 @@ function UserProvider({ children }) {
     const updatedBooks = user.books.map((book) =>
        book.id === updatedBook.id ? updatedBook : book
      )
-// debugger
     setUser({ ...user, books: updatedBooks });
   };
 
@@ -115,5 +107,3 @@ function UserProvider({ children }) {
 }
 
 export { UserContext, UserProvider };
-
-//add the 

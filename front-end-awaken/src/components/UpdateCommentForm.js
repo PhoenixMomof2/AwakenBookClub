@@ -1,22 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Body from "../components/Body";
-// import { CommentContext } from "../context/CommentContext";
 import { BookContext } from "../context/BookContext";
 
 const UpdateCommentForm = () => {
   const navigate = useNavigate()  
   const { id } = useParams()
+  let { state } = useLocation()
+  
   const { user, handleEditUserComment } = useContext(UserContext)
+  const {handleUpdateBookComments} = useContext(BookContext)
   const { books } = useContext(BookContext)   
   const getBook = books.find(book => book.id === parseInt(id))
   const bookToEdit = user.books.find(book => book.id === getBook.id)
-  const commentToEdit = bookToEdit.comments.find(comment => comment.book_id === bookToEdit.id)
-      
+  // debugger
+  const commentToEdit = state.comment
   const [comment, setComment] = useState(commentToEdit.comment)
   const [errors, setErrors] = useState([])
-  
+
   const handleSubmit = (e) => {
     e.preventDefault()
     
@@ -25,7 +27,7 @@ const UpdateCommentForm = () => {
     }
     
     //UPDATE (PATCH REQUEST)
-    fetch(`/my_books/${commentToEdit.id}`, {
+    fetch(`/users/${user.id}/comments/${commentToEdit.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -34,18 +36,24 @@ const UpdateCommentForm = () => {
     }).then((res) => { 
       if (res.ok) {
         res.json().then((edit) => {   
-              const updatedUserComments = bookToEdit.comments.map((c) => c.id === edit.id ? edit : c)
-              const updatedBook = {...bookToEdit, comments: updatedUserComments}
-              const updatedUserBooks = [...user.books, updatedBook]
-              debugger
-              handleEditUserComment(updatedUserBooks) // update user book comments state                 
-              navigate("/my_books")
+              console.log(edit)
+              // 1- update user comments
+              // 2- update user books
+              // 3- update book comments
+              
+              const updatedBookComments = bookToEdit.comments.map((comment) => comment.id === edit.id ? edit : comment) // update book comments
+              const updatedBook = {...getBook, comments: updatedBookComments} // update book
+              const newUserBooks = user.books.map((b) => b.id === updatedBook.id ? updatedBook : b)
+              const updatedUser = {...user, books: newUserBooks} // update user
+              handleEditUserComment(updatedUser) // update user books       
+              handleUpdateBookComments(updatedBook) // update books state
+              navigate("/me")
               })
             } else {
               res.json().then((errorData) => {            
-                console.log(errorData.message)    
-                // const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
-                // setErrors(errorLis)
+                const errorLis = errorData.errors.map((e, ind) => <li key={ind}>{e}</li>)
+                setErrors(errorLis)
+                console.log(errorData.errors)    
               })
             }
           })          

@@ -7,10 +7,10 @@ const NewCommentForm = () => {
   const navigate = useNavigate();
   const { user, handleAddNewUserComment, handleAddNewUserBookAfterNewComment } =
     useContext(UserContext);
-  const { books } = useContext(BookContext);
+  const { books, handleUpdateBookComments } = useContext(BookContext);
 
   const [comment, setComment] = useState("");
-  const [book_id, setBook_Id] = useState("");
+  const [book_id, setBook_Id] = useState(books[0].id);
   const [errors, setErrors] = useState("");
 
   const handleSubmit = (e) => {
@@ -32,39 +32,45 @@ const NewCommentForm = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((newComment) => {
-          console.log(newComment.book_id, "newComment's book_id");
-          const thisBook = newComment.book;
-          const newBookToAdd = books.find((book) => book.id === thisBook.id);
+          console.log(newComment.book_id, "newComment's book_id")
+          const thisBook = newComment.book
+          const newBookToAdd = books.find((book) => book.id === thisBook.id)
           const newBookToAddToUser = user.books.find(
             (book) => book.id === newBookToAdd.id
           );
-          const updatedUserComments = [...newBookToAdd.comments, newComment];
+          const updatedBookComments = [...newBookToAdd.comments, newComment]        
           const updatedBook = {
             ...newBookToAdd,
-            comments: updatedUserComments,
+            comments: updatedBookComments,
           };
-          const updatedUserBooks = [...user.books, updatedBook];
-          // debugger
+          
           if (!newBookToAddToUser) {
-            console.log(user, "The book does not exist.");
-            // const updatedUserComments = [...newBookToAdd.comments, newComment]
-            // const updatedBook = {...newBookToAdd, comments: updatedUserComments}
-
-            handleAddNewUserBookAfterNewComment(updatedUserBooks); // update user comments state
+            console.log(user, "The book does not exist.")
+            const updatedBookUsers = [...updatedBook.users, user]
+            const updatedBook2 = {...updatedBook, users: updatedBookUsers}
+            const updatedUserBooks = [...user.books, updatedBook2]
+            handleAddNewUserBookAfterNewComment(updatedUserBooks) // update user comments state
+            handleUpdateBookComments(updatedBook2) // update books state                      
           } else {
-            // just update the books for the user
-            handleAddNewUserComment(newComment); // update user comments state
-            console.log(user, "Already a user book.");
+            console.log(user, "Already a user book.")
+            // comments are in 3 places (book.comments, user.comments, user.book.comments)            
+            const bookToAddCommentTo = books.find((book) => book.id === thisBook.id) //get book
+            const updatedComments = [...bookToAddCommentTo.comments, newComment]  // update book comments
+            const updatedBook2 = {...bookToAddCommentTo, comments: updatedComments} // update book
+            const newUserBooks = user.books.map((b) => b.id === updatedBook2.id ? updatedBook2 : b) // update user.books            
+            const updatedUser = {...user, books: newUserBooks}; //update User
+            handleAddNewUserComment(updatedUser) // update user books
+            handleUpdateBookComments(updatedBook2) // update books state
           }
-          navigate("/my_books");
+          navigate("/me")
         });
       } else {
         res.json().then((errorData) => {
           const errorLis = errorData.errors.map((e, ind) => (
             <li key={ind}>{e}</li>
           ));
-          setErrors(errorLis);
-        });
+          setErrors(errorLis)
+        })
       }
     });
     // clear form

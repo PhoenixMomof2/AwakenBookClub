@@ -1,10 +1,15 @@
 class CommentsController < ApplicationController
   before_action :authorize
-  before_action :find_comment, only: [:update, :destroy]
+  before_action :find_comment, only: [:show, :update, :destroy]
 
   # GET /comments 
   def index   
       render json: current_user.comments, status: :ok    
+  end
+  
+  # GET /comments/:id
+  def index
+    render json: @comment, status: :ok    
   end
   
   # POST /comments
@@ -12,8 +17,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.create!(comment_params)
     render json: @comment, status: :created   
   end
-  # added include user
-
+  
   # PATCH /comments/:id
   def update      
       @comment.update!(comment_params)
