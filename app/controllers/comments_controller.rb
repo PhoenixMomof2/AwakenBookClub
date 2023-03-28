@@ -4,11 +4,12 @@ class CommentsController < ApplicationController
 
   # GET /comments 
   def index   
-      render json: current_user.comments, status: :ok    
+      # render json: current_user.comments, status: :ok   
+      render json: Comment.all 
   end
   
   # GET /comments/:id
-  def index
+  def show
     render json: @comment, status: :ok    
   end
   
