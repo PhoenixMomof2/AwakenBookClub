@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show, :comments_by_category]
   
   # GET /books
   def index
@@ -22,7 +22,16 @@ class BooksController < ApplicationController
     @book = Book.create!(book_params)
     render json: @book, status: :created
   end
-  
+
+  # Write a custom route that takes in a word or a string and then renders 
+  # json of all the users who have left comments on books that belong to that category. 
+  # If there are no matches no books that have that category render json that says so.
+  # def comments_by_category      
+  #   byebug
+  #   comments = Book.all.filter { |b| b.category = params[:category] }
+  #   render json: comments
+  # end
+
   private
   def book_params
     params.permit(:title, :book_img, :author, :stars, :category, :content)

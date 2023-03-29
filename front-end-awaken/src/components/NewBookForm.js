@@ -62,7 +62,9 @@ const NewBookForm = () => {
                 const updatedUserComments = [...newBook.comments, newComment]
                 const updatedBook = {...newBook, comments: updatedUserComments}
                 const updatedUserBooks = [...user.books, updatedBook]
-                handleAddNewUserComment(updatedUserBooks)             
+                const updatedUser = {...user, books: updatedUserBooks}
+                // debugger
+                handleAddNewUserComment(updatedUser)             
                 navigate("/me")
               })
             } else {

@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import HoldHands from "../images/HoldHands.jpg";
 import { UserContext } from "../context/UserContext";
+import { BookContext } from "../context/BookContext";
 
 const Profile = () => {
   const { user, handleDeleteUserComment } = useContext(UserContext);
+  const { handleDeleteBookComment } = useContext(BookContext);
 
   const handleDeleteClick = (comment) => {
     fetch(`/users/${user.id}/comments/${comment.id}`, {
       method: "DELETE",
     }).then(() => {
-      handleDeleteUserComment(comment);
+      handleDeleteUserComment(comment)
+      handleDeleteBookComment(comment)
     });
   };
 

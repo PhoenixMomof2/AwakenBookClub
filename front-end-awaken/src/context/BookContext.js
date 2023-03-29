@@ -27,9 +27,17 @@ const BookProvider = ({ children }) => {
     const updatedBooks = books.map(book => book.id === updatedBook.id ? updatedBook : book)
     setBooks(updatedBooks);
   }
+  const handleDeleteBookComment = (deletedComment) => {
+    const updatedBook = books.find(book => book.id === deletedComment.book_id)
+    const updatedBookComments = updatedBook.comments.filter((c) => c.id !== deletedComment.id)
+    const updatedBook2 = {...updatedBook, comments: updatedBookComments}
+    const updatedBooks = books.map((book) => book.id === updatedBook2.id ? updatedBook2 : book)
+    setBooks(updatedBooks);
+    console.log(updatedBook2, "check to see if comment is gone")
+  }
 
   return (
-    <BookContext.Provider value={{ books, handleAddNewBook, handleUpdateBookComments }}>
+    <BookContext.Provider value={{ books, handleAddNewBook, handleUpdateBookComments, handleDeleteBookComment }}>
       {children}
     </BookContext.Provider>
   );
