@@ -11,6 +11,15 @@ class UsersController < ApplicationController
   def show
     render json: current_user, status: :ok
   end
+  
+  # Write a custom route that takes in a word or a string and then renders 
+  # json of all the users who have left comments on books that belong to that category. 
+  # If there are no matches no books that have that category render json that says so.
+  # def comments_by_category      
+  #   byebug
+  #   comments = Book.all.filter { |b| b.category = params[:category] }
+  #   render json: comments
+  # end
 
   def index
     render json: User.all, status: :ok

@@ -17,6 +17,8 @@ const Profile = () => {
     });
   };
 
+  console.log(user)
+
   return (
     <div className="container-flex bg-dark">
       <div className="container bg-dark border-bottom border-danger border-3">
@@ -87,13 +89,13 @@ const Profile = () => {
                       Preview: {book.content}
                     </p>
                     <div className="text-light text-center">
-                      {book.comments.map((comment) => (
+                      {book.user_comments.map((comment) => (
                         <div key={comment.id}>
                           <div className="list-group p-2 bg-dark my-1">
                             <div className="list-group-item">
                               <h6 className="text-success fst-italic">
-                                <i className="bi bi-chat-quote-fill"></i>Posted:{" "}
-                                {comment.created_at}
+                                <i className="bi bi-chat-quote-fill"></i>
+                                {comment.username}
                               </h6>
                               <p className="mb-1 text-dark px-2">
                                 {comment.comment}
@@ -107,6 +109,8 @@ const Profile = () => {
                             </div>
                           </div>
                           <div className="btn-group border mx-2 fw-bold border-warning">
+                          {user.username === comment.username ? (
+                          <>
                             <Link
                               className="btn btn-sm btn-dark text-center"
                               aria-current="page" 
@@ -131,6 +135,8 @@ const Profile = () => {
                             >
                               Add A New Comment
                             </Link>
+                            </>
+                      ) : null}
                           </div>
                         </div>
                       ))}

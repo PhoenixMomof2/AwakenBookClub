@@ -21,7 +21,7 @@ const BookDetails = () => {
               <p className="card-text text-warning fw-bold">Stars: {getBook.stars}</p>
               <p className="card-text text-success fw-bold">Category: {getBook.category}</p>
               <p className="card-text text-light">{getBook.content}</p>
-              {getBook.comments.map((comment) => (           
+              {getBook.user_comments.map((comment) => (           
               <div  key={comment.id} className="text-center">
               <div className="list-group p-2 bg-dark my-1">
                 <div className="list-group-item">       

@@ -21,16 +21,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.create!(book_params)
     render json: @book, status: :created
-  end
-
-  # Write a custom route that takes in a word or a string and then renders 
-  # json of all the users who have left comments on books that belong to that category. 
-  # If there are no matches no books that have that category render json that says so.
-  # def comments_by_category      
-  #   byebug
-  #   comments = Book.all.filter { |b| b.category = params[:category] }
-  #   render json: comments
-  # end
+  end 
 
   private
   def book_params

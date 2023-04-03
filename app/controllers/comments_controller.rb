@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :authorize
   before_action :find_comment, only: [:show, :update, :destroy]
 
   # GET /comments 

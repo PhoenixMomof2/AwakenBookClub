@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :comments
   end
  
-  get "/comments_by_category", to: "books#comments_by_category"
+  get "/users/:id/comments_by_category", to: "users#comments_by_category"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

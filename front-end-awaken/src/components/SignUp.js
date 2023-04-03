@@ -66,8 +66,8 @@ const SignUp = () => {
                 <input
                   type="text"
                   className="form-control text-center"
-                  placeholder="Enter Username"
                   aria-label="Username"
+                  placeholder="Enter Username"
                   id="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
