@@ -17,7 +17,6 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 
 //dynamic pages
-import Profile from "./Profile";
 import BookList from "./BookList";
 import BookDetails from "./BookDetails";
 import UserBookList from "./UserBookList";
@@ -33,11 +32,10 @@ const App = () => {
             <Navbar />
             <Header />
             <Routes>
-              <Route path="/" element={<About />} />
+              <Route path="*" element={<About />} />
               <Route path="/home" element={<Home />} />         
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/me" element={<Profile />} />
               <Route path="/books" element={<BookList />} />
               <Route path="/books/:id" element={<BookDetails />} />          
               <Route path="/books/new" element={<NewBookForm />} />    

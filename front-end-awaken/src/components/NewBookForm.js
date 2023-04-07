@@ -32,7 +32,7 @@ const NewBookForm = () => {
     }
     
     // CREATE (POST REQUEST BOOK)
-    fetch(`/users/${user.id}/books`, {
+    fetch(`/books`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,12 +41,12 @@ const NewBookForm = () => {
     })
     .then((res) => res.json())
     .then((newBook) => {
-      handleAddNewBook(newBook)
+      handleAddNewBook(newBook) // update books state
 
         const newCommentData = {
           comment,
           user_id: user.id,
-          book_id: newBook.id
+          // book_id: newBook.id
         }
         
         //CREATE (POST REQUEST COMMENT)
@@ -59,11 +59,20 @@ const NewBookForm = () => {
           }).then((res) => {
             if (res.ok) {
               res.json().then((newComment) => { 
-                const updatedUserComments = [...newBook.comments, newComment]
-                const updatedBook = {...newBook, comments: updatedUserComments}
-                const updatedUserBooks = [...user.books, updatedBook]
-                const updatedUser = {...user, books: updatedUserBooks}
                 // debugger
+                // 1 - update book (book.user_comments) with new comment
+                const updatedBookComments = [...newBook.user_comments, newComment]
+
+                // 2 - update user book
+                const updatedBook = {...newBook, user_comments: updatedBookComments}
+
+                // 3 - update user books
+                const updatedUserBooks = user.books.map((book) => book.id === updatedBook.id ? newBook : book)
+
+                // 4 - update User
+                const updatedUser = {...user, books: updatedUserBooks} 
+                
+                // 5 - update user books state    
                 handleAddNewUserComment(updatedUser)             
                 navigate("/me")
               })

@@ -7,18 +7,18 @@ import { BookContext } from "../context/BookContext";
 const UpdateCommentForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  let { state } = useLocation();
 
-  const { user, handleEditUserComment } = useContext(UserContext);
-  const { handleUpdateBookComments } = useContext(BookContext);
-  const { books } = useContext(BookContext);
-  const getBook = books.find((book) => book.id === parseInt(id));
-  const bookToEdit = user.books.find((book) => book.id === getBook.id);
-  // debugger
+  const { user, handleEditUserComment } = useContext(UserContext); 
+  const { books, handleUpdateBookComments } = useContext(BookContext);
+
+  let { state } = useLocation();
   const commentToEdit = state.comment;
+  const getBookToEdit = books.find((book) => book.id === parseInt(id));
+  console.log(getBookToEdit, "getBookToEdit");
+
   const [comment, setComment] = useState(commentToEdit.comment);
   const [errors, setErrors] = useState([]);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,30 +36,34 @@ const UpdateCommentForm = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((edit) => {
-          console.log(edit);
-          // 1- update user comments
-          // 2- update user books
-          // 3- update book comments
+          console.log(edit, "edited comment");
 
-          const updatedBookComments = bookToEdit.comments.map((comment) =>
-            comment.id === edit.id ? edit : comment
-          ); // update book comments
-          const updatedBook = { ...getBook, comments: updatedBookComments }; // update book
-          const newUserBooks = user.books.map((b) =>
-            b.id === updatedBook.id ? updatedBook : b
-          );
-          const updatedUser = { ...user, books: newUserBooks }; // update user
-          handleEditUserComment(updatedUser); // update user books
-          handleUpdateBookComments(updatedBook); // update books state
-          navigate("/me");
+          // 1 - update book (book.user_comments) and ?###book users###?
+          const updatedBookComments = getBookToEdit.user_comments.map((comment) =>
+          comment.id === edit.id ? edit : comment
+          )
+
+          // 2 - update book      
+          const updatedUserBook = {...getBookToEdit, user_comments: updatedBookComments} 
+          
+          // 3 - update user books
+          const updatedUserBooks = user.books.map((b) =>
+              b.id === updatedUserBook.id ? updatedUserBook : b
+            );
+
+          // 4 - update user
+          const updatedUser = { ...user, books: updatedUserBooks }; 
+          
+          handleUpdateBookComments(updatedUserBook); // 6 - update books state
+          handleEditUserComment(updatedUser); // 7 - update user books state
+          console.log(updatedUser, "after update submit");
+          navigate("/my_books");
         });
       } else {
         res.json().then((errorData) => {
-          const errorLis = errorData.errors.map((e, ind) => (
-            <li key={ind}>{e}</li>
-          ));
-          setErrors(errorLis);
-          console.log(errorData.errors);
+          const err = errorData.error
+          console.log(err, "errors")
+          setErrors(err);
         });
       }
     });
@@ -85,7 +89,7 @@ const UpdateCommentForm = () => {
             <div className="justify-content-center pt-2 mb-3 input-group">
               <span className="input-group-text">Book Title</span>
               <span className="input-group-text bg-danger text-light fw-bold">
-                BOOK TITLE
+                {getBookToEdit.title}
               </span>
             </div>
           </div>

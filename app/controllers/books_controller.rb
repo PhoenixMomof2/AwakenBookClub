@@ -1,19 +1,39 @@
 class BooksController < ApplicationController
   skip_before_action :authorize, only: [:index, :show, :comments_by_category]
   
+  # GET /commented_books/:count
+  def commented_books
+    books = Book.all.select { |book| book.comments.count > (params[:count]).to_i }
+    render json: books
+  end
+
+   # GET commented_books_by_category/:category
+  #  def commented_books_by_category
+  #   books = Book.all.select { |book| book.category > (params[:category]).to_i }
+  #   render json: books
+  # end
+
+  #### CUSTOM ROUTE EXAMPLE #### (from Sandra)
+# get '/locations/filter/:length', to: "locations#filter"
+# def filter
+#   @location = Location.all.filter{|l| l.trail_name.length > params[:length].to_i}
+#   render json: @location
+# end
+
+
   # GET /books
   def index
     if params[:user_id]
       @user = User.find_by_id(params[:user_id])
-      render json: @user.books, status: :ok
+      render json: @user.books.order("title ASC"), status: :ok
     else
-      render json: Book.all, status: :ok
+      render json: Book.all.order("title ASC"), status: :ok
     end    
   end
 
   # GET /books/:id
   def show
-    @book = find_book
+    @book = Book.find_by_id(params[:id])
     render json: @book, status: :ok
   end
 

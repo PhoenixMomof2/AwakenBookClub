@@ -24,16 +24,18 @@ const BookProvider = ({ children }) => {
   };
 
   const handleUpdateBookComments = (updatedBook) => {
+    console.log(updatedBook, "updatedBook")
     const updatedBooks = books.map(book => book.id === updatedBook.id ? updatedBook : book)
     setBooks(updatedBooks);
   }
+
   const handleDeleteBookComment = (deletedComment) => {
     const updatedBook = books.find(book => book.id === deletedComment.book_id)
-    const updatedBookComments = updatedBook.comments.filter((c) => c.id !== deletedComment.id)
-    const updatedBook2 = {...updatedBook, comments: updatedBookComments}
+    const updatedBookComments = updatedBook.user_comments.filter((c) => c.id !== deletedComment.id)
+    const updatedBook2 = {...updatedBook, user_comments: updatedBookComments}
     const updatedBooks = books.map((book) => book.id === updatedBook2.id ? updatedBook2 : book)
     setBooks(updatedBooks);
-    console.log(updatedBook2, "check to see if comment is gone")
+    console.log(updatedBook2, "handleDeleteBookContext")
   }
 
   return (

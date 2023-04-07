@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :comments, only: :index
-  resources :books, except: [:create, :update, :destroy]
-  resources :users, except: [:update, :destroy]
+get "/commented_books/:count", to: "books#commented_books"
+# get "/books_by_catego/ry/:category", to: "users#books_by_category"
+
+  resources :books, except: [:update, :destroy]
+  resources :users, only: :create
 
    # Sessions
    post "/login", to: "sessions#create"
@@ -10,14 +12,12 @@ Rails.application.routes.draw do
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
-    
-  # Custom User Routes
-  resources :users, only: [:index , :show] do 
-    resources :books 
+  
+  # Nested User Comments Routes
+  resources :users, only: :show do 
     resources :comments
   end
  
-  get "/users/:id/comments_by_category", to: "users#comments_by_category"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

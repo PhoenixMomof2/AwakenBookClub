@@ -49,15 +49,6 @@ const UserNavbar = () => {
             <Link
               className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
               aria-current="page"
-              to="/me"
-            >
-              Profile
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className="nav-link my-1 mx-1 active text-center text-dark fw-bolder"
-              aria-current="page"
               to="/my_books"
             >
               My Books

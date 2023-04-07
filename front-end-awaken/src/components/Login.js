@@ -25,7 +25,7 @@ const Login = () => {
       if (res.ok) {
         res.json().then((user) => {
           login(user)
-          navigate("/me")
+          navigate("/my_books")
         });
       } else {
         res.json().then((err) => {          

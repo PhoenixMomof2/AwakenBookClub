@@ -1,13 +1,16 @@
 class BookSerializer < ActiveModel::Serializer
-  attributes :id, :title, :book_img, :author, :stars, :category, :content, :short_content, :comments, :user_comments
+  attributes :id, :title, :book_img, :author, :stars, :category, :content, :short_content, :user_comments
   
   def user_comments
+    # byebug
     object.comments.map do |comment|
       { 
         id: comment.id,
-        comment: comment.comment,
-        username: comment.user.username,
-        updated_at: comment.updated_at.strftime("%A, %B %d, %Y at %I:%M %p")
+        comment: comment.comment,    
+        name: comment.user.username,
+        book_id: comment.book_id,
+        updated_at: comment.updated_at.strftime("%A, %B %d, %Y at %I:%M %p"),
+        created_at: comment.created_at.strftime("%A, %B %d, %Y at %I:%M %p")
       }
     end
   end
