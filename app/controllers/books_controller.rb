@@ -7,20 +7,6 @@ class BooksController < ApplicationController
     render json: books
   end
 
-   # GET commented_books_by_category/:category
-  #  def commented_books_by_category
-  #   books = Book.all.select { |book| book.category > (params[:category]).to_i }
-  #   render json: books
-  # end
-
-  #### CUSTOM ROUTE EXAMPLE #### (from Sandra)
-# get '/locations/filter/:length', to: "locations#filter"
-# def filter
-#   @location = Location.all.filter{|l| l.trail_name.length > params[:length].to_i}
-#   render json: @location
-# end
-
-
   # GET /books
   def index
     if params[:user_id]

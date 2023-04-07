@@ -5,7 +5,6 @@ import UserNavbar from "./UserNavbar";
 import Welcome from "./Welcome";
 
 const Navbar = () => {
-  // console.log("I'm in the Navbar Component")
   const { loggedIn } = useContext(UserContext);
 
   if (!loggedIn) {

@@ -24,14 +24,6 @@ function UserProvider({ children }) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch("/users")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUsers(data)
-  //     })
-  // }, [])
-
   // Updating user books state to add new book.
   const handleAddNewUserBook = (newBook) => {
     setUser({ ...user, books: [...books, newBook] });

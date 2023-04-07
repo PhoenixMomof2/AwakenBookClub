@@ -16,9 +16,8 @@ const NewBookForm = () => {
   const [content, setContent] = useState("")
 
   const [comment, setComment] = useState("")
-  // const [username, setUsername] = useState(user.username)
   const [errors, setErrors] = useState("")
-// debugger
+
   const handleSubmit = (e) => {
     e.preventDefault()
     
@@ -45,8 +44,7 @@ const NewBookForm = () => {
 
         const newCommentData = {
           comment,
-          user_id: user.id,
-          // book_id: newBook.id
+          user_id: user.id          
         }
         
         //CREATE (POST REQUEST COMMENT)
@@ -82,7 +80,7 @@ const NewBookForm = () => {
                 setErrors(errorLis);
               })
             }
-          }) // update state
+          }) 
       })
         // clear form
         // setTitle("")

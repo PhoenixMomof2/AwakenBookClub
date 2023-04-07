@@ -1,8 +1,7 @@
 class BookSerializer < ActiveModel::Serializer
   attributes :id, :title, :book_img, :author, :stars, :category, :content, :short_content, :user_comments
   
-  def user_comments
-    # byebug
+  def user_comments    
     object.comments.map do |comment|
       { 
         id: comment.id,

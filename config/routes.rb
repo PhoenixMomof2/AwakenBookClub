@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 get "/commented_books/:count", to: "books#commented_books"
-# get "/books_by_catego/ry/:category", to: "users#books_by_category"
+get "/books_by_category/:category", to: "users#books_by_category"
 
   resources :books, except: [:update, :destroy]
   resources :users, only: :create

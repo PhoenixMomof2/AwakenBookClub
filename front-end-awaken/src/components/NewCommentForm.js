@@ -31,10 +31,7 @@ const NewCommentForm = () => {
       body: JSON.stringify(newCommentData),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((newComment) => {
-          // debugger
-          // console.log(newComment.book_id, "newComment's book_id");          
-          // const thisBook = newComment.book;
+        res.json().then((newComment) => {         
           const newBookToAdd = books.find((book) => book.id === newComment.book_id)          
           const newBookToAddToUser = user.books.find(
             (book) => book.id === newBookToAdd.id

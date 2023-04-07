@@ -12,19 +12,20 @@ class UsersController < ApplicationController
     render json: current_user, status: :ok
   end
   
+  ### BEN'S CODE CHALLENGE ###
   # Write a custom route that takes in a word or a string and then renders 
   # json of all the users who have left comments on books that belong to that category. 
   # If there are no matches no books that have that category render json that says so.
 
-  # def books_by_category      
-  # #   byebug
-  #   # if category?
-  #     books = Book.all.select {|b, user| b.category = params[:category]}
-  #     render json: books
-  #   # else
-  #   #   render json: { error: "Category not found" }
-  #   # end
-  # end
+  def books_by_category      
+  #   byebug
+    # if category?
+      books = Book.all.select {|b, user| b.category = params[:category]}
+      render json: books
+    # else
+    #   render json: { error: "Category not found" }
+    # end
+  end
 
   def index
     render json: User.all, status: :ok

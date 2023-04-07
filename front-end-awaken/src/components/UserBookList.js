@@ -11,8 +11,7 @@ const UserBookList = () => {
   const handleDeleteClick = (comment) => {
     fetch(`/users/${user.id}/comments/${comment.id}`, {
       method: "DELETE",
-    }).then(() => {
-      console.log(comment, `Deleted comment # ${comment.id}`)
+    }).then(() => {      
       handleDeleteUserComment(comment);
       handleDeleteBookComment(comment);
     });

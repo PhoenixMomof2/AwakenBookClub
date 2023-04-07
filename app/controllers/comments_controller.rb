@@ -16,8 +16,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.create!(comment_params)
     render json: @comment, include: ['book.user_comments'], status: :created   
   end
-  # include: ['books.user_comments']
-
+  
   # PATCH /users/:user_id/comments/:id 
   def update      
     @comment.update!(comment_params)
