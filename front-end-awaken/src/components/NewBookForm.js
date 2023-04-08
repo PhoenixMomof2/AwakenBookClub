@@ -4,8 +4,8 @@ import { BookContext } from "../context/BookContext";
 import { UserContext } from "../context/UserContext";
 
 const NewBookForm = () => {
-  const { handleAddNewBook } = useContext(BookContext)
-  const { user, handleAddNewUserComment } = useContext(UserContext)
+  const { handleAddNewBook, handleUpdateBookComments } = useContext(BookContext)
+  const { user, handleAddNewUserBookAfterNewComment,  } = useContext(UserContext)
   const navigate = useNavigate()
 
   const [title, setTitle] = useState("")
@@ -41,38 +41,37 @@ const NewBookForm = () => {
     .then((res) => res.json())
     .then((newBook) => {
       handleAddNewBook(newBook) // update books state
-
+       
         const newCommentData = {
           comment,
-          user_id: user.id          
+          user_id: user.id,
+          book_id: newBook.id          
         }
         
         //CREATE (POST REQUEST COMMENT)
-          fetch(`/users/${user.id}/comments`, {
-            method: "POST",
+        fetch(`/users/${user.id}/comments`, {
+          method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newCommentData),
           }).then((res) => {
             if (res.ok) {
-              res.json().then((newComment) => { 
-                // debugger
-                // 1 - update book (book.user_comments) with new comment
+              res.json().then((newComment) => {                              
+                // 1 - add new comment to user.book.comments 
                 const updatedBookComments = [...newBook.user_comments, newComment]
-
-                // 2 - update user book
+                                 
+                // 2 - update book users and user_comments
                 const updatedBook = {...newBook, user_comments: updatedBookComments}
-
-                // 3 - update user books
-                const updatedUserBooks = user.books.map((book) => book.id === updatedBook.id ? newBook : book)
-
-                // 4 - update User
-                const updatedUser = {...user, books: updatedUserBooks} 
                 
-                // 5 - update user books state    
-                handleAddNewUserComment(updatedUser)             
-                navigate("/me")
+                // 2 - update user books
+                const updatedUserBooks = [...user.books, updatedBook]
+
+                // 4 - update user and books state             
+                handleAddNewUserBookAfterNewComment(updatedUserBooks)
+                handleUpdateBookComments(updatedBook)              
+                
+                navigate("/my_books")
               })
             } else {
               res.json().then((errorData) => {

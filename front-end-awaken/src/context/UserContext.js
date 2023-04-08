@@ -1,6 +1,5 @@
 // src/context/UserContext.js
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { BookContext } from "../context/BookContext";
+import React, { createContext, useState, useEffect } from "react";
 
 // Create context
 const UserContext = createContext();
@@ -11,8 +10,7 @@ function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
-  const books = useContext(BookContext);
-
+  
   useEffect(() => {
     fetch("/me")
       .then((res) => res.json())
@@ -23,11 +21,6 @@ function UserProvider({ children }) {
         }
       });
   }, []);
-
-  // Updating user books state to add new book.
-  const handleAddNewUserBook = (newBook) => {
-    setUser({ ...user, books: [...books, newBook] });
-  };
 
   // Updating user comments state to add new comment.
   const handleAddNewUserComment = (updatedUser) => {
@@ -53,13 +46,15 @@ function UserProvider({ children }) {
     const book = user.books.find((book) => book.id === deletedComment.book_id);
     const updatedBook = {
       ...book,
-      user_comments: book.user_comments.filter((c) => c.id !== deletedComment.id),
+      user_comments: book.user_comments.filter(
+        (c) => c.id !== deletedComment.id
+      ),
     };
     const updatedBooks = user.books.map((book) =>
       book.id === updatedBook.id ? updatedBook : book
     );
     setUser({ ...user, books: updatedBooks });
-    console.log(deletedComment, "handleDeleteUserContext")
+    console.log(deletedComment, "handleDeleteUserContext");
   };
 
   const login = (user) => {
@@ -86,8 +81,7 @@ function UserProvider({ children }) {
         signup,
         loggedIn,
         setErrors,
-        errors,
-        handleAddNewUserBook,
+        errors,        
         handleAddNewUserComment,
         handleEditUserComment,
         handleDeleteUserComment,
