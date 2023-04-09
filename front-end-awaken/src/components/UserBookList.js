@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import HoldHands from "../images/HoldHands.jpg";
+// import HoldHands from "../images/HoldHands.jpg";
+import soccer from "../images/soccer.jpeg"
 import { UserContext } from "../context/UserContext";
 import { BookContext } from "../context/BookContext";
 
@@ -40,7 +41,7 @@ console.log(user, "user book list")
             <section id="profile-top-right" className="container-fluid">
               <div className="container-flex py-5 my-5">
                 <img
-                  src={HoldHands}
+                  src={soccer}
                   className="text-center card-img-top img-fluid bg-dark ms-1"
                   alt="profile-placeholder"
                 />

@@ -35,6 +35,7 @@ const SignUp = () => {
         } else {
           const errorLis = user.errors.map((e, ind) => <li key={ind}>{e}</li>);
           setErrors(errorLis);
+          console.log(user.errors);
         }
       });
     //clear form

@@ -102,10 +102,10 @@ const NewCommentForm = () => {
       } else {
         res.json().then((res) => {
           console.log(res.errors);
-          // const errorLis = errorData.errors.map((e, ind) => (
-          //   <li key={ind}>{e}</li>
-          // ));
-          // setErrors(errorLis);
+          const errorLis = res.errors.map((e, ind) => (
+            <li key={ind}>{e}</li>
+          ));
+          setErrors(errorLis);
         });
       }
     });
