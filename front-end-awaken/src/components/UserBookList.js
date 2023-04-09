@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-// import HoldHands from "../images/HoldHands.jpg";
-import soccer from "../images/soccer.jpeg"
+import HoldHands from "../images/HoldHands.jpg";
 import { UserContext } from "../context/UserContext";
 import { BookContext } from "../context/BookContext";
 
@@ -41,7 +40,7 @@ console.log(user, "user book list")
             <section id="profile-top-right" className="container-fluid">
               <div className="container-flex py-5 my-5">
                 <img
-                  src={soccer}
+                  src={HoldHands}
                   className="text-center card-img-top img-fluid bg-dark ms-1"
                   alt="profile-placeholder"
                 />
@@ -105,7 +104,7 @@ console.log(user, "user book list")
                                   aria-current="page"
                                   state={{ comment }}
                                   to={`/my_books/${book.id}/edit`}
-                                >
+                                  >
                                   Edit
                                 </Link>
                                 <Link
@@ -117,15 +116,8 @@ console.log(user, "user book list")
                                 >
                                   Delete
                                 </Link>
-                                <Link
-                                  className="btn btn-sm btn-success text-center"
-                                  aria-current="page"
-                                  to="/comments/new"
-                                >
-                                  Add A New Comment
-                                </Link>
-                              </div>
-                            ) : null}                       
+                                </div>
+                              ) : null}  
                         </div>
                       ))}
                     </div>
