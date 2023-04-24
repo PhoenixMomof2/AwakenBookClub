@@ -15,3 +15,4 @@ As a politic and a practice, abolition increasingly shapes our political momentâ
 Amplifying the analysis and the theories of change generated from vibrant community based organizing, Abolition. Feminism. Now. surfaces necessary historical genealogies, key internationalist learnings, and everyday practices to grow our collective and flourishing present and futures.
 
 comment: This was an excellent read!
+

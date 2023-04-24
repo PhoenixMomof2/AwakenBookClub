@@ -4,5 +4,10 @@ class Book < ApplicationRecord
   
   has_many :comments
   has_many :users, -> { distinct }, through: :comments
+
+  def self.books_by_author(n)
+    self.all.select{ |book| book.author.length > n }
+  end
+
 end
 

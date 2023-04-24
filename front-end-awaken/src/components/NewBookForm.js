@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 
 const NewBookForm = () => {
   const { handleAddNewBook, handleUpdateBookComments } = useContext(BookContext)
-  const { user, handleAddNewUserBookAfterNewComment,  } = useContext(UserContext)
+  const { user, handleAddNewUserBookAfterNewComment } = useContext(UserContext)
   const navigate = useNavigate()
 
   const [title, setTitle] = useState("")

@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
-get "/commented_books/:count", to: "books#commented_books"
-get "/books_by_category/:category", to: "users#books_by_category"
-
+  get "/commented_books/:count", to: "books#commented_books"
+  get "/books_by_category/:category", to: "books#books_by_category"
+  get "/books_by_author/:n", to: "books#books_by_author"
+  get "/users_by_age/:n", to: "users#users_by_age"
+  
   resources :books, except: [:update, :destroy]
   resources :users, only: :create
 
-   # Sessions
-   post "/login", to: "sessions#create"
-   delete "/logout", to: "sessions#destroy"
+  # Sessions
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
+ 
   
   # Nested User Comments Routes
   resources :users, only: :show do 
