@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get "/books_by_category/:category", to: "books#books_by_category"
   get "/books_by_author/:n", to: "books#books_by_author"
   get "/users_by_age/:n", to: "users#users_by_age"
+  get "/random_star/:n", to: "books#random_star"
+  get "/stars", to: "books#stars"
   
   resources :books, except: [:update, :destroy]
   resources :users, only: :create

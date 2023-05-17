@@ -20,7 +20,8 @@ const BookProvider = ({ children }) => {
   }, [])
 
   const handleAddNewBook = (newBook) => {
-    setBooks([...books, newBook]);
+    setBooks([...books, newBook])    
+    console.log("added new book", newBook)
   };
 
   const handleUpdateBookComments = (updatedBook) => {

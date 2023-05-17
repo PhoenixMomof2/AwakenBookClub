@@ -26,7 +26,7 @@ import UpdateCommentForm from "./UpdateCommentForm";
 
 const App = () => {
   return (
-    <div className="container-flex bg-danger" style={{'paddingTop': '85px'}}>
+    <div className="container-xxl-flex bg-danger" style={{'paddingTop': '85px'}}>
       <UserProvider>
         <BookProvider>         
             <Navbar />

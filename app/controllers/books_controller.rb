@@ -1,6 +1,41 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show, :books_by_category]
-  
+  skip_before_action :authorize, only: [:index, :show, :books_by_category, :random_star, :stars]
+
+=begin
+Write a custom class method that goes through all the books and randomly 
+assigns a value to the stars attribute between 1 and 5.
+Then follow up by writing a custom instance method for a book 
+that will return a string of stars that is a reflection of they value of the stars attribute.
+=end
+
+  # GET /random_star/:n (dynamic)
+  def random_star  
+    book = Book.find_by(id: params[:n])
+    star = '⭐'
+    num = rand(1..5)
+    str = ''
+    stars = book.stars.to_i  
+    num.times do
+      str += star
+    end
+    render json: { message: "#{book.title} now has #{str} stars." }
+  end
+
+  # goes through all the books
+  def stars  
+    starred_books = Book.all.select{|book| 
+      star = '⭐'
+      num = rand(1..5)
+      str = ''
+      stars = book.stars.to_i  
+      num.times do
+        str += star
+      end
+      puts str
+    }
+    render json: starred_books
+  end
+
   # GET /commented_books/:count
   def commented_books
     books = Book.all.select { |book| book.comments.count > (params[:count]).to_i }
@@ -33,6 +68,7 @@ class BooksController < ApplicationController
       @user = User.find_by_id(params[:user_id])
       render json: @user.books.order("title ASC"), status: :ok
     else
+      # byebug
       render json: Book.all.order("title ASC"), status: :ok
     end    
   end
@@ -46,7 +82,7 @@ class BooksController < ApplicationController
   # POST /books 
   def create
     @book = Book.create!(book_params)
-    render json: @book, include: ['user', 'user_comments'], status: :created
+    render json: @book, include: ['users', 'user_comments'], status: :created
   end 
 
   private

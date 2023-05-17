@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Welcome from "../components/Welcome";
 import Body from "../components/Body";
+import usePasswordToggle from "./hooks/usePasswordToggle";
 
 const SignUp = () => {
   const [username, setUsername] = useState("")
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [bio, setBio] = useState("")
   const { signup, setErrors, errors } = useContext(UserContext)
   const navigate = useNavigate()
+  const [ PasswordInputType, ToggleIcon ] = usePasswordToggle()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +81,7 @@ const SignUp = () => {
               <div className="mb-3 input-group">
                 <span className="input-group-text">Enter Password</span>
                 <input
-                  type="text"
+                  type={PasswordInputType}
                   className="form-control"
                   placeholder="Password"
                   aria-label="Password"
@@ -87,13 +89,14 @@ const SignUp = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                 <span className="text-dark" style={{'position': 'absolute', 'top': '8px', 'right': '10px','zIndex': '1000', 'cursor': 'pointer'}}>{ToggleIcon}</span>
               </div>
             </div>
             <div className="form-group">
               <div className="mb-3 input-group">
                 <span className="input-group-text">Password Confirmation</span>
                 <input
-                  type="text"
+                  type={PasswordInputType}
                   className="form-control"
                   placeholder="Enter Password Confirmation"
                   aria-label="password_confirmation"
@@ -101,6 +104,7 @@ const SignUp = () => {
                   value={passwordConfirmation}
                   onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
+                 <span className="text-dark" style={{'position': 'absolute', 'top': '8px', 'right': '10px', 'zIndex': '1000', 'cursor': 'pointer'}}>{ToggleIcon}</span>
               </div>
             </div>
             <div className="form-group">

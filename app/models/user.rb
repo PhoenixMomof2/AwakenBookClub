@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :age, numericality: { greater_than_or_equal_to: 18 }
   validates :bio, presence: true
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :books, -> { distinct }, through: :comments
   
   #proc ->

@@ -11,6 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   private
+  # checks the session to see if the user id has been saved to the session
   def authorize
     @current_user = User.find_by_id(session[:user_id])
     render json: { errors: ["Not Authorized"] }, status: :unauthorized unless @current_user
@@ -25,3 +26,5 @@ class ApplicationController < ActionController::API
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 end
+
+# methods in the contollers are referred to as actions

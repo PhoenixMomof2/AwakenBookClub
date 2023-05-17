@@ -40,11 +40,10 @@ const NewBookForm = () => {
     })
     .then((res) => res.json())
     .then((newBook) => {
-      handleAddNewBook(newBook) // update books state
-       
-        const newCommentData = {
-          comment,
-          user_id: user.id,
+            
+      const newCommentData = {
+        comment,
+        user_id: user.id,
           book_id: newBook.id          
         }
         
@@ -60,17 +59,17 @@ const NewBookForm = () => {
               res.json().then((newComment) => {                              
                 // 1 - add new comment to user.book.comments 
                 const updatedBookComments = [...newBook.user_comments, newComment]
-                                 
+                
                 // 2 - update book users and user_comments
                 const updatedBook = {...newBook, user_comments: updatedBookComments}
                 
                 // 2 - update user books
                 const updatedUserBooks = [...user.books, updatedBook]
-
+                
                 // 4 - update user and books state             
                 handleAddNewUserBookAfterNewComment(updatedUserBooks)
                 handleUpdateBookComments(updatedBook)              
-                
+                handleAddNewBook(updatedBook) // update books state
                 navigate("/my_books")
               })
             } else {
@@ -223,5 +222,4 @@ const NewBookForm = () => {
     </div>
   )
 }
-
 export default NewBookForm;

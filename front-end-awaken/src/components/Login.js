@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { headers } from "../components/Globals";
 import Body from "./Body";
 import Welcome from "./Welcome";
+import usePasswordToggle from "./hooks/usePasswordToggle";
 
 const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const { login, setErrors, errors } = useContext(UserContext)
   const navigate = useNavigate()
+  const [ PasswordInputType, ToggleIcon ] = usePasswordToggle()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -71,7 +73,7 @@ const Login = () => {
               <div className="mb-3 input-group">
                 <span className="input-group-text">Password</span>
                 <input
-                  type="text"
+                  type={PasswordInputType}
                   className="form-control"
                   placeholder="Enter Password"
                   aria-label="Password"
@@ -79,6 +81,7 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <span className="text-dark" style={{'position': 'absolute', 'top': '8px', 'right': '10px', 'zIndex': '1000', 'cursor': 'pointer'}}>{ToggleIcon}</span>
               </div>
             </div>
             <div className="text-center text-light fw-bolder pb-3">
