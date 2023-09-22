@@ -1,5 +1,24 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show, :books_by_category, :random_star, :stars]
+  skip_before_action :authorize, only: [:index, :show, :books_by_category, :random_star, :stars, :book_comments_length]
+
+  def example
+    range = (1..5)
+    num = params[:n].to_i.to_f
+    if range.include?(num)
+      books = Book.where("stars >= ?", num)
+      render json: books
+    else
+      render json: { error: "please give appropriate num" }
+    end
+  end 
+
+#books that have at lease :n of comments or more   
+def book_comments_length
+  num =  params[:n].to_i
+  books = Book.all.select{|book| book.comments.length >= num }  
+  render json: books
+  # { message: "There are no books with #{} comments."}
+end
 
 =begin
 Write a custom class method that goes through all the books and randomly 
@@ -14,7 +33,7 @@ that will return a string of stars that is a reflection of they value of the sta
     star = '⭐'
     num = rand(1..5)
     str = ''
-    stars = book.stars.to_i  
+    stars = book.stars.to_i 
     num.times do
       str += star
     end

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "/users_by_age/:n", to: "users#users_by_age"
   get "/random_star/:n", to: "books#random_star"
   get "/stars", to: "books#stars"
+  get "/example/:n", to: "books#example"
+  get "/book_comments/:n", to: "books#book_comments_length"
   
   resources :books, except: [:update, :destroy]
   resources :users, only: :create
@@ -16,14 +18,12 @@ Rails.application.routes.draw do
   # Users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
- 
-  
+   
   # Nested User Comments Routes
   resources :users, only: :show do 
     resources :comments
   end
  
-
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

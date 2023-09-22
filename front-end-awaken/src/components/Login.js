@@ -7,14 +7,14 @@ import Welcome from "./Welcome";
 import usePasswordToggle from "./hooks/usePasswordToggle";
 
 const Login = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const { login, setErrors, errors } = useContext(UserContext)
-  const navigate = useNavigate()
-  const [ PasswordInputType, ToggleIcon ] = usePasswordToggle()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, setErrors, errors } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [PasswordInputType, ToggleIcon] = usePasswordToggle();
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     fetch("/login", {
       method: "POST",
@@ -26,25 +26,25 @@ const Login = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
-          login(user)
-          navigate("/my_books")
+          login(user);
+          navigate("/my_books");
         });
       } else {
-        res.json().then((err) => {          
-          setErrors(err.errors)
+        res.json().then((err) => {
+          setErrors(err.errors);
         });
       }
     });
     // clear form
-    setUsername("")
-    setPassword("")
+    setUsername("");
+    setPassword("");
   }
 
   useEffect(() => {
     return () => {
-      setErrors([])
-    }
-  }, [setErrors])
+      setErrors([]);
+    };
+  }, [setErrors]);
 
   return (
     <div className="container-flex">
@@ -81,7 +81,18 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span className="text-dark" style={{'position': 'absolute', 'top': '8px', 'right': '10px', 'zIndex': '1000', 'cursor': 'pointer'}}>{ToggleIcon}</span>
+                <span
+                  className="text-dark"
+                  style={{
+                    position: "absolute",
+                    top: "8px",
+                    right: "10px",
+                    zIndex: "1000",
+                    cursor: "pointer",
+                  }}
+                >
+                  {ToggleIcon}
+                </span>
               </div>
             </div>
             <div className="text-center text-light fw-bolder pb-3">
@@ -100,7 +111,7 @@ const Login = () => {
       </div>
       <Body />
     </div>
-  )
-}
+  );
+};
 
 export default Login;
